@@ -1,0 +1,28 @@
+<div class="announcement-bar">
+  <div class="announcement-inside">
+    <span class="announcement">WELCOME</span>
+  </div>
+</div>
+<div class="site-header">
+  <a href=""><img src="LogoHs.PNG" alt="Logo" class="logo" /></a>
+  <div class="allButLogo">
+    <nav class="nav-menu">
+      <button class="allButtons" mat-button>SHOP</button>
+      <button class="allButtons" mat-button routerLink="/collections">NEWS</button>
+      <button class="allButtons" mat-button routerLink="/games">GAMES & QUIZESS</button>
+    </nav>
+    <div class="header-actions">
+      <a href="/login" mat-icon-button aria-label="Account">
+        <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
+      </a>
+      <button mat-icon-button aria-label="Search">
+        <mat-icon class="material-symbols-outlined">search</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Cart">
+        <mat-icon class="material-symbols-outlined">shopping_bag</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<footer class="hs-footer">Handsome Styles © 2024</footer>

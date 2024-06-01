@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-family: "Montserrat", sans-serif !important;
+}
+::ng-deep * {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 35px;
+  margin: 0 0 30px;
+  color: #b67f5e;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.login-div {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 600px; /* Maksimalna širina forme */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 100%; /* Polja za unos zauzimaju punu širinu forme */
+  margin-bottom: 16px; /* Razmak između polja */
+}
+
+/* input {
+  background-color: white;
+} */
+
+input {
+  height: 33px; /* Visina polja za unos */
+}
+
+button {
+  width: 100%;
+  max-width: 200px; /* Maksimalna širina dugmeta */
+  margin-top: 16px; /* Razmak iznad dugmeta */
+}

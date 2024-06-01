@@ -1,0 +1,20 @@
+<div class="login-container">
+  <div class="login-div">
+    <h1>LOGIN</h1>
+    <form [formGroup]="loginForm" class="login-form">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="name@example.com" />
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email address</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is <strong>required</strong></mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+        <mat-error *ngIf="loginForm.get('password')?.hasError('pattern')">Password must be a combination of lower-case, upper-case, numbers and at least 9 characters long</mat-error>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is <strong>required</strong></mat-error>
+      </mat-form-field>
+      <button mat-stroked-button color="basic" type="submit">log in</button>
+    </form>
+  </div>
+</div>
