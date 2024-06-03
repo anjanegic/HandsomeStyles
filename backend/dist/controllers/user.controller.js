@@ -8,7 +8,7 @@ const user_1 = __importDefault(require("../models/user"));
 class UserController {
     constructor() {
         this.login = (req, res) => {
-            let username = req.body.username;
+            let email = req.body.email;
             let password = req.body.password;
             /*
                     let query = UserM.findOne({username: usernameP, password: passwordP});
@@ -21,7 +21,7 @@ class UserController {
                     Then function returs Promise, but we are not returning promises to front,
                     from then callback we are returning just data in response that is later inserted into Observable.
                */
-            user_1.default.findOne({ username: username, password: password })
+            user_1.default.findOne({ email: email, password: password })
                 .then((user) => {
                 res.json(user);
             })

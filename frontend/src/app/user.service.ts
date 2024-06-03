@@ -10,9 +10,9 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  login(username: string, password: string) {
+  login(email: string, password: string) {
     const data = {
-      username: username,
+      email: email,
       password: password,
     };
     return this.http.post<User>(`${this.uri}/login`, data);

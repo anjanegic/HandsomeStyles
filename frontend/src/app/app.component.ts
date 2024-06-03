@@ -1,5 +1,5 @@
 import { Component, ViewChild, HostListener, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgIf } from '@angular/common';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgIf, MatButtonModule, MatMenuModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, MatSidenavModule, HttpClientModule],
+  imports: [RouterModule, RouterOutlet, NgIf, MatButtonModule, MatMenuModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, MatSidenavModule, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

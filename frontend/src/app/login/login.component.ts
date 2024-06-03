@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private service: UserService) {
+  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -31,12 +32,15 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const formValues = this.loginForm.value;
-      const username = formValues.email;
+      const email = formValues.email;
       const password = formValues.password;
       console.log('Form Submitted!', formValues);
-      this.service.login(username, password).subscribe((data) => {
+      this.service.login(email, password).subscribe((data) => {
         if (data == null) alert('Nema korisnika');
-        else alert('Hello ' + data.firstname);
+        else {
+          localStorage.setItem('logged', data.email);
+          this.router.navigate(['']);
+        }
       });
     } else {
       console.log('Form is not valid');

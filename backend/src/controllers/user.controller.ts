@@ -3,7 +3,7 @@ import User from "../models/user";
 
 export class UserController {
   login = (req: express.Request, res: express.Response) => {
-    let username = req.body.username;
+    let email = req.body.email;
     let password = req.body.password;
 
     /*
@@ -17,7 +17,7 @@ export class UserController {
             Then function returs Promise, but we are not returning promises to front, 
             from then callback we are returning just data in response that is later inserted into Observable.
        */
-    User.findOne({ username: username, password: password })
+    User.findOne({ email: email, password: password })
       .then((user) => {
         res.json(user);
       })
