@@ -1,0 +1,38 @@
+[
+  {
+    "email": "pera@gmail.com",
+    "password": "pera12345",
+    "firstname": "Petar",
+    "lastname": "Petrovic",
+    "type": "user",
+    "address": "Bulevar Arsenija Carnojevica",
+    "country": "Serbia",
+    "phone": "612288927",
+    "approved": true,
+    "deleted": false
+  },
+  {
+    "email": "admin@gmail.com",
+    "password": "admin12345",
+    "firstname": "Admin",
+    "lastname": "Admin",
+    "type": "admin",
+    "address": "",
+    "country": "",
+    "phone": "",
+    "approved": true,
+    "deleted": false
+  },
+  {
+    "email": "manager@gmail.com",
+    "password": "manager12345",
+    "firstname": "manager",
+    "lastname": "manager",
+    "type": "user",
+    "address": "",
+    "country": "",
+    "phone": "",
+    "approved": true,
+    "deleted": false
+  }
+]

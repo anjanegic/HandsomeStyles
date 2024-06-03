@@ -1,7 +1,7 @@
 <div class="login-container">
   <div class="login-div">
     <h1>LOGIN</h1>
-    <form [formGroup]="loginForm" class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" placeholder="name@example.com" />

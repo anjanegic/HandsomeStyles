@@ -68,6 +68,8 @@ mat-button {
 .nav-menu {
   padding: auto;
   margin-right: 50px;
+  display: flex;
+  gap: 7px;
 }
 
 .nav-menu a {
