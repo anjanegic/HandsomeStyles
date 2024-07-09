@@ -6,7 +6,9 @@
     "lastname": "Petrovic",
     "type": "user",
     "address": "Bulevar Arsenija Carnojevica",
+    "city": "Belgrade",
     "country": "Serbia",
+    "postalCode": "10000",
     "phone": "612288927",
     "approved": true,
     "deleted": false
@@ -18,7 +20,9 @@
     "lastname": "Admin",
     "type": "admin",
     "address": "",
+    "city": "",
     "country": "",
+    "postalCode": "",
     "phone": "",
     "approved": true,
     "deleted": false
@@ -30,7 +34,9 @@
     "lastname": "manager",
     "type": "user",
     "address": "",
+    "city": "",
     "country": "",
+    "postalCode": "",
     "phone": "",
     "approved": true,
     "deleted": false

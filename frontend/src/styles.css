@@ -6,3 +6,13 @@ body {
   font-family: "Montserrat", sans-serif !important;
   color: #757575 !important;
 }
+
+body [class^="mat-"]:not(mat-icon),
+body [class*=" mat-"]:not(mat-icon),
+h1 {
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.mat-mdc-dialog-surface {
+  border-radius: 10px !important;
+}

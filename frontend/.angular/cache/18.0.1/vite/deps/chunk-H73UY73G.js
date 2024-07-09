@@ -1,7 +1,7 @@
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-TGEX24XA.js";
+} from "./chunk-YVDVSW2Y.js";
 import {
   ANIMATION_MODULE_TYPE,
   APP_ID,
@@ -81,7 +81,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate1,
   ɵɵviewQuery
-} from "./chunk-SMIUU5AE.js";
+} from "./chunk-B6XZNXEO.js";
 
 // node_modules/@angular/cdk/fesm2022/platform.mjs
 var hasV8BreakIterator;
@@ -4986,6 +4986,7 @@ export {
   RtlScrollAxisType,
   supportsScrollBehavior,
   getRtlScrollAxisType,
+  _getFocusedElementPierceShadowDom,
   _getEventTarget,
   _isTestEnvironment,
   ENTER,
@@ -5008,6 +5009,7 @@ export {
   isFakeMousedownFromScreenReader,
   isFakeTouchstartFromScreenReader,
   FocusMonitor,
+  A11yModule,
   Directionality,
   BidiModule,
   MatCommonModule,
@@ -5017,4 +5019,4 @@ export {
   MatRippleModule,
   MatRippleLoader
 };
-//# sourceMappingURL=chunk-2NXPQCOP.js.map
+//# sourceMappingURL=chunk-H73UY73G.js.map

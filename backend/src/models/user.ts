@@ -28,6 +28,15 @@ const User = new mongoose.Schema(
     address: {
       type: String,
     },
+    city: {
+      type: String,
+    },
+    country: {
+      type: String,
+    },
+    postalCode: {
+      type: String,
+    },
     phone: {
       type: String,
     },

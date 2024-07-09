@@ -3,28 +3,36 @@
   <form [formGroup]="changeDataForm" (ngSubmit)="onSubmit()" class="changeData-form">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="{{user.email}}" />
+      <input matInput formControlName="email" placeholder="{{ user.email }}" />
       <mat-error *ngIf="changeDataForm.get('email')?.hasError('email')">Please enter a valid email address</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>
-      <input matInput formControlName="firstname" placeholder="{{user.firstname}}" />
+      <input matInput formControlName="firstname" placeholder="{{ user.firstname }}" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Last Name</mat-label>
-      <input matInput formControlName="lastname" placeholder="{{user.lastname}}" />
+      <input matInput formControlName="lastname" placeholder="{{ user.lastname }}" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Address</mat-label>
-      <input matInput formControlName="address" placeholder="{{user.address}}" />
+      <input matInput formControlName="address" placeholder="{{ user.address }}" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <input matInput formControlName="city" placeholder="{{ user.city }}" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Country</mat-label>
-      <input matInput formControlName="country" placeholder="{{user.country}}" />
+      <input matInput formControlName="country" placeholder="{{ user.country }}" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Postal Code</mat-label>
+      <input matInput formControlName="postalCode" placeholder="{{ user.postalCode }}" />
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Phone</mat-label>
-      <input matInput formControlName="phone" placeholder="{{user.phone}}" />
+      <input matInput formControlName="phone" placeholder="{{ user.phone }}" />
     </mat-form-field>
 
     <mat-dialog-actions>
