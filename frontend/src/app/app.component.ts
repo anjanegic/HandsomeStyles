@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule } from '@angular/common/http'; // TODO: remove
+import { AuthService } from './auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,37 +21,24 @@ import { HttpClientModule } from '@angular/common/http';
 export class AppComponent {
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
   isSearchActive = false;
+  user: any;
 
-  constructor(public title: Title, private router: Router) {}
+  constructor(public title: Title, private router: Router, private authService: AuthService) {}
 
-  openMenu() {
-    this.menuTrigger.openMenu();
-  }
-
-  closeMenu() {
-    setTimeout(() => {
-      if (!this.isMenuHovered) {
-        this.menuTrigger.closeMenu();
-      }
-    }, 1000);
+  getUser() {
+    return this.authService.getUser();
   }
 
   isMenuHovered = false;
 
-  menuOpened() {
-    this.isMenuHovered = true;
-  }
-
-  menuClosed() {
-    this.isMenuHovered = false;
-  }
-
-  toggleSearch() {
-    this.isSearchActive = !this.isSearchActive;
-  }
-
   ngOnInit() {
     this.onWindowScroll(); // Initialize on load to apply background if needed
+    this.user = this.authService.getUser();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.user = null;
   }
 
   @HostListener('window:scroll', [])

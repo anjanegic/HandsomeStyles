@@ -5,7 +5,7 @@
 }
 
 .announcement-bar {
-  background-color: #fee9da;
+  background-color: #fbe0c5;
   display: flex;
   justify-content: center;
   font-size: 12px;
@@ -15,6 +15,7 @@
 }
 
 .site-header {
+  transition: background-color 250ms ease-in-out;
   padding: 8px 16px;
   gap: 8px;
   justify-content: space-between;
@@ -28,9 +29,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: sticky; /* Postavljamo da bude lepljiv */
+  position: sticky;
   top: 0; /* Definišemo poziciju lepljivosti */
-  z-index: 1000; /* Opciono: Definišemo z-index da bi bio iznad ostalih elemenata */
+  z-index: 1000;
+  background-color: #fdf4eb;
 }
 
 .site-header.scrolled {
@@ -45,6 +47,7 @@ img {
   width: 75px;
   height: auto;
 }
+
 mat-button {
   color: #757575 !important;
   margin: 5px;
@@ -92,6 +95,7 @@ button:hover {
   background-color: #fee9da !important;
   color: #ffffff !important;
 }
+
 .allButLogo {
   display: flex;
   min-width: 300px;

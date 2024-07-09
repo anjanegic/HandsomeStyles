@@ -8,6 +8,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -38,7 +39,7 @@ export class LoginComponent {
       this.service.login(email, password).subscribe((data) => {
         if (data == null) alert('Nema korisnika');
         else {
-          localStorage.setItem('logged', data.email);
+          this.authService.login(data);
           this.router.navigate(['']);
         }
       });

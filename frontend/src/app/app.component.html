@@ -12,9 +12,19 @@
       <button class="allButtons" mat-button routerLink="/games">GAMES & QUIZESS</button>
     </nav>
     <div class="header-actions">
-      <button routerLink="/login" mat-icon-button aria-label="Account">
+      <!-- <button routerLink="/login" mat-icon-button aria-label="Account">
         <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
-      </button>
+      </button> -->
+      <ng-container *ngIf="getUser(); else loginButton">
+        <button routerLink="/user-info" mat-icon-button aria-label="Account">
+          <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #loginButton>
+        <button routerLink="login" mat-icon-button aria-label="Account">
+          <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
+        </button>
+      </ng-template>
       <button mat-icon-button aria-label="Search">
         <mat-icon class="material-symbols-outlined">search</mat-icon>
       </button>

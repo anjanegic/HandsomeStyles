@@ -1,0 +1,43 @@
+<div class="account-dashboard">
+  <div class="account-greeting">
+    <h1 class="account-greeting-name">HI {{ user.firstname.toUpperCase() }}</h1>
+    <a (click)="logout()" class="account-greeting-logout">Log out</a>
+  </div>
+</div>
+<div class="account-info">
+  <nav class="account-navigation">
+    <ul>
+      <li (click)="showSection('account')">account</li>
+      <li (click)="showSection('orders')">orders</li>
+      <li (click)="showSection('addresses')">wishlist</li>
+      <li (click)="showSection('ranking')">ranking</li>
+    </ul>
+  </nav>
+  <div class="account-data" *ngIf="selectedSection === 'account'">
+    <div class="account-details">
+      <span
+        ><b>{{ user.firstname }} {{ user.lastname }}</b></span
+      >
+      <span><span id="change-data" (click)="changeData()">reset password</span></span>
+    </div>
+    <div class="account-details">
+      <span>{{ user.email }} </span>
+    </div>
+    <div class="account-details">
+      <span id="password">{{ user.password }} </span>
+    </div>
+    <div class="account-details">
+      <span>{{ user.address }} </span>
+    </div>
+    <div class="account-details"><span id="change-data" (click)="changeData()">change my data</span></div>
+  </div>
+  <div class="account-data" *ngIf="selectedSection === 'orders'">
+    <p>Orders content goes here...</p>
+  </div>
+  <div class="account-data" *ngIf="selectedSection === 'ranking'">
+    <p>Ranking content goes here...</p>
+  </div>
+  <div class="account-data" *ngIf="selectedSection === 'addresses'">
+    <p>WishList content goes here...</p>
+  </div>
+</div>

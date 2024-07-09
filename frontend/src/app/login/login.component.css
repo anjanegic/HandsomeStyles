@@ -4,15 +4,15 @@
   height: 100%;
   font-family: "Montserrat", sans-serif !important;
 }
-::ng-deep * {
+/* ::ng-deep {
   font-family: "Montserrat", sans-serif !important;
-}
+} */
 
 h1 {
   font-weight: bold;
   font-size: 35px;
   margin: 0 0 30px;
-  color: #b67f5e;
+  color: #da8c6b;
 }
 
 .login-container {
@@ -39,16 +39,13 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 mat-form-field {
   width: 100%; /* Polja za unos zauzimaju punu širinu forme */
   margin-bottom: 16px; /* Razmak između polja */
 }
-
-/* input {
-  background-color: white;
-} */
 
 input {
   height: 33px; /* Visina polja za unos */
