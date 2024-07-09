@@ -24,12 +24,12 @@
       <span>{{ user.email }} </span>
     </div>
     <div class="account-details">
-      <span id="password">{{ user.password }} </span>
+      <span id="password">{{ maskedpassword }} </span>
     </div>
     <div class="account-details">
       <span>{{ user.address }} </span>
     </div>
-    <div class="account-details"><span id="change-data" (click)="changeData()">change my data</span></div>
+    <div class="account-details"><span id="change-data" (click)="openDialog('0ms', '0ms')">change my data</span></div>
   </div>
   <div class="account-data" *ngIf="selectedSection === 'orders'">
     <p>Orders content goes here...</p>
