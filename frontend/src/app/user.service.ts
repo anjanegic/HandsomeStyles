@@ -17,4 +17,29 @@ export class UserService {
     };
     return this.http.post<User>(`${this.uri}/login`, data);
   }
+
+  register(email: string, firstname: string, lastname: string, password: string) {
+    const data = {
+      email: email,
+      firstname: firstname,
+      lastname: lastname,
+      password: password,
+    };
+    return this.http.post<User>(`${this.uri}/register`, data);
+  }
+
+  changeData(_id: string, email: string, firstname: string, lastname: string, address: string, city: string, country: string, postalCode: string, phone: string) {
+    const data = {
+      _id: _id,
+      email: email,
+      firstname: firstname,
+      lastname: lastname,
+      city: city,
+      address: address,
+      country: country,
+      postalCode: postalCode,
+      phone: phone,
+    };
+    return this.http.post<User>(`${this.uri}/change-data`, data);
+  }
 }

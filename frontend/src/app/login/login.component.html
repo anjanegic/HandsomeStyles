@@ -3,18 +3,19 @@
     <h1>LOGIN</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
       <mat-form-field>
-        <mat-label>Email</mat-label>
+        <mat-label>email</mat-label>
         <input matInput formControlName="email" placeholder="name@example.com" />
-        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email address</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">please enter a valid email address</mat-error>
         <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is <strong>required</strong></mat-error>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Password</mat-label>
+        <mat-label>password</mat-label>
         <input matInput formControlName="password" type="password" />
-        <mat-error *ngIf="loginForm.get('password')?.hasError('pattern')">Password must be a combination of lower-case, upper-case, numbers and at least 9 characters long</mat-error>
         <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is <strong>required</strong></mat-error>
       </mat-form-field>
       <button mat-stroked-button color="basic" type="submit">log in</button>
     </form>
+    <p>don't have an account?</p>
+    <p class="login-register-link" (click)="navigateToRegister()">create account</p>
   </div>
 </div>

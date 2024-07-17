@@ -34,7 +34,7 @@ h1 {
 
 .login-form {
   width: 100%;
-  max-width: 600px; /* Maksimalna širina forme */
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,15 +44,31 @@ h1 {
 
 mat-form-field {
   width: 100%; /* Polja za unos zauzimaju punu širinu forme */
-  margin-bottom: 16px; /* Razmak između polja */
+  margin-bottom: 6px; /* Razmak između polja */
+}
+
+mat-error {
+  width: 100% !important;
 }
 
 input {
-  height: 33px; /* Visina polja za unos */
+  height: 30px;
 }
 
 button {
   width: 100%;
-  max-width: 200px; /* Maksimalna širina dugmeta */
-  margin-top: 16px; /* Razmak iznad dugmeta */
+  margin-bottom: 24px;
+  margin-top: 10px;
+  border: 1px solid #938984 !important;
+  color: #da8c6b !important;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
+}
+
+.login-register-link {
+  text-decoration: underline;
+  cursor: pointer;
 }

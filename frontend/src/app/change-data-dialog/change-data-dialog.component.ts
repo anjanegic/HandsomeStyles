@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'change-data-dialog-component',
@@ -40,7 +41,7 @@ export class ChangeDataDialogComponent {
   changeDataForm: FormGroup;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService, private location: Location) {
     this.user = this.authService.getUser();
     this.changeDataForm = this.formBuilder.group({
       firstname: [this.user.firstname, []],
@@ -56,6 +57,7 @@ export class ChangeDataDialogComponent {
 
   onSubmit(): void {
     if (this.changeDataForm.valid) {
+      const _id = this.user._id;
       const formValues = this.changeDataForm.value;
       const email = formValues.email;
       const firstname = formValues.firstname;
@@ -66,13 +68,15 @@ export class ChangeDataDialogComponent {
       const postalCode = formValues.postalCode;
       const phone = formValues.phone;
       console.log('Form Submitted!', formValues);
-      // this.service.changeData(email, firstname, lastname, address, country, phone).subscribe((data) => {
-      //   if (data == null) alert('Nema korisnika');
-      //   else {
-      //     this.authService.login(data);
-      //     this.router.navigate(['']);
-      //   }
-      // });
+      this.service.changeData(_id, email, firstname, lastname, address, city, country, postalCode, phone).subscribe((data) => {
+        if (data == null) alert('Nema korisnika');
+        else {
+          this.authService.login(data);
+          this.router.navigate(['user-info']).then(() => {
+            window.location.reload();
+          });
+        }
+      });
     } else {
       console.log('Form is not valid');
     }

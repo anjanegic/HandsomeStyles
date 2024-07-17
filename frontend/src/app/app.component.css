@@ -32,7 +32,7 @@
   position: sticky;
   top: 0; /* Definišemo poziciju lepljivosti */
   z-index: 1000;
-  background-color: #fdf4eb;
+  background-color: #f9f8f8;
 }
 
 .site-header.scrolled {

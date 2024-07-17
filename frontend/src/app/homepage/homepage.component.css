@@ -1,0 +1,45 @@
+.homepage-top {
+  background-image: url("/IMG_2057.png");
+  background-size: cover;
+  background-position: 25% 64%;
+  background-repeat: no-repeat;
+  height: 700px;
+  width: 100%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Pomeranje kontejnera na desnu stranu */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 12vw;
+}
+
+.top-left {
+  margin-bottom: 15px;
+}
+
+.cusom-h {
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.custom-button {
+  background-color: #fbe0c5;
+  color: rgb(55, 50, 50);
+  border-radius: 30px;
+  font-size: 1.5em;
+  padding: 15px 30px;
+  height: auto;
+  width: auto;
+}
+
+.best-sellers {
+  display: block;
+  width: 100%;
+  height: 400px;
+  background-color: white;
+}
