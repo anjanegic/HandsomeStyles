@@ -12,6 +12,10 @@ userRouter
   .post((req, res) => new UserController().register(req, res));
 
 userRouter
+  .route("/change-data")
+  .post((req, res) => new UserController().changeData(req, res));
+
+userRouter
   .route("/addToFavourites")
   .post((req, res) => new UserController().addToFavourites(req, res));
 

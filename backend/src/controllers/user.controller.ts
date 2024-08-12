@@ -1,5 +1,6 @@
 import express from "express";
 import User from "../models/user";
+import { ObjectId } from "mongodb";
 
 export class UserController {
   login = (req: express.Request, res: express.Response) => {
@@ -26,27 +27,70 @@ export class UserController {
       });
   };
 
-  register = (req: express.Request, res: express.Response) => {
-    let username = req.body.username;
+  changeData = (req: express.Request, res: express.Response) => {
+    let userId = req.body._id;
+    let email = req.body.email;
+    let firstname = req.body.firstname;
+    let lastname = req.body.lastname;
+    let address = req.body.address;
+    let city = req.body.city;
+    let country = req.body.country;
+    let postalCode = req.body.postalCode;
+    let phone = req.body.phone;
+
+    User.findByIdAndUpdate(
+      userId,
+      {
+        $set: {
+          email: email,
+          firstname: firstname,
+          lastname: lastname,
+          address: address,
+          city: city,
+          country: country,
+          postalCode: postalCode,
+          phone: phone,
+        },
+      },
+      { new: true }
+    )
+      .then((user) => {
+        if (user) {
+          res.json(user);
+        } else {
+          res.status(404).json({ message: "User not found" });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  register = async (req: express.Request, res: express.Response) => {
+    let email = req.body.email;
     let password = req.body.password;
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
 
-    let user = {
-      username: username,
-      password: password,
-      firstname: firstname,
-      lastname: lastname,
-    };
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: "User already exists." });
+    }
 
-    new User(user)
-      .save()
-      .then((ok) => {
-        res.json({ message: "ok" });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const newUser = new User({
+      email,
+      password, // Preporučuje se da lozinku hash-ujete pre nego što je sačuvate
+      firstname,
+      lastname,
+      type: "user", // Možete dodati dodatne podatke kao što je tip korisnika
+      approved: false, // Postavite po potrebi
+      deleted: false, // Postavite po potrebi
+    });
+
+    const savedUser = await newUser.save();
+
+    res.status(201).json(savedUser);
   };
 
   addToFavourites = (req: express.Request, res: express.Response) => {

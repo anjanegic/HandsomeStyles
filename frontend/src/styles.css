@@ -9,7 +9,13 @@ body {
 
 body [class^="mat-"]:not(mat-icon),
 body [class*=" mat-"]:not(mat-icon),
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   font-family: "Montserrat", sans-serif !important;
 }
 
