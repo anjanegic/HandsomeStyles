@@ -1,0 +1,30 @@
+.custom-form-field {
+  width: 200px;
+}
+
+mat-form-field {
+  height: 40px !important;
+}
+
+.custom-mat-select {
+  padding: 0;
+  font-size: 14px;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  border-color: #754c4c;
+}
+
+.mat-select-value {
+  color: #1b1b1b;
+}
+
+mat-option {
+  font-size: 14px !important;
+}
+
+.sort-options {
+  margin: 20px;
+  display: grid;
+  justify-content: end;
+}

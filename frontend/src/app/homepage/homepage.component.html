@@ -9,8 +9,9 @@
   </div>
 </div>
 <div class="best-sellers">
-  <h1 class="cusom-h">BEST SELLERS</h1>
   <div class="best-seller-cards">
-    <app-product-list [products]="products" (addToCart)="onAddToCart($event)"></app-product-list>
+    <app-product-list title="Best Sellers" [products]="products"></app-product-list>
+    <!-- <app-product-list title="BEST PISE IKADA" [products]="products"></app-product-list> -->
+    <!-- (addToCart)="onAddToCart($event)" -->
   </div>
 </div>

@@ -1,17 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { Product } from '../models/product';
+import { NgIf } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, NgIf, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css',
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  @Input() products: string[] = []; // @TODO create product model e.g. {name, price, imageUrl}
-  @Output() addToCart = new EventEmitter<string>();
+  @Input() products: Product[] = [];
+  @Input() title = '';
+  @Output() addToCart = new EventEmitter<Product>();
+
+  constructor(private router: Router) {}
+
+  navigateToShopCollection() {
+    this.router.navigate(['/collection'], { queryParams: { title: this.title } });
+  }
+
+  navigateToProduct(id: string) {
+    this.router.navigate(['/product'], { queryParams: { id } });
+  }
 }

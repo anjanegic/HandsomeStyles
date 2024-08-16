@@ -1,24 +1,13 @@
-<div>
-  <div *ngFor="let product of products">
-    <span>{{ product }}</span>
-    <button (click)="addToCart.emit(product)" mat-stroked-button>Add to cart</button>
+<div class="product-gallery">
+  <div class="highlight-card product-card" (click)="navigateToShopCollection()">
+    <div class="highlight-text">{{ title }}</div>
+  </div>
+
+  <div *ngFor="let product of products" class="product-card" (click)="navigateToProduct(product._id)">
+    <img [src]="'/products/' + product.imageFilename" alt="{{ product.name }}" class="product-image" />
+    <div class="product-info">
+      <h3 class="product-title">{{ product.name }}</h3>
+      <p class="product-price">{{ product.price | currency }}</p>
+    </div>
   </div>
 </div>
-<mat-card class="productCard" appearance="outlined">
-  <mat-card-header>
-    <div mat-card-avatar class="header-image"></div>
-    <mat-card-title>Shiba Inu</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" />
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred
-      for hunting.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>

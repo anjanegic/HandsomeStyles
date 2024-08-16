@@ -41,7 +41,11 @@ const Product = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    imageUrl: {
+    sold: {
+      type: Number,
+      default: 0,
+    },
+    imageFilename: {
       type: String, // Možete koristiti URL ili putanju ako čuvate slike na disku
     },
     tags: {

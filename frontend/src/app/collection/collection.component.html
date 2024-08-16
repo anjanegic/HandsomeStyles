@@ -1,0 +1,16 @@
+<div class="best-sellers">
+  <div class="sort-options">
+    <mat-form-field appearance="outline" class="custom-form-field">
+      <mat-label>sort by</mat-label>
+      <mat-select [(ngModel)]="selectedSort" (selectionChange)="onSortChange($event.value)" class="custom-mat-select">
+        <mat-option value="price-asc">price (low to high)</mat-option>
+        <mat-option value="price-desc">price (high to low)</mat-option>
+        <mat-option value="name-asc">a-z</mat-option>
+        <mat-option value="name-desc">z-a</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="best-seller-cards">
+    <app-product-list [title]="title" [products]="sortedProducts"></app-product-list>
+  </div>
+</div>

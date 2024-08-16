@@ -5,7 +5,8 @@ import { GridFSBucket } from "mongodb";
 import { createReadStream, unlink } from "fs";
 import multer, { FileFilterCallback } from "multer"; // Import multer tipove
 import userRouter from "./routers/user.router";
-
+import productRouter from "./routers/product.router";
+import path from "path";
 const CORS: CorsOptions = {
   origin: "*",
   methods: ["GET", "POST", "DELETE", "PUT"],
@@ -56,9 +57,16 @@ app.post(
   }
 );
 
+// Serviranje statičkih fajlova iz `public/uploads/products` direktorijuma
+app.use(
+  "/uploads/products",
+  express.static(path.join(__dirname, "public", "uploads", "products"))
+);
+
 const router = express.Router();
 
 router.use("/users", userRouter);
+router.use("/products", productRouter);
 app.use("/", router);
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));
