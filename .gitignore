@@ -43,6 +43,7 @@ yarn-error.log
 ./frontend/libpeerconnection.log
 ./frontendtestem.log
 ./frontend/typings
+frontend/.angular
 
 
 

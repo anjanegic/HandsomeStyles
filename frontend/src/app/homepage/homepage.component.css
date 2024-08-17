@@ -1,22 +1,10 @@
 .homepage-top {
-  background-image: url("/IMG_2057.png");
-  background-size: cover;
-  background-position: 25% 64%;
-  background-repeat: no-repeat;
   min-height: 700px;
   width: 100%;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: hidden; /* Sakrijte sadržaj koji izlazi iz div-a */
 }
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin: 12vw;
 }
 
 .top-left {
