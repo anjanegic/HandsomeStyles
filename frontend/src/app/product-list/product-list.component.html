@@ -1,6 +1,13 @@
-<app-product-preview
-  *ngFor="let product of products"
-  [product]="product"
-  (click)="navigateToProduct(product._id)"
-></app-product-preview>
+<div class="product-gallery">
+  <div class="highlight-card product-card" (click)="navigateToShopCollection()">
+    <div class="highlight-text">{{ title }}</div>
+  </div>
+
+  <div *ngFor="let product of products" class="product-card" (click)="navigateToProduct(product._id)">
+    <img [src]="'/products/' + product.imageFilename" alt="{{ product.name }}" class="product-image" />
+    <div class="product-info">
+      <h3 class="product-title">{{ product.name }}</h3>
+      <p class="product-price">{{ product.price | currency }}</p>
+    </div>
+  </div>
 </div>

@@ -1,15 +1,38 @@
 <div class="homepage-top">
   <div class="container">
     <div class="top-left">
-      <h1 class="cusom-h">PHONE CASES FOR EVERYONE</h1>
+      <h1 class="cusom-h">
+        <span>HANDSOME STYLES</span>
+        <span class="custom-font">STORE</span>
+      </h1>
     </div>
-    <div class="button-shop">
-      <button mat-stroked-button class="custom-button" (click)="navigateToShopPhoneCases()">SHOP NOW</button>
+    <div class="second-row">
+      <div class="highlighted-product">
+        <img [src]="'/products/' + highlightedProduct.imageFilename" alt="{{ highlightedProduct.name }}" class="highlighted-product-image" />
+        <div class="highlighted-product-details">
+          <span>{{ highlightedProduct?.name }}</span>
+          <span class="custom-font big-font">20% off!</span>
+        </div>
+      </div>
+      <img class="harry-standup" src="/assets/harry.png" alt="harry" />
+      <div class="right-side">
+        <div class="collection">
+          <h3>New Summer Collection!</h3>
+          <button mat-stroked-button class="custom-button" (click)="navigateToShopPhoneCases()">SHOP NOW</button>
+        </div>
+        <button matRipple matRippleColor="#f1d5ee4f" class="random-product" (click)="navigateToRandomProduct()">
+          <img [src]="'/products/' + randomProduct.imageFilename" alt="{{ randomProduct.name }}" class="random-product-image" />
+          <div class="highlighted-product-details">
+            <span>{{ randomProduct?.name }}</span>
+            <span class="custom-font">{{ randomProduct?.price }}$</span>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
-</div>
-<div class="best-sellers">
-  <div class="best-seller-cards">
-    <app-product-list title="Best Sellers" [products]="products"></app-product-list>
+  <div class="best-sellers">
+    <div class="best-seller-cards">
+      <app-product-list title="Best Sellers" [products]="products"></app-product-list>
+    </div>
   </div>
 </div>
