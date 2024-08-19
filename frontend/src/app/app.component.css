@@ -5,13 +5,14 @@
 }
 
 .announcement-bar {
-  background-color: #fbe0c5;
+  background-color: #c2aac2;
   display: flex;
   justify-content: center;
   font-size: 12px;
   font-weight: 500;
   min-height: 34px;
   align-items: center;
+  color: #ffffff;
 }
 
 .site-header {
@@ -120,5 +121,6 @@ button[mat-icon-button] mat-icon {
   display: block;
   padding: 12px;
   font-size: 12px;
-  background: #fee9da;
+  background-color: #c2aac2;
+  color: white;
 }

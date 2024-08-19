@@ -7,12 +7,6 @@ enum ProductCategory {
   Home = "Home",
 }
 
-// Enum za varijante proizvoda
-enum ProductVariant {
-  Color = "Color",
-  Size = "Size",
-}
-
 const Product = new mongoose.Schema(
   {
     name: {
@@ -77,8 +71,15 @@ const Product = new mongoose.Schema(
     ],
     variants: [
       {
-        type: String,
-        enum: Object.values(ProductVariant),
+        name: {
+          type: String,
+        },
+        color: {
+          type: String,
+        },
+        model: {
+          type: String,
+        },
       },
     ],
   },

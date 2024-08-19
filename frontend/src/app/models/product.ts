@@ -20,7 +20,7 @@ export class Product {
 }
 
 export interface Variant {
-  name?: string; // Može biti naziv
-  color?: string; // Može biti boja
-  model?: string; // Može biti model
+  name?: string;
+  color?: string;
+  model?: string;
 }
