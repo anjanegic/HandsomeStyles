@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../auth.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product',
@@ -24,7 +26,11 @@ export class ProductComponent {
   labelText: string = 'Choose Variant'; // Default label text
   quantity: number = 1; // Default quantity
 
-  constructor(private route: ActivatedRoute, private productService: ProductService) {}
+  getUser() {
+    return this.authService.getUser();
+  }
+
+  constructor(private route: ActivatedRoute, private productService: ProductService, private authService: AuthService, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
@@ -41,7 +47,6 @@ export class ProductComponent {
 
   onVariantChange(variant: any) {
     this.selectedVariant = variant;
-    // Additional logic for variant selection
   }
 
   setLabelText() {
@@ -69,5 +74,29 @@ export class ProductComponent {
     if (this.quantity > 1) {
       this.quantity--;
     }
+  }
+  addToCart() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+
+    const item = {
+      product: this.product,
+      variant: this.selectedVariant,
+      quantity: this.quantity,
+    };
+
+    const compareKey = item.product.category === 'Phone Case' ? 'model' : 'color';
+
+    const existingItemIndex = cartItems.findIndex((cartItem: any) => cartItem.product._id === item.product._id && cartItem.variant[compareKey] === item.variant[compareKey]);
+
+    if (existingItemIndex !== -1) {
+      cartItems[existingItemIndex].quantity += item.quantity;
+    } else {
+      cartItems.push(item);
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+    this.cartService.openCart();
+    this.cartService.updateCartBadge();
   }
 }

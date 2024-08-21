@@ -1,0 +1,52 @@
+<mat-sidenav-container (click)="onContainerClick($event)">
+  <mat-sidenav #sidenav mode="side" position="end">
+    <div class="all">
+      <div class="sidenav-header">
+        <p style="font-size: 18px">cart &nbsp;&nbsp;</p>
+        <p>{{ getTotalQuantity() }} items</p>
+        <button mat-icon-button (click)="closeSidenav()" class="material-symbols-outlined"><mat-icon>close</mat-icon></button>
+      </div>
+
+      <hr />
+      <div *ngFor="let item of cartItems; let i = index">
+        <div class="cart-item">
+          <div class="cart-item-image-details">
+            <div class="cart-item-image-container">
+              <img [src]="'/products/' + item.product.imageFilename" alt="{{ item.product.name }}" class="cart-item-image" />
+            </div>
+
+            <div class="cart-item-details">
+              <h3>{{ item.product.name }} - {{ item.product.price | currency }}</h3>
+              <p>{{ item.variant.color || item.variant.model }}</p>
+            </div>
+          </div>
+          <div class="quantity-container">
+            <button mat-icon-button (click)="removeFromCart(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <div class="quantity">
+              <button class="minus" aria-label="Decrease" (click)="decreaseQuantity(i)">&minus;</button>
+              <input type="number" class="input-box" [(ngModel)]="item.quantity" min="1" (input)="updateQuantity(i, item.quantity)" />
+              <button class="plus" aria-label="Increase" (click)="increaseQuantity(i)">&plus;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-total">
+      <div class="total-title">
+        <h2 style="margin: 0">total:</h2>
+        <p style="font-size: large">
+          {{ getTotalPrice() | currency }}
+        </p>
+      </div>
+
+      <div class="checkout-button-container">
+        <button mat-flat-button class="checkout-button" (click)="checkout()">checkout</button>
+      </div>
+    </div>
+
+    <!-- <button (click)="clearCart()">Clear Cart</button> -->
+  </mat-sidenav>
+</mat-sidenav-container>

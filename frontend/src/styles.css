@@ -15,10 +15,16 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+input {
   font-family: "Montserrat", sans-serif !important;
 }
 
 .mat-mdc-dialog-surface {
   border-radius: 10px !important;
+}
+
+@font-face {
+  font-family: brasika;
+  src: url(/assets/fonts/BrasikaDisplay.ttf) format("truetype");
 }

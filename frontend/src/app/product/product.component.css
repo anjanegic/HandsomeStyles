@@ -25,12 +25,14 @@
 .product-title-heart {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin: 0 0 10px 0;
 }
 
 .material-symbols-outlined {
   font-size: 22px;
   color: rgb(57, 56, 56);
-  margin-right: 70px;
+  margin-right: 12vw;
 }
 
 .product-details {
@@ -48,8 +50,8 @@ mat-form-field {
 
 h1 {
   font-size: 24px;
-  margin: 0 0 10px 0;
   color: rgb(36, 36, 36);
+  margin: 0;
 }
 
 h2 {
@@ -58,7 +60,7 @@ h2 {
 }
 
 p {
-  margin: 0 0 50px;
+  margin: 0 80px 40px 0px;
 }
 
 .quantity-selector {
@@ -77,13 +79,34 @@ p {
 }
 
 .quantityForm {
-  min-width: 150px;
-  max-width: 500px;
   width: 400px;
   margin-bottom: 20px;
-  height: 50%;
+  /* border: 2px solid #e8dfe9; */
 }
 
 .example-full-width {
   width: 100%;
+}
+
+input[matinput]::-webkit-outer-spin-button,
+input[matinput]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  height: 0;
+}
+
+.addtocartbutton {
+  margin: 8px 8px 8px 0;
+  background-color: #373737;
+  color: white;
+  width: 400px;
+}
+
+.addtocartbutton:hover {
+  background-color: #ffffff !important;
+  color: #373737;
+  border: #373737 solid 1px;
 }

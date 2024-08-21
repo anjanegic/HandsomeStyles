@@ -6,7 +6,17 @@
   <div class="product-details">
     <div class="product-title-heart">
       <h1>{{ product.name }}</h1>
-      <span class="material-symbols-outlined">favorite</span>
+      <ng-container *ngIf="getUser(); else loginButton">
+        <button routerLink="/user-info" mat-icon-button aria-label="Account">
+          <mat-icon class="material-symbols-outlined">favorite</mat-icon>
+        </button>
+      </ng-container>
+      <ng-template #loginButton>
+        <button routerLink="login" mat-icon-button aria-label="Account">
+          <mat-icon class="material-symbols-outlined">favorite</mat-icon>
+        </button>
+      </ng-template>
+      <!-- <span class="material-symbols-outlined">favorite</span> -->
     </div>
 
     <h2>{{ product.price | currency }}</h2>
@@ -33,5 +43,8 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <div>
+      <button mat-flat-button class="addtocartbutton" (click)="addToCart()">add to cart</button>
+    </div>
   </div>
 </div>

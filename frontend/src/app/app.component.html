@@ -28,11 +28,13 @@
       <button mat-icon-button aria-label="Search">
         <mat-icon class="material-symbols-outlined">search</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Cart">
-        <mat-icon class="material-symbols-outlined">shopping_bag</mat-icon>
+      <button mat-icon-button (click)="openCart()" aria-label="Cart">
+        <mat-icon matBadge="{{ getTotalQuantity() }}" matBadgeColor="accent" MatBadgeSize="small" class="material-symbols-outlined">shopping_bag</mat-icon>
       </button>
     </div>
   </div>
 </div>
+<app-cart (sidenavClosed)="closeCart()"></app-cart>
+
 <router-outlet></router-outlet>
 <footer class="hs-footer">Handsome Styles © 2024</footer>

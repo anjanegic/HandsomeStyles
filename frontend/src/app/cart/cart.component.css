@@ -1,0 +1,147 @@
+mat-sidenav {
+  width: 600px;
+  background-color: #ffffff;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+mat-sidenav-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 1000;
+}
+
+.all {
+  padding: 20px;
+}
+
+.sidenav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-item-image-container {
+  width: 100px;
+  height: auto;
+  overflow: hidden;
+  margin: 5px;
+}
+
+.cart-item-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  border: #d8cdd9 1px solid;
+  border-radius: 8px;
+  margin: 8px;
+  padding: 5px;
+}
+
+.cart-item-image-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-content {
+  flex-grow: 1; /* Omogućava rastezanje srednjeg dela */
+  overflow-y: auto; /* Omogućava skrolovanje sadržaja ako je potrebno */
+}
+
+.cart-total {
+  position: absolute;
+  bottom: 0;
+  padding-top: 20px;
+  padding: 15px;
+  border-top: 1px solid #d8cdd9;
+  display: flex;
+  justify-content: space-between;
+  width: 96.5%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.total-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.checkout-button-container {
+  width: 100%;
+}
+
+.checkout-button {
+  margin: 8px 8px 8px 0;
+  background-color: #373737;
+  color: white;
+  width: 100%;
+}
+
+.checkout-button:hover {
+  background-color: #ffffff !important;
+  color: #373737;
+  border: #373737 solid 1px;
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+.quantity-container {
+  display: grid;
+  justify-items: end;
+}
+
+.quantity {
+  display: flex;
+  border: 1px solid #878787;
+  border-radius: 4px;
+  justify-self: center;
+  width: 1s00px;
+  overflow: hidden;
+  height: 30px;
+  margin-right: 12px;
+}
+
+.quantity button {
+  background-color: #ffffff;
+  color: #3f3f3f;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  width: 30px;
+  height: auto;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.input-box {
+  width: 40px;
+  text-align: center;
+  border: none;
+  font-size: 14px;
+  outline: none;
+}
+
+.input-box::-webkit-inner-spin-button,
+.input-box::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

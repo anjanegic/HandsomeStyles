@@ -1,4 +1,4 @@
-import { Component, ViewChild, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgIf } from '@angular/common';
@@ -11,19 +11,40 @@ import { FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HttpClientModule } from '@angular/common/http'; // TODO: remove
 import { AuthService } from './auth.service';
+import { CartComponent } from './cart/cart.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CartService } from './cart.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterModule, RouterOutlet, NgIf, MatButtonModule, MatMenuModule, MatIconModule, FormsModule, MatFormFieldModule, MatInputModule, MatSidenavModule, HttpClientModule],
+  imports: [
+    RouterModule,
+    RouterOutlet,
+    NgIf,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatBadgeModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSidenavModule,
+    HttpClientModule,
+    CartComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
+  @ViewChild(CartComponent) cartComponent!: CartComponent;
+
   isSearchActive = false;
   user: any;
+  cartOpened: boolean = false;
+  cartItems: any[] = [];
 
-  constructor(public title: Title, private router: Router, private authService: AuthService) {}
+  constructor(public title: Title, private router: Router, private authService: AuthService, private cartService: CartService) {}
 
   getUser() {
     return this.authService.getUser();
@@ -32,8 +53,13 @@ export class AppComponent {
   isMenuHovered = false;
 
   ngOnInit() {
-    this.onWindowScroll(); // Initialize on load to apply background if needed
+    this.onWindowScroll();
     this.user = this.authService.getUser();
+    this.refreshCart();
+
+    this.cartService.getCartUpdatedEvent().subscribe(() => {
+      this.refreshCart();
+    });
   }
 
   logout(): void {
@@ -45,10 +71,37 @@ export class AppComponent {
   onWindowScroll() {
     const header = document.querySelector('.site-header') as HTMLElement;
     if (window.scrollY > 50) {
-      // Change 50 to whatever scroll distance you want
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
+  }
+
+  loadCartFromLocalStorage() {
+    const items = localStorage.getItem('cartItems');
+    if (items) {
+      this.cartItems = JSON.parse(items);
+    }
+  }
+
+  refreshCart() {
+    this.loadCartFromLocalStorage();
+  }
+
+  getTotalQuantity(): number {
+    return this.cartItems.reduce((total, item) => total + item.quantity, 0);
+  }
+
+  updateBadge() {
+    // This will refresh the badge by recalculating the total quantity
+    this.refreshCart();
+  }
+
+  openCart() {
+    this.cartComponent.openSidenav();
+  }
+
+  closeCart() {
+    this.cartComponent.closeSidenav();
   }
 }
