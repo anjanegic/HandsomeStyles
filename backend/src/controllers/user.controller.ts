@@ -147,4 +147,35 @@ export class UserController {
       .then((ok) => res.json({ message: "Ok" }))
       .catch((err) => console.log(err));
   };
+
+  addToWishlist = (req: express.Request, res: express.Response) => {
+    let productId = req.body.productId;
+    let _id = req.body.userId;
+
+    User.updateOne({ _id }, { $push: { wishlist: new ObjectId(productId) } })
+      .then((data) => {
+        console.debug(data);
+        res.json({ message: "Ok" });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.json({ message: "Fail" });
+      });
+  };
+
+  removeFromWishlist = (req: express.Request, res: express.Response) => {
+    let productId = req.body.productId;
+    let _id = req.body.userId;
+    console.log(productId);
+
+    User.updateOne({ _id }, { $pull: { wishlist: new ObjectId(productId) } })
+      .then((data) => {
+        console.debug(data);
+        res.json({ message: "Ok" });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.json({ message: "Fail" });
+      });
+  };
 }

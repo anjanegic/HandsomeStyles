@@ -1,26 +1,39 @@
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { ChangeDataDialogComponent } from '../change-data-dialog/change-data-dialog.component';
+import { Product } from '../models/product';
+import { ProductService } from '../product.service';
+import { ProductListComponent } from '../product-list/product-list.component';
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
-  imports: [NgIf, MatDialogModule],
+  imports: [NgIf, MatDialogModule, ProductListComponent, RouterModule],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css',
 })
-export class UserInfoComponent {
+export class UserInfoComponent implements OnInit {
   user: any;
   selectedSection: string = 'account';
   maskedpassword: string;
+  products: Product[] = [];
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private productService: ProductService) {
     this.user = this.authService.getUser();
     this.maskedpassword = '*'.repeat(this.user.password.length);
+  }
+
+  ngOnInit() {
+    console.log(this.authService.getUser());
+    const products = [];
+    for (const id of this.authService.getUser().wishlist) {
+      this.productService.getProductById(id).subscribe((product) => products.push(product));
+    }
+    this.products = products;
   }
 
   showSection(section: string): void {

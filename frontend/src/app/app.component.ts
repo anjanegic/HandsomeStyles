@@ -93,7 +93,6 @@ export class AppComponent {
   }
 
   updateBadge() {
-    // This will refresh the badge by recalculating the total quantity
     this.refreshCart();
   }
 

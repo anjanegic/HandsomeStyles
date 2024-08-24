@@ -16,6 +16,8 @@ mat-sidenav-container {
 }
 
 .all {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
 }
 
@@ -41,7 +43,7 @@ mat-sidenav-container {
 .cart-item {
   display: flex;
   justify-content: space-between;
-  border: #d8cdd9 1px solid;
+  border: 1px solid #d8cdd9;
   border-radius: 8px;
   margin: 8px;
   padding: 5px;
@@ -63,6 +65,7 @@ mat-sidenav-container {
 }
 
 .cart-total {
+  width: 95%;
   position: absolute;
   bottom: 0;
   padding-top: 20px;
@@ -70,7 +73,6 @@ mat-sidenav-container {
   border-top: 1px solid #d8cdd9;
   display: flex;
   justify-content: space-between;
-  width: 96.5%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -82,15 +84,15 @@ mat-sidenav-container {
   align-items: center;
   justify-content: space-between;
 }
+
 .checkout-button-container {
   width: 100%;
 }
 
 .checkout-button {
-  margin: 8px 8px 8px 0;
+  width: 100%;
   background-color: #373737;
   color: white;
-  width: 100%;
 }
 
 .checkout-button:hover {
@@ -114,7 +116,7 @@ p {
   border: 1px solid #878787;
   border-radius: 4px;
   justify-self: center;
-  width: 1s00px;
+  width: 100px;
   overflow: hidden;
   height: 30px;
   margin-right: 12px;

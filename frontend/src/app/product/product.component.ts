@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../models/product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,11 +12,13 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
+import { RouterModule } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatIconModule, FormsModule, CommonModule, MatInputModule],
+  imports: [MatCardModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatIconModule, FormsModule, CommonModule, MatInputModule, RouterModule],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 })
@@ -30,7 +32,14 @@ export class ProductComponent {
     return this.authService.getUser();
   }
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private authService: AuthService, private cartService: CartService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService,
+    private authService: AuthService,
+    private cartService: CartService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
@@ -39,7 +48,7 @@ export class ProductComponent {
         this.productService.getProductById(productId).subscribe((product) => {
           this.product = product;
           this.selectedVariant = this.product.variants[0];
-          this.setLabelText(); // Set the appropriate label text based on the variant type
+          this.setLabelText();
         });
       }
     });
@@ -61,6 +70,29 @@ export class ProductComponent {
       }
     }
   }
+
+  isInWishlist(): boolean {
+    const user = this.getUser();
+    return user && user.wishlist && user.wishlist.includes(this.product._id);
+  }
+
+  toggleWishlist() {
+    if (this.authService.isLoggedIn()) {
+    }
+    if (this.getUser()) {
+      if (this.isInWishlist()) {
+        this.userService.removeFromWishlist(this.product._id, this.getUser()._id).subscribe();
+        this.authService.patchUser({ ...this.getUser(), wishlist: this.getUser().wishlist.filter((id) => id !== this.product._id) });
+      } else {
+        this.userService.addToWishlist(this.product._id, this.getUser()._id).subscribe();
+        this.authService.patchUser({ ...this.getUser(), wishlist: [...this.getUser().wishlist, this.product._id] });
+      }
+    } else {
+      this.router.navigate(['/login'], { queryParams: { returnUrl: this.router.url } });
+    }
+  }
+
+  addToWishlist() {}
 
   onQuantityChange(quantity: number) {
     this.quantity = quantity;

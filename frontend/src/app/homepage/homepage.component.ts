@@ -6,11 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from '../product.service';
 import { Product } from '../models/product';
 import { MatRippleModule } from '@angular/material/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-homepage',
   standalone: true,
-  imports: [MatButtonModule, ProductListComponent, MatRippleModule],
+  imports: [MatButtonModule, ProductListComponent, MatRippleModule, CommonModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.css',
 })

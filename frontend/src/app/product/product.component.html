@@ -1,22 +1,21 @@
 <div class="product-page">
   <div class="product-images">
-    <img [src]="'/products/' + product.imageFilename" alt="{{ product.name }}" class="main-image" />
+    <img *ngIf="product?.imageFilename" [src]="'/products/' + product.imageFilename" alt="product image" class="main-image" />
   </div>
 
-  <div class="product-details">
+  <div class="product-details" *ngIf="product">
     <div class="product-title-heart">
       <h1>{{ product.name }}</h1>
-      <ng-container *ngIf="getUser(); else loginButton">
-        <button routerLink="/user-info" mat-icon-button aria-label="Account">
-          <mat-icon class="material-symbols-outlined">favorite</mat-icon>
-        </button>
-      </ng-container>
-      <ng-template #loginButton>
-        <button routerLink="login" mat-icon-button aria-label="Account">
-          <mat-icon class="material-symbols-outlined">favorite</mat-icon>
-        </button>
-      </ng-template>
-      <!-- <span class="material-symbols-outlined">favorite</span> -->
+
+      <button mat-icon-button aria-label="Toggle Wishlist" (click)="toggleWishlist()">
+        <mat-icon
+          [ngClass]="{
+            'material-symbols-outlined': !isInWishlist(),
+            'material-symbols': isInWishlist()
+          }"
+          >favorite</mat-icon
+        >
+      </button>
     </div>
 
     <h2>{{ product.price | currency }}</h2>

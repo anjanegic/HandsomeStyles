@@ -63,3 +63,24 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+#removeFromWishlist {
+  cursor: pointer;
+  color: #3b393b;
+  text-decoration: underline;
+}
+
+.product-remove {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.no-products-message {
+  padding: 16px 8px;
+  flex-direction: column;
+  gap: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

@@ -27,4 +27,12 @@ userRouter
   .route("/changeFavourite")
   .post((req, res) => new UserController().changeFavourite(req, res));
 
+userRouter
+  .route("/removeFromWishlist")
+  .post((req, res) => new UserController().removeFromWishlist(req, res));
+
+userRouter
+  .route("/addToWishlist")
+  .post((req, res) => new UserController().addToWishlist(req, res));
+
 export default userRouter;

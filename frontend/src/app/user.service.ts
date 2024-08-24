@@ -42,4 +42,20 @@ export class UserService {
     };
     return this.http.post<User>(`${this.uri}/change-data`, data);
   }
+
+  removeFromWishlist(productId: string, userId: string) {
+    const data = {
+      userId,
+      productId,
+    };
+    return this.http.post<User>(`${this.uri}/removeFromWishlist`, data);
+  }
+
+  addToWishlist(productId: string, userId: string) {
+    const data = {
+      productId,
+      userId,
+    };
+    return this.http.post<User>(`${this.uri}/addToWishlist`, data);
+  }
 }

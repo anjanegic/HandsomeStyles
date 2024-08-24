@@ -11,4 +11,5 @@ export class User {
   phone: string;
   approved: boolean;
   deleted: boolean;
+  wishlist: string[] = [];
 }

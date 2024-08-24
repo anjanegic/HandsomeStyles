@@ -29,7 +29,8 @@
         <mat-icon class="material-symbols-outlined">search</mat-icon>
       </button>
       <button mat-icon-button (click)="openCart()" aria-label="Cart">
-        <mat-icon matBadge="{{ getTotalQuantity() }}" matBadgeColor="accent" MatBadgeSize="small" class="material-symbols-outlined">shopping_bag</mat-icon>
+        <mat-icon *ngIf="getTotalQuantity() > 0" [matBadge]="getTotalQuantity()" matBadgeColor="accent" matBadgeSize="medium" class="material-symbols-outlined"> shopping_bag </mat-icon>
+        <mat-icon *ngIf="getTotalQuantity() === 0" class="material-symbols-outlined"> shopping_bag </mat-icon>
       </button>
     </div>
   </div>

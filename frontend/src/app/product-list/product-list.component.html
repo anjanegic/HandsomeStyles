@@ -1,13 +1,24 @@
-<div class="product-gallery">
-  <div class="highlight-card product-card" (click)="navigateToShopCollection()">
-    <div class="highlight-text">{{ title }}</div>
-  </div>
+<ng-container *ngIf="products?.length; else noProducts">
+  <div class="product-gallery">
+    <div class="highlight-card product-card" (click)="navigateToShopCollection()">
+      <div class="highlight-text">{{ page }}</div>
+    </div>
 
-  <div *ngFor="let product of products" class="product-card" (click)="navigateToProduct(product._id)">
-    <img [src]="'/products/' + product.imageFilename" alt="{{ product.name }}" class="product-image" />
-    <div class="product-info">
-      <h3 class="product-title">{{ product.name }}</h3>
-      <p class="product-price">{{ product.price | currency }}</p>
+    <div *ngFor="let product of products" class="product-card" (click)="navigateToProduct(product._id)">
+      <img [src]="'/products/' + product.imageFilename" alt="{{ product.name }}" class="product-image" />
+      <div class="product-info">
+        <h3 class="product-title">{{ product.name }}</h3>
+        <p class="product-price">{{ product.price | currency }}</p>
+      </div>
+      <div class="product-remove" *ngIf="page === 'Wishlist'">
+        <span id="removeFromWishlist" (click)="removeFromWishlist($event, product._id)">remove from wishlist</span>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
+<ng-template #noProducts>
+  <div class="no-products-message">
+    <mat-icon>favorite</mat-icon>
+    <h3>Opps, There are no products in {{ page }}.</h3>
+  </div>
+</ng-template>

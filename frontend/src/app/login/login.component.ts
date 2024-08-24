@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -40,7 +40,21 @@ export class LoginComponent {
         if (data == null) alert('Nema korisnika');
         else {
           this.authService.login(data);
-          this.router.navigate(['']);
+          // @ts-ignore
+          if (this.route.snapshot.queryParams?.returnUrl) {
+            // @ts-ignore
+            const decodedUrl = decodeURIComponent(this.route.snapshot.queryParams?.returnUrl);
+            const [path, queryString] = decodedUrl.split('?');
+            const queryParams = queryString.split('&').reduce((params, param) => {
+              const [key, value] = param.split('=');
+              params[key] = value;
+              return params;
+            }, {} as any);
+
+            this.router.navigate([path], { queryParams });
+          } else {
+            this.router.navigate(['/']);
+          }
         }
       });
     } else {

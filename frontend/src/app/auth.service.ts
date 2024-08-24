@@ -17,6 +17,10 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
+  patchUser(user: any): void {
+    localStorage.setItem(this.storageKey, JSON.stringify(user));
+  }
+
   login(user: any): void {
     localStorage.setItem(this.storageKey, JSON.stringify(user));
   }

@@ -46,6 +46,10 @@ const User = new mongoose.Schema(
     deleted: {
       type: Boolean,
     },
+    wishlist: {
+      type: Array,
+      default: [],
+    },
   },
   {
     versionKey: false,

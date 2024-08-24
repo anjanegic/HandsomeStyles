@@ -1,19 +1,33 @@
 [
   {
+    "_id": {
+      "$oid": "668d9e0f7fbd551a28ff371f"
+    },
     "email": "pera@gmail.com",
     "password": "pera12345",
     "firstname": "Petar",
     "lastname": "Petrovic",
     "type": "user",
-    "address": "Bulevar Arsenija Carnojevica",
-    "city": "Belgrade",
+    "address": "Bulevar Arsenija Carnojevica 11",
+    "city": "Beograd",
     "country": "Serbia",
-    "postalCode": "10000",
+    "postalCode": "10070",
     "phone": "612288927",
     "approved": true,
-    "deleted": false
+    "deleted": false,
+    "wishlist": [
+      {
+        "$oid": "66bcb06c5096ca24c716eda6"
+      },
+      {
+        "$oid": "66bcb06c5096ca24c716eda7"
+      }
+    ]
   },
   {
+    "_id": {
+      "$oid": "668d9e0f7fbd551a28ff3720"
+    },
     "email": "admin@gmail.com",
     "password": "admin12345",
     "firstname": "Admin",
@@ -25,9 +39,13 @@
     "postalCode": "",
     "phone": "",
     "approved": true,
-    "deleted": false
+    "deleted": false,
+    "wishlist": []
   },
   {
+    "_id": {
+      "$oid": "668d9e0f7fbd551a28ff3721"
+    },
     "email": "manager@gmail.com",
     "password": "manager12345",
     "firstname": "manager",
@@ -39,6 +57,47 @@
     "postalCode": "",
     "phone": "",
     "approved": true,
-    "deleted": false
+    "deleted": false,
+    "wishlist": [
+      {
+        "$oid": "66be15d95096ca24c716eda9"
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "668e944dc12c38e0cacc16dd"
+    },
+    "firstname": "Anja",
+    "lastname": "Negic",
+    "password": "Anja1234",
+    "type": "user",
+    "email": "anjanegic@gmail.com",
+    "approved": false,
+    "deleted": false,
+    "address": "Belgrade",
+    "city": "Bulevar Mihajla Pupina 143",
+    "country": "Serbia",
+    "phone": null,
+    "postalCode": "11070",
+    "wishlist": []
+  },
+  {
+    "_id": {
+      "$oid": "668e95fdc12c38e0cacc16e5"
+    },
+    "firstname": "Milica",
+    "lastname": "Negic",
+    "password": "Mica1234",
+    "type": "user",
+    "email": "mica@gmail.com",
+    "approved": false,
+    "deleted": false,
+    "address": "Bulevar",
+    "city": null,
+    "country": null,
+    "phone": null,
+    "postalCode": null,
+    "wishlist": []
   }
 ]

@@ -9,7 +9,7 @@
     <ul>
       <li (click)="showSection('account')">account</li>
       <li (click)="showSection('orders')">orders</li>
-      <li (click)="showSection('addresses')">wishlist</li>
+      <li (click)="showSection('wishlist')">wishlist</li>
       <li (click)="showSection('ranking')">ranking</li>
     </ul>
   </nav>
@@ -37,7 +37,9 @@
   <div class="account-data" *ngIf="selectedSection === 'ranking'">
     <p>Ranking content goes here...</p>
   </div>
-  <div class="account-data" *ngIf="selectedSection === 'addresses'">
-    <p>WishList content goes here...</p>
+  <div class="account-data" *ngIf="selectedSection === 'wishlist'">
+    <div class="wishlist-cards">
+      <app-product-list page="Wishlist" [products]="products"></app-product-list>
+    </div>
   </div>
 </div>
