@@ -1,0 +1,44 @@
+<div class="checkout-container">
+  <div class="checkout-left">
+    <h1>Checkout</h1>
+  </div>
+  <div class="checkout-right">
+    <div class="checkout-items">
+      <div class="checkout-item">
+        <div *ngFor="let item of cartItems">
+          <div class="checkout-product">
+            <div class="checkout-product-title-image">
+              <img class="checkout-product-image" [src]="'/products/' + item.product?.imageFilename" alt="product image" />
+              <div class="checkout-product-name">
+                {{ item.product.name }}
+              </div>
+            </div>
+            <div class="checkout-product-price">
+              {{ item.product.price | currency }}
+            </div>
+          </div>
+        </div>
+        <div class="checkout-total">
+          <div class="subtotal">
+            <p>subtotal:</p>
+            <p>
+              {{ getTotalPrice() | currency }}
+            </p>
+          </div>
+          <div class="subtotal">
+            <p>shipping:</p>
+            <p>$5</p>
+          </div>
+        </div>
+        <div class="checkout-total">
+          <div class="total-title">
+            <p>total:</p>
+            <p>
+              {{ getTotalPrice() + 5 | currency }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

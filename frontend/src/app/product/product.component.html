@@ -1,6 +1,6 @@
 <div class="product-page">
   <div class="product-images">
-    <img *ngIf="product?.imageFilename" [src]="'/products/' + product.imageFilename" alt="product image" class="main-image" />
+    <img *ngIf="product?.imageFilename" [src]="'/products/' + product?.imageFilename" alt="product image" class="main-image" />
   </div>
 
   <div class="product-details" *ngIf="product">

@@ -91,13 +91,13 @@ mat-sidenav-container {
 
 .checkout-button {
   width: 100%;
-  background-color: #373737;
-  color: white;
+  background-color: #373737 !important;
+  color: white !important;
 }
 
 .checkout-button:hover {
   background-color: #ffffff !important;
-  color: #373737;
+  color: #373737 !important;
   border: #373737 solid 1px;
 }
 

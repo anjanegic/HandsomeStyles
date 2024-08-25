@@ -6,6 +6,7 @@ import { RouterModule, Routes, RouterStateSnapshot, TitleStrategy } from '@angul
 import { UserInfoComponent } from './user-info/user-info.component';
 import { ProductComponent } from './product/product.component';
 import { CollectionComponent } from './collection/collection.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'HandsomeStyles' },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'product', component: ProductComponent, title: 'Product' },
   { path: 'product:${id}', component: ProductComponent, title: 'Product' },
   { path: 'collection', component: CollectionComponent, title: 'Collection' },
+  { path: 'checkout', component: CheckoutComponent, title: 'Checkout' },
 ];
 
 @NgModule({

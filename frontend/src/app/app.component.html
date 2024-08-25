@@ -1,9 +1,9 @@
-<div class="announcement-bar">
+<div *ngIf="!isCheckoutOpened" class="announcement-bar">
   <div class="announcement-inside">
     <span class="announcement">WELCOME</span>
   </div>
 </div>
-<div class="site-header">
+<div *ngIf="!isCheckoutOpened" class="site-header">
   <a href=""><img src="LogoHs.PNG" alt="Logo" class="logo" /></a>
   <div class="allButLogo">
     <nav class="nav-menu">
@@ -34,6 +34,9 @@
       </button>
     </div>
   </div>
+</div>
+<div *ngIf="isCheckoutOpened" class="site-header-checkout">
+  <a href=""><img src="LogoHs.PNG" alt="Logo" class="logo" /></a>
 </div>
 <app-cart (sidenavClosed)="closeCart()"></app-cart>
 

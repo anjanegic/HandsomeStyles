@@ -45,6 +45,12 @@
   background-color: white;
 }
 
+.site-header-checkout {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
 .mat-badge-accent {
   --mat-badge-background-color: #b69e9e !important;
   --mat-badge-text-color: white !important;

@@ -1,5 +1,5 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { NgIf } from '@angular/common';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
@@ -43,6 +43,7 @@ export class AppComponent {
   user: any;
   cartOpened: boolean = false;
   cartItems: any[] = [];
+  isCheckoutOpened: boolean = false;
 
   constructor(public title: Title, private router: Router, private authService: AuthService, private cartService: CartService) {}
 
@@ -53,10 +54,14 @@ export class AppComponent {
   isMenuHovered = false;
 
   ngOnInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isCheckoutOpened = event.url === '/checkout';
+      }
+    });
     this.onWindowScroll();
     this.user = this.authService.getUser();
     this.refreshCart();
-
     this.cartService.getCartUpdatedEvent().subscribe(() => {
       this.refreshCart();
     });
@@ -71,9 +76,9 @@ export class AppComponent {
   onWindowScroll() {
     const header = document.querySelector('.site-header') as HTMLElement;
     if (window.scrollY > 50) {
-      header.classList.add('scrolled');
+      header?.classList.add('scrolled');
     } else {
-      header.classList.remove('scrolled');
+      header?.classList.remove('scrolled');
     }
   }
 

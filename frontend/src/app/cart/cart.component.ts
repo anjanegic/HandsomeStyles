@@ -6,11 +6,12 @@ import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../cart.service'; // Importujte servis
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [MatSidenavModule, MatIconModule, MatButtonModule, CommonModule, FormsModule],
+  imports: [MatSidenavModule, MatIconModule, MatButtonModule, CommonModule, FormsModule, RouterModule],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
@@ -20,7 +21,7 @@ export class CartComponent implements OnInit {
   cartItems: any[] = [];
   totalPrice: number;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit() {
     this.cartService.getCartOpenedEvent().subscribe(() => {
@@ -94,7 +95,8 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
-    // his.cartService.checkout();
+    this.sidenav.close();
+    this.router.navigate(['/checkout']);
   }
 
   toggleSidenav() {

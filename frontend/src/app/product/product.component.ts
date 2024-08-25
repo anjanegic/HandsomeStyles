@@ -92,8 +92,6 @@ export class ProductComponent {
     }
   }
 
-  addToWishlist() {}
-
   onQuantityChange(quantity: number) {
     this.quantity = quantity;
   }
