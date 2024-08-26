@@ -7,14 +7,14 @@
   <a href=""><img src="LogoHs.PNG" alt="Logo" class="logo" /></a>
   <div class="allButLogo">
     <nav class="nav-menu">
-      <button class="allButtons" mat-button>SHOP</button>
+      <button class="allButtons" mat-button [matMenuTriggerFor]="menu">SHOP</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let collection of collections" (click)="selectedCollection = collection; navigateToCollection()">{{ collection }}</button>
+      </mat-menu>
       <button class="allButtons" mat-button routerLink="/collections">NEWS</button>
-      <button class="allButtons" mat-button routerLink="/games">GAMES & QUIZESS</button>
+      <button class="allButtons" mat-button routerLink="/games">QOTD</button>
     </nav>
     <div class="header-actions">
-      <!-- <button routerLink="/login" mat-icon-button aria-label="Account">
-        <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
-      </button> -->
       <ng-container *ngIf="getUser(); else loginButton">
         <button routerLink="/user-info" mat-icon-button aria-label="Account">
           <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
@@ -25,7 +25,7 @@
           <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
         </button>
       </ng-template>
-      <button mat-icon-button aria-label="Search">
+      <button mat-icon-button routerLink="/search" aria-label="Search">
         <mat-icon class="material-symbols-outlined">search</mat-icon>
       </button>
       <button mat-icon-button (click)="openCart()" aria-label="Cart">

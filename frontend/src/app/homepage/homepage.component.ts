@@ -21,6 +21,7 @@ export class HomepageComponent implements OnInit {
   highlightedProduct: Product;
   randomProduct: Product;
   randomProductLink: string;
+
   constructor(private router: Router, private productService: ProductService) {}
 
   ngOnInit(): void {

@@ -1,6 +1,68 @@
 <div class="checkout-container">
   <div class="checkout-left">
-    <h1>Checkout</h1>
+    <div class="shipping-container">
+      <div class="shipping-div">
+        <form [formGroup]="shippingForm" (ngSubmit)="onSubmit()" class="shipping-form">
+          <div class="name-fields">
+            <p>CONTACT</p>
+            <mat-form-field appearance="outline" id="field">
+              <mat-label>email</mat-label>
+              <input type="email" matInput formControlName="email" placeholder="name@example.com" />
+              <mat-error *ngIf="shippingForm.get('email')?.hasError('email')">please enter a valid email address</mat-error>
+              <mat-error *ngIf="shippingForm.get('email')?.hasError('required')">email is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <p>SHIPPING ADDRESS</p>
+            <div class="names">
+              <mat-form-field class="name" appearance="outline" id="field">
+                <mat-label>first name</mat-label>
+                <input matInput formControlName="firstname" placeholder="firstname" />
+                <mat-error *ngIf="shippingForm.get('firstname')?.hasError('required')">first name is <strong>required</strong></mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>last name</mat-label>
+                <input matInput formControlName="lastname" placeholder="lastname" />
+                <mat-error *ngIf="shippingForm.get('lastname')?.hasError('required')">last name is <strong>required</strong></mat-error>
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+              <mat-error *ngIf="shippingForm.get('address')?.hasError('required')">address is <strong>required</strong></mat-error>
+              <mat-label>address</mat-label>
+              <input matInput formControlName="address" placeholder="address" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>city</mat-label>
+              <input matInput formControlName="city" placeholder="city" />
+              <mat-error *ngIf="shippingForm.get('city')?.hasError('required')">city is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>zip</mat-label>
+              <input matInput formControlName="zip" placeholder="zip" />
+              <mat-error *ngIf="shippingForm.get('zip')?.hasError('required')">zip is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>country</mat-label>
+              <input matInput formControlName="country" placeholder="country" />
+              <mat-error *ngIf="shippingForm.get('country')?.hasError('required')">country is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <mat-form-field type="tel" appearance="outline">
+              <mat-label>phone</mat-label>
+              <input type="tel" matInput formControlName="phone" placeholder="phone" />
+              <mat-error *ngIf="shippingForm.get('phone')?.hasError('required')">phone is <strong>required</strong></mat-error>
+            </mat-form-field>
+            <p class="error" *ngIf="shippingForm.get('phone')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
+            <p class="error" *ngIf="shippingForm.get('email')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
+            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
+            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
+            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
+            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
+          </div>
+
+          <button mat-stroked-button color="basic" type="submit">order</button>
+        </form>
+        <!-- <p>already have an account?</p>
+        <p class="login-register-link" (click)="navigateToLogin()">log in</p> -->
+      </div>
+    </div>
   </div>
   <div class="checkout-right">
     <div class="checkout-items">
@@ -8,7 +70,9 @@
         <div *ngFor="let item of cartItems">
           <div class="checkout-product">
             <div class="checkout-product-title-image">
-              <img class="checkout-product-image" [src]="'/products/' + item.product?.imageFilename" alt="product image" />
+              <div class="badge" [matBadge]="item.quantity" matBadgeColor="accent" matBadgeSize="medium">
+                <img class="checkout-product-image" [src]="'/products/' + item.product?.imageFilename" alt="product image" />
+              </div>
               <div class="checkout-product-name">
                 {{ item.product.name }}
               </div>
@@ -33,7 +97,7 @@
         <div class="checkout-total">
           <div class="total-title">
             <p>total:</p>
-            <p>
+            <p class="total-price">
               {{ getTotalPrice() + 5 | currency }}
             </p>
           </div>

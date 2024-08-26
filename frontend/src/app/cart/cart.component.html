@@ -1,4 +1,5 @@
 <mat-sidenav-container (click)="onContainerClick($event)">
+  <div *ngIf="isOpen" (click)="closeSidenav()" class="overlay"></div>
   <mat-sidenav #sidenav mode="side" position="end">
     <div class="all">
       <div class="sidenav-header">

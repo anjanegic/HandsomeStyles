@@ -5,7 +5,7 @@ import { ParsedQs } from "qs";
 export class ProductController {
   getProductsFromCollection = (req: express.Request, res: express.Response) => {
     let collection = req.body.collection;
-    console.log(collection);
+
     Product.find({ tags: collection })
       .then((products) => {
         res.json(products);

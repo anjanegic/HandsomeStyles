@@ -38,13 +38,11 @@ export class CollectionComponent {
 
   onSortChange(value: string) {
     this.sortProducts(value);
-    console.log('Sort option changed:', value); // Debug poruka
   }
 
   sortProducts(sortOption: string) {
     this.selectedSort = sortOption;
-    this.sortedProducts = [...this.products]; // Reset sortedProducts to original products
-
+    this.sortedProducts = [...this.products];
     switch (sortOption) {
       case 'price-asc':
         this.sortedProducts.sort((a, b) => a.price - b.price);

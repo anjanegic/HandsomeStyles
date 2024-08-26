@@ -7,6 +7,7 @@ import { UserInfoComponent } from './user-info/user-info.component';
 import { ProductComponent } from './product/product.component';
 import { CollectionComponent } from './collection/collection.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { SearchComponent } from './search/search.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'HandsomeStyles' },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'product:${id}', component: ProductComponent, title: 'Product' },
   { path: 'collection', component: CollectionComponent, title: 'Collection' },
   { path: 'checkout', component: CheckoutComponent, title: 'Checkout' },
+  { path: 'search', component: SearchComponent, title: 'Search' },
 ];
 
 @NgModule({

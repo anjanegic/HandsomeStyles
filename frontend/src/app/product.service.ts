@@ -20,4 +20,8 @@ export class ProductService {
   getProductById(_id: string) {
     return this.http.get<Product>(`${this.uri}/getProductById/${_id}`);
   }
+
+  search(query: string) {
+    return this.http.get<any[]>(`${this.uri}?q=${query}`);
+  }
 }

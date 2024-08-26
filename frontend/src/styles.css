@@ -5,6 +5,9 @@ body {
   margin: 0;
   font-family: "Montserrat", sans-serif !important;
   color: #757575 !important;
+  height: 100vh;
+  flex-basis: 100%;
+  display: flex;
 }
 
 body [class^="mat-"]:not(mat-icon),

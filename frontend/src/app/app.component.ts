@@ -1,7 +1,7 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { NavigationEnd, Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +32,7 @@ import { CartService } from './cart.service';
     MatSidenavModule,
     HttpClientModule,
     CartComponent,
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -44,6 +45,8 @@ export class AppComponent {
   cartOpened: boolean = false;
   cartItems: any[] = [];
   isCheckoutOpened: boolean = false;
+  collections: string[] = ['Phone Cases', 'Clothing', 'Accessories'];
+  selectedCollection: string = '';
 
   constructor(public title: Title, private router: Router, private authService: AuthService, private cartService: CartService) {}
 
@@ -65,6 +68,10 @@ export class AppComponent {
     this.cartService.getCartUpdatedEvent().subscribe(() => {
       this.refreshCart();
     });
+  }
+
+  navigateToCollection() {
+    this.router.navigate(['/collection'], { queryParams: { title: this.selectedCollection } });
   }
 
   logout(): void {
@@ -103,9 +110,11 @@ export class AppComponent {
 
   openCart() {
     this.cartComponent.openSidenav();
+    this.cartOpened = true;
   }
 
   closeCart() {
     this.cartComponent.closeSidenav();
+    this.cartOpened = false;
   }
 }

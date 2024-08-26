@@ -1,5 +1,5 @@
 // cart.component.ts
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener, Input, AfterViewInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
@@ -15,13 +15,19 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, AfterViewInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   @ViewChild('sidenav', { static: false }) sidenavElementRef!: ElementRef;
   cartItems: any[] = [];
+  isOpen: boolean = false;
   totalPrice: number;
 
   constructor(private cartService: CartService, private router: Router) {}
+
+  ngAfterViewInit(): void {
+    this.sidenav?.openedChange.subscribe((opened) => (this.isOpen = opened));
+    this.sidenav?.openedStart.subscribe(() => (this.isOpen = true));
+  }
 
   ngOnInit() {
     this.cartService.getCartOpenedEvent().subscribe(() => {
@@ -114,16 +120,6 @@ export class CartComponent implements OnInit {
 
   closeSidenav() {
     this.sidenav.close();
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    if (!this.sidenav.opened || !this.sidenavElementRef || !this.sidenavElementRef.nativeElement) return;
-
-    const clickedInside = this.sidenavElementRef.nativeElement.contains(event.target);
-    if (!clickedInside) {
-      this.closeSidenav();
-    }
   }
 
   onContainerClick(event: MouseEvent) {
