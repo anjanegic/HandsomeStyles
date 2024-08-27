@@ -1,0 +1,40 @@
+{
+  "userId": "668d9e0f7fbd551a28ff371f",
+  "orderItems": [
+    {
+      "productId": "66bcb06c5096ca24c716eda7",
+      "name": "Pearl Necklace",
+      "variant": "Gold",
+      "price": 15.9,
+      "quantity": 3
+    },
+    {
+      "productId": "66be24985096ca24c716edab",
+      "name": "Harry Styles Collage Phone Case",
+      "variant": "iPhone 15 Pro",
+      "price": 16.9,
+      "quantity": 1
+    },
+    {
+      "productId": "66be15d95096ca24c716eda9",
+      "name": "As It Was Phone Case",
+      "variant": "iPhone 13 Pro",
+      "price": 16.9,
+      "quantity": 3
+    }
+  ],
+  "shipping": {
+    "address": "Bulevar Mihajla Pupina 143",
+    "city": "Belgrade",
+    "country": "Serbia",
+    "email": "anjanegic@gmail.com",
+    "firstname": "Anja",
+    "lastname": "Negic",
+    "phone": "+612970696",
+    "zip": "11070"
+  },
+  "paymentMethod": "cod",
+  "subtotalPrice": 115.3,
+  "shippingPrice": 5,
+  "totalPrice": 120.3
+}

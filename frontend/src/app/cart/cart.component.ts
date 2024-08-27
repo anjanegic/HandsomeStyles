@@ -53,6 +53,10 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   getTotalPrice(): number {
+    localStorage.setItem('subtotalPrice', this.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0).toFixed(2));
+    localStorage.setItem('shippingPrice', '5');
+    localStorage.setItem('totalPrice', (this.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0) + 5).toFixed(2));
+
     return this.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
   }
 

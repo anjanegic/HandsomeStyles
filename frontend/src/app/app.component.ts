@@ -62,12 +62,14 @@ export class AppComponent {
         this.isCheckoutOpened = event.url === '/checkout';
       }
     });
-    this.onWindowScroll();
-    this.user = this.authService.getUser();
-    this.refreshCart();
+
     this.cartService.getCartUpdatedEvent().subscribe(() => {
       this.refreshCart();
     });
+
+    this.onWindowScroll();
+    this.user = this.authService.getUser();
+    this.refreshCart();
   }
 
   navigateToCollection() {

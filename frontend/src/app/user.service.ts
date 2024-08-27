@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './models/user';
+import { Order } from './models/order';
 
 @Injectable({
   providedIn: 'root',
@@ -57,5 +58,9 @@ export class UserService {
       userId,
     };
     return this.http.post<User>(`${this.uri}/addToWishlist`, data);
+  }
+
+  addOrder(order: Order) {
+    return this.http.post<Order>(`${this.uri}/addOrder`, order);
   }
 }

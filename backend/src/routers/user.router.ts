@@ -35,4 +35,8 @@ userRouter
   .route("/addToWishlist")
   .post((req, res) => new UserController().addToWishlist(req, res));
 
+userRouter
+  .route("/addOrder")
+  .post((req, res) => new UserController().addOrder(req, res));
+
 export default userRouter;

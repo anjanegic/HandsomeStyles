@@ -5,7 +5,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 })
 export class CartService {
   private cartOpened = new EventEmitter<void>();
-  private cartUpdated = new EventEmitter<void>(); // Novi EventEmitter za ažuriranje badge-a
+  private cartUpdated = new EventEmitter<void>();
 
   getCartOpenedEvent() {
     return this.cartOpened.asObservable();
@@ -20,6 +20,10 @@ export class CartService {
   }
 
   updateCartBadge() {
+    this.cartUpdated.emit();
+  }
+
+  notifyCartUpdated() {
     this.cartUpdated.emit();
   }
 }

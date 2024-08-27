@@ -2,12 +2,13 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, RouterStateSnapshot, TitleStrategy } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { UserInfoComponent } from './user-info/user-info.component';
 import { ProductComponent } from './product/product.component';
 import { CollectionComponent } from './collection/collection.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SearchComponent } from './search/search.component';
+import { OrderConformationComponent } from './order-conformation/order-conformation.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'HandsomeStyles' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'collection', component: CollectionComponent, title: 'Collection' },
   { path: 'checkout', component: CheckoutComponent, title: 'Checkout' },
   { path: 'search', component: SearchComponent, title: 'Search' },
+  { path: 'order-confirmation', component: OrderConformationComponent, title: 'Order confirmation' },
 ];
 
 @NgModule({

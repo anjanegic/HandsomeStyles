@@ -10,17 +10,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatDividerModule, MatIconModule, MatBadgeModule],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatButtonModule, MatRadioModule, MatDividerModule, MatIconModule, MatBadgeModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css',
 })
 export class CheckoutComponent implements OnInit {
   cartItems: any[] = [];
   shippingForm: FormGroup;
+  paymentForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService) {
     this.shippingForm = this.formBuilder.group({
@@ -29,10 +31,12 @@ export class CheckoutComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required]],
       city: ['', [Validators.required]],
-      state: ['', [Validators.required]],
       zip: ['', [Validators.required]],
       country: ['', [Validators.required]],
       phone: ['', [Validators.required, this.phoneValidator]],
+    });
+    this.paymentForm = this.formBuilder.group({
+      paymentMethod: [''],
     });
   }
 
@@ -43,7 +47,54 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Form Submitted!', this.shippingForm.value);
+    const selectedPaymentMethod = this.paymentForm.get('paymentMethod')?.value;
+    if (this.shippingForm.valid && selectedPaymentMethod === 'cod') {
+      console.log('Form Submitted!', this.shippingForm.value);
+      const cartItemsString = localStorage.getItem('cartItems');
+      let cartItems: any[] = [];
+      if (cartItemsString) {
+        cartItems = JSON.parse(cartItemsString);
+      }
+      const orderItems = this.transformToOrderItems(cartItems);
+      const shipping = this.shippingForm.value;
+      const paymentMethod = this.paymentForm.get('paymentMethod')?.value;
+      const subtotalPrice = parseFloat(localStorage.getItem('subtotalPrice'));
+      const shippingPrice = parseFloat(localStorage.getItem('shippingPrice'));
+      const totalPrice = parseFloat(localStorage.getItem('totalPrice'));
+      const userId = this.authService.getUser()._id;
+
+      const orderJson = {
+        orderItems,
+        shipping,
+        paymentMethod,
+        subtotalPrice,
+        shippingPrice,
+        totalPrice,
+        userId,
+      };
+
+      this.service.addOrder(orderJson).subscribe((order) => {
+        console.log(order);
+
+        this.router.navigate(['/order-confirmation']);
+      });
+    } else {
+      console.log('Form Invalid!');
+    }
+  }
+
+  transformToOrderItems(cartItems: any[]): any[] {
+    return cartItems.map((item) => {
+      const variantValue = item.variant.color || item.variant.model || item.variant.size || 'Unknown';
+
+      return {
+        productId: item.product._id,
+        name: item.product.name,
+        variant: variantValue,
+        price: item.product.price,
+        quantity: item.quantity,
+      };
+    });
   }
 
   getCartItems(): any[] {

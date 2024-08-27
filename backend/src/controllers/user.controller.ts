@@ -1,6 +1,9 @@
 import express from "express";
 import User from "../models/user";
+import Order from "../models/order";
 import { ObjectId } from "mongodb";
+import { Request, Response } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 export class UserController {
   login = (req: express.Request, res: express.Response) => {
@@ -80,12 +83,12 @@ export class UserController {
 
     const newUser = new User({
       email,
-      password, // Preporučuje se da lozinku hash-ujete pre nego što je sačuvate
+      password,
       firstname,
       lastname,
-      type: "user", // Možete dodati dodatne podatke kao što je tip korisnika
-      approved: false, // Postavite po potrebi
-      deleted: false, // Postavite po potrebi
+      type: "user",
+      approved: false,
+      deleted: false,
     });
 
     const savedUser = await newUser.save();
@@ -176,6 +179,21 @@ export class UserController {
       .catch((err) => {
         console.error(err);
         res.json({ message: "Fail" });
+      });
+  };
+
+  addOrder = (req: express.Request, res: express.Response) => {
+    let order = req.body;
+    console.log(order);
+    const newOrder = new Order(order);
+    newOrder
+      .save()
+      .then((order) => {
+        res.json(order);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
       });
   };
 }

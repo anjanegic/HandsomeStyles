@@ -50,17 +50,17 @@
               <mat-error *ngIf="shippingForm.get('phone')?.hasError('required')">phone is <strong>required</strong></mat-error>
             </mat-form-field>
             <p class="error" *ngIf="shippingForm.get('phone')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
-            <p class="error" *ngIf="shippingForm.get('email')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
-            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
-            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
-            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
-            <p class="error" *ngIf="shippingForm.get('')?.hasError('phoneInvalid')">phone must be in the format +xxxxxxxxxx</p>
           </div>
-
+          <form [formGroup]="paymentForm">
+            <div class="payment-methods">
+              <p>PAYMENT METHOD</p>
+              <mat-radio-group class="payment-method" aria-label="payment method" formControlName="paymentMethod">
+                <mat-radio-button value="cod">cash on delivery (COD)</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </form>
           <button mat-stroked-button color="basic" type="submit">order</button>
         </form>
-        <!-- <p>already have an account?</p>
-        <p class="login-register-link" (click)="navigateToLogin()">log in</p> -->
       </div>
     </div>
   </div>
