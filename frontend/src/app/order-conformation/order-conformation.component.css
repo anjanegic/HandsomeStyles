@@ -1,0 +1,39 @@
+:host {
+  flex: 1;
+  display: flex;
+}
+
+.confirmation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  flex: 1;
+}
+
+.order-confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  background-color: white;
+  box-shadow: 1px 0px 10px 1px #b8b3b3;
+  text-align: center;
+}
+
+.order-confirmation-container > span {
+  font-size: 100px;
+}
+
+.order-confirmation-container > p {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.material-symbols-outlined {
+  color: rgb(140, 210, 35) !important;
+}

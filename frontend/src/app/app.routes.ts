@@ -14,7 +14,7 @@ export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'HandsomeStyles' },
   { path: 'register', component: RegisterComponent, title: 'Register' },
   { path: 'login', component: LoginComponent, title: 'LogIn' },
-  { path: 'user-info', component: UserInfoComponent, title: 'UserInfo' },
+  { path: 'user-info', component: UserInfoComponent, title: 'My Account' },
   { path: 'product', component: ProductComponent, title: 'Product' },
   { path: 'product:${id}', component: ProductComponent, title: 'Product' },
   { path: 'collection', component: CollectionComponent, title: 'Collection' },

@@ -16,4 +16,8 @@ productRouter
   .route("/getProductById/:id")
   .get((req, res) => new ProductController().getProductById(req, res));
 
+productRouter
+  .route("/search")
+  .get((req, res) => new ProductController().searchProducts(req, res));
+
 export default productRouter;

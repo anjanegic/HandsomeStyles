@@ -9,20 +9,9 @@
     </mat-form-field>
   </div>
   <div class="search-results">
-    <p>SEARCH RESULTS</p>
-    <p></p>
-    <div *ngIf="results.length > 0">
-      <mat-grid-list cols="3" rowHeight="1:1">
-        <mat-grid-tile *ngFor="let result of results">
-          <mat-card>
-            <img mat-card-image [src]="result.imageUrl" alt="{{ result.name }}" />
-            <mat-card-content>
-              <h2>{{ result.name }}</h2>
-              <p>{{ result.price | currency }}</p>
-            </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+    <h2 [@resultsState]="resultsState">SEARCH RESULTS</h2>
+    <div class="results-grid">
+      <app-product-list [page]="searchControl.value" [products]="results"></app-product-list>
     </div>
   </div>
 </div>

@@ -62,6 +62,7 @@ export class CheckoutComponent implements OnInit {
       const shippingPrice = parseFloat(localStorage.getItem('shippingPrice'));
       const totalPrice = parseFloat(localStorage.getItem('totalPrice'));
       const userId = this.authService.getUser()._id;
+      const dateAndTime = new Date();
 
       const orderJson = {
         orderItems,
@@ -71,6 +72,7 @@ export class CheckoutComponent implements OnInit {
         shippingPrice,
         totalPrice,
         userId,
+        dateAndTime,
       };
 
       this.service.addOrder(orderJson).subscribe((order) => {

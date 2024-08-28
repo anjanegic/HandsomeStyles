@@ -22,6 +22,6 @@ export class ProductService {
   }
 
   search(query: string) {
-    return this.http.get<any[]>(`${this.uri}?q=${query}`);
+    return this.http.get<any[]>(`${this.uri}/search?q=${query}`);
   }
 }

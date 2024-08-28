@@ -40,4 +40,22 @@ export class ProductController {
           .json({ error: "Došlo je do greške prilikom pretrage proizvoda." });
       });
   };
+
+  async searchProducts(req: Request, res: Response) {
+    try {
+      const query = req.query.q;
+      if (!query) {
+        return res.status(200).json([]);
+      }
+
+      const products = await Product.find({
+        name: { $regex: query, $options: "i" },
+      });
+
+      res.json(products);
+    } catch (error) {
+      console.error("Error during product search:", error);
+      res.status(500).json({ message: "Error during product search." });
+    }
+  }
 }

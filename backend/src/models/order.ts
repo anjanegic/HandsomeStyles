@@ -81,6 +81,10 @@ const orderSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  dateAndTime: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 export default mongoose.model("Order", orderSchema, "orders");

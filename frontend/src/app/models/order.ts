@@ -21,4 +21,5 @@ export class Order {
   subtotalPrice: number;
   shippingPrice: number;
   totalPrice: number;
+  dateAndTime: Date;
 }
