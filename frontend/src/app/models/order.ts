@@ -1,4 +1,5 @@
 export class Order {
+  _id?: string = '';
   userId: string;
   orderItems: {
     productId: string;
@@ -6,6 +7,7 @@ export class Order {
     variant: string;
     price: number;
     quantity: number;
+    image: string;
   }[] = [];
   shipping: {
     address: string;
@@ -22,4 +24,5 @@ export class Order {
   shippingPrice: number;
   totalPrice: number;
   dateAndTime: Date;
+  status: string;
 }

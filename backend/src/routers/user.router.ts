@@ -39,4 +39,8 @@ userRouter
   .route("/addOrder")
   .post((req, res) => new UserController().addOrder(req, res));
 
+userRouter
+  .route("/getOrders/:userId")
+  .get((req, res) => new UserController().getOrders(req, res));
+
 export default userRouter;

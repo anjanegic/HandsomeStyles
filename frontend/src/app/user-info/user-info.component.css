@@ -8,17 +8,17 @@
 
 .account-greeting {
   display: flex;
-  flex-direction: row; /* Postavi horizontalni raspored */
-  align-items: center; /* Vertikalno centriranje elemenata */
-  justify-content: space-between; /* Prostor između imena i logout dugmeta */
-  width: 95%; /* Podesi da zauzima celu širinu kontejnera */
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 95%;
   margin: 50px;
 }
 
 .account-greeting-name {
   font-size: 28px;
   font-weight: 600;
-  margin: 0; /* Ukloni marginu oko imena */
+  margin: 0;
   color: #dd735e;
 }
 
@@ -27,7 +27,7 @@
   font-weight: 500;
   color: #6a6e71;
   text-decoration: none;
-  cursor: pointer; /* Dodaj kursor pointer za klik */
+  cursor: pointer;
 }
 
 .account-info {
@@ -83,7 +83,6 @@ li:hover {
   justify-content: space-between;
   flex-direction: column;
   flex-basis: 70%;
-  /* width: 70%; */
   margin: auto;
   border: #f4b9ae solid 1px;
   border-radius: 8px;
@@ -92,8 +91,83 @@ li:hover {
 
 .account-details {
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   width: 100%;
   padding: 3px;
+}
+
+mat-expansion-panel {
+  border-bottom: 1px solid #f6bdb2;
+  color: #6a6e71;
+  background-color: transparent;
+  box-shadow: 0 0 0 0 !important;
+  height: auto;
+}
+mat-expansion-panel-header {
+  height: 100px;
+  color: #3b3d3e;
+}
+
+mat-panel-description {
+  width: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.orders-cards {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cart-item-image-container {
+  height: auto;
+  overflow: hidden;
+  margin: 5px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  background-color: white;
+  border: 1px solid #f6bdb2;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: auto;
+    height: fit-content;
+    overflow: hidden;
+    display: flex;
+  }
+}
+
+.items-cards {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.order-items-cards {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f6bdb2 !important;
+  padding: 10px 0 10px;
+}
+
+.order-shipping-details {
+  border-top: 1px solid #f6bdb2 !important;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+
+.item-card {
+  width: 250px;
+  display: contents;
+  text-align: center;
 }

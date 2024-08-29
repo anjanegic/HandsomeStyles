@@ -31,8 +31,45 @@
     </div>
     <div class="account-details"><span id="change-data" (click)="openDialog('0ms', '0ms')">change my data</span></div>
   </div>
-  <div class="account-data" *ngIf="selectedSection === 'orders'">
-    <p>Orders content goes here...</p>
+  <div class="account-data" *ngIf="selectedSection === 'orders'" style="padding: 0 !important">
+    <div class="orders-cards">
+      <mat-expansion-panel hideToggle *ngFor="let order of orders">
+        <mat-expansion-panel-header>
+          <mat-panel-description> <span class="material-symbols-outlined"> inventory </span> </mat-panel-description>
+          <mat-panel-description> {{ order.status }} </mat-panel-description>
+          <mat-panel-description> {{ getOrderItems(order) }} items </mat-panel-description>
+          <mat-panel-description>{{ formatDate(order.dateAndTime) }}</mat-panel-description>
+          <mat-panel-description> {{ order.totalPrice | currency }} </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="items-cards">
+          <div class="order-items-cards">
+            <div *ngFor="let item of order.orderItems">
+              <div class="item-card">
+                <div class="item-card-details">
+                  <div class="cart-item-image-container">
+                    <img [src]="'/products/' + item.image" alt="{{ item.name }}" class="cart-item-image" />
+                  </div>
+                  <div class="item-card-name">{{ item.name }}</div>
+                  <div class="item-card-variant">{{ item.variant }}</div>
+                  <div class="item-card-price">{{ item.price | currency }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="order-shipping-details">
+            {{ order.shipping.firstname }} {{ order.shipping.lastname }}
+            <br />
+            {{ order.shipping.address }}
+            <br />
+            {{ order.shipping.city }}, {{ order.shipping.zip }} {{ order.shipping.country }}
+            <br />
+            {{ order.shipping.phone }}
+            <br />
+            {{ order.shipping.email }}
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </div>
   </div>
   <div class="account-data" *ngIf="selectedSection === 'ranking'">
     <p>Ranking content goes here...</p>

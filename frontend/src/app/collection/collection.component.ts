@@ -25,7 +25,20 @@ export class CollectionComponent {
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
       this.title = params.get('title') || '';
-      this.fetchProducts();
+      const productsParam = params.get('products');
+
+      if (productsParam) {
+        try {
+          this.products = JSON.parse(productsParam) as Product[];
+          this.sortProducts(this.selectedSort);
+        } catch (error) {
+          console.error('Invalid JSON format for products:', error);
+          this.products = [];
+        }
+      }
+      if (this.products.length === 0) {
+        this.fetchProducts();
+      }
     });
   }
 
@@ -60,6 +73,6 @@ export class CollectionComponent {
         this.sortedProducts = [...this.products]; // Reset to unsorted products
         break;
     }
-    console.log(this.sortedProducts); // Debug poruka
+    console.log(this.sortedProducts);
   }
 }

@@ -29,6 +29,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
+      image: {
+        type: String,
+        required: true,
+      },
     },
   ],
   shipping: {
@@ -84,6 +88,10 @@ const orderSchema = new mongoose.Schema({
   dateAndTime: {
     type: Date,
     default: Date.now,
+  },
+  status: {
+    type: String,
+    default: "pending",
   },
 });
 

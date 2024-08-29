@@ -25,7 +25,7 @@ export class ProductListComponent {
   constructor(private router: Router, private userService: UserService, private authService: AuthService, private cd: ChangeDetectorRef) {}
 
   navigateToShopCollection() {
-    this.router.navigate(['/collection'], { queryParams: { title: this.page } });
+    this.router.navigate(['/collection'], { queryParams: { title: this.page, products: JSON.stringify(this.products) } });
   }
 
   navigateToProduct(id: string) {

@@ -49,7 +49,6 @@ export class CheckoutComponent implements OnInit {
   onSubmit(): void {
     const selectedPaymentMethod = this.paymentForm.get('paymentMethod')?.value;
     if (this.shippingForm.valid && selectedPaymentMethod === 'cod') {
-      console.log('Form Submitted!', this.shippingForm.value);
       const cartItemsString = localStorage.getItem('cartItems');
       let cartItems: any[] = [];
       if (cartItemsString) {
@@ -73,6 +72,7 @@ export class CheckoutComponent implements OnInit {
         totalPrice,
         userId,
         dateAndTime,
+        status: 'pending',
       };
 
       this.service.addOrder(orderJson).subscribe((order) => {
@@ -95,6 +95,7 @@ export class CheckoutComponent implements OnInit {
         variant: variantValue,
         price: item.product.price,
         quantity: item.quantity,
+        image: item.product.imageFilename,
       };
     });
   }

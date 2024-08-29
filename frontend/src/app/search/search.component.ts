@@ -11,6 +11,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ProductListComponent } from '../product-list/product-list.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -41,8 +42,9 @@ export class SearchComponent implements OnInit {
   searchControl = new FormControl('');
   results: any[] = [];
   resultsState: string;
+  page = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(300), distinctUntilChanged()).subscribe((query) => {
@@ -56,5 +58,10 @@ export class SearchComponent implements OnInit {
         this.resultsState = 'center'; // Sakriva rezultate
       }
     });
+  }
+
+  navigateToShopCollection() {
+    this.page = this.searchControl.value;
+    this.router.navigate(['/collection'], { queryParams: { title: this.page, products: JSON.stringify(this.results) } });
   }
 }

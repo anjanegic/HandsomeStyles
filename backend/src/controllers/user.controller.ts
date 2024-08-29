@@ -2,6 +2,7 @@ import express from "express";
 import User from "../models/user";
 import Order from "../models/order";
 import { ObjectId } from "mongodb";
+import { Types } from "mongoose";
 import { Request, Response } from "express-serve-static-core";
 import { ParsedQs } from "qs";
 
@@ -109,6 +110,7 @@ export class UserController {
       author: req.body.author,
       date: dateStr,
     };
+    // @ts-ignore
     User.updateOne({ username: req.body.user }, { $push: { favourites: fav } })
       .then((data) => {
         res.json({ message: "Ok" });
@@ -120,6 +122,7 @@ export class UserController {
 
   getUserByUsername = (req: express.Request, res: express.Response) => {
     let username = req.params.username;
+    // @ts-ignore
     User.findOne({ username: username })
       .then((user) => {
         res.json(user);
@@ -143,6 +146,7 @@ export class UserController {
         ).catch(err=>console.log(err))*/
 
     User.updateOne(
+      // @ts-ignore
       { username: user },
       { $set: { "favourites.$[f].name": "Changed name" } },
       { arrayFilters: [{ "f.name": bookname }] }
@@ -193,6 +197,26 @@ export class UserController {
       })
       .catch((err) => {
         console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  getOrders = (req: express.Request, res: express.Response) => {
+    let userId = req.params.userId;
+
+    if (!Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    const theId = new Types.ObjectId(userId);
+    console.log("Converted userId:", theId);
+
+    Order.find({ userId: theId })
+      .then((orders) => {
+        res.json(orders);
+      })
+      .catch((err) => {
+        console.error("Error fetching orders:", err);
         res.status(500).json({ message: "Internal server error" });
       });
   };

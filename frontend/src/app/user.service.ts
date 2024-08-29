@@ -63,4 +63,8 @@ export class UserService {
   addOrder(order: Order) {
     return this.http.post<Order>(`${this.uri}/addOrder`, order);
   }
+
+  getOrders(userId: string) {
+    return this.http.get<Order[]>(`${this.uri}/getOrders/${userId}`);
+  }
 }

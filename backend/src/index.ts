@@ -35,6 +35,7 @@ app.post(
     }
     const file = req.file;
 
+    // @ts-ignore
     const bucket = new GridFSBucket(conn.db);
     const uploadStream = bucket.openUploadStream(req.file.originalname);
 
