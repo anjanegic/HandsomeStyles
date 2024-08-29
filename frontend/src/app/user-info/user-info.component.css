@@ -150,8 +150,8 @@ mat-panel-description {
 }
 
 .order-items-cards {
-  display: flex;
-  flex-direction: row;
+  grid-template-columns: repeat(3, auto);
+  display: grid;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -167,7 +167,11 @@ mat-panel-description {
 }
 
 .item-card {
-  width: 250px;
-  display: contents;
   text-align: center;
+}
+
+.item-card-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -65,7 +65,6 @@ export class UserInfoComponent implements OnInit {
   formatDate(dateV: Date) {
     const date = new Date(dateV);
     const options: Intl.DateTimeFormatOptions = {
-      weekday: 'long',
       day: 'numeric',
       month: 'long',
       year: 'numeric',
