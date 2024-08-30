@@ -1,6 +1,7 @@
 import express from "express";
 import User from "../models/user";
 import Order from "../models/order";
+import Review from "../models/review";
 import { ObjectId } from "mongodb";
 import { Types } from "mongoose";
 import { Request, Response } from "express-serve-static-core";
@@ -217,6 +218,26 @@ export class UserController {
       })
       .catch((err) => {
         console.error("Error fetching orders:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  getReviews = (req: express.Request, res: express.Response) => {
+    let userId = req.params.userId;
+
+    if (!Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    const theId = new Types.ObjectId(userId);
+    console.log("Converted userId:", theId);
+
+    Review.find({ userId: theId })
+      .then((reviews) => {
+        res.json(reviews);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
         res.status(500).json({ message: "Internal server error" });
       });
   };

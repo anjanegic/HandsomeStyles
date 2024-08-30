@@ -43,4 +43,8 @@ userRouter
   .route("/getOrders/:userId")
   .get((req, res) => new UserController().getOrders(req, res));
 
+userRouter
+  .route("/getReviews/:userId")
+  .get((req, res) => new UserController().getReviews(req, res));
+
 export default userRouter;

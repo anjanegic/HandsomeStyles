@@ -24,8 +24,8 @@
                 "input": "public"
               }
             ],
-            "styles": ["@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.css"],
-            "scripts": []
+            "styles": ["@angular/material/prebuilt-themes/indigo-pink.css", "src/styles.css", "node_modules/slick-carousel/slick/slick.css", "node_modules/slick-carousel/slick/slick-theme.css"],
+            "scripts": ["node_modules/slick-carousel/slick/slick.min.js"]
           },
           "configurations": {
             "production": {

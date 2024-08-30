@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from './models/user';
 import { Order } from './models/order';
+import { Review } from './models/review';
 
 @Injectable({
   providedIn: 'root',
@@ -66,5 +67,9 @@ export class UserService {
 
   getOrders(userId: string) {
     return this.http.get<Order[]>(`${this.uri}/getOrders/${userId}`);
+  }
+
+  getReviews(userId: string) {
+    return this.http.get<Review[]>(`${this.uri}/getReviews/${userId}`);
   }
 }

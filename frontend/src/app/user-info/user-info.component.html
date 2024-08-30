@@ -9,8 +9,8 @@
     <ul>
       <li (click)="showSection('account')">account</li>
       <li (click)="showSection('orders')">orders</li>
+      <li (click)="showSection('reviews')">reviews</li>
       <li (click)="showSection('wishlist')">wishlist</li>
-      <li (click)="showSection('ranking')">ranking</li>
     </ul>
   </nav>
   <div class="account-data" *ngIf="selectedSection === 'account'">
@@ -71,9 +71,23 @@
       </mat-expansion-panel>
     </div>
   </div>
-  <div class="account-data" *ngIf="selectedSection === 'ranking'">
-    <p>Ranking content goes here...</p>
+  <div class="account-data" *ngIf="selectedSection === 'reviews'">
+    <h2>My Reviews</h2>
+    <mat-tab-group animationDuration="500ms" (selectedTabChange)="onTabChange($event)">
+      <mat-tab *ngFor="let review of reviews">
+        <ng-template mat-tab-label>
+          <span>{{ getProductName(review.productId) }}</span>
+        </ng-template>
+        <div class="review-card">
+          <div class="review-card-details">
+            <div class="review-card-date">{{ review.date | date }}</div>
+            <div class="review-card-text">{{ review.comment }}</div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
+
   <div class="account-data" *ngIf="selectedSection === 'wishlist'">
     <div class="wishlist-cards">
       <app-product-list page="Wishlist" [products]="products"></app-product-list>

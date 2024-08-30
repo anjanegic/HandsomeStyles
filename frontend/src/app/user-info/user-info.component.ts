@@ -10,11 +10,16 @@ import { ProductListComponent } from '../product-list/product-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserService } from '../user.service';
 import { Order } from '../models/order';
+import { Review } from '../models/review';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
-  imports: [NgIf, MatDialogModule, ProductListComponent, RouterModule, MatExpansionModule, CommonModule],
+  imports: [NgIf, MatDialogModule, ProductListComponent, RouterModule, MatExpansionModule, CommonModule, MatTabsModule, MatCardModule, MatTabsModule],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css',
 })
@@ -24,6 +29,10 @@ export class UserInfoComponent implements OnInit {
   maskedpassword: string;
   products: Product[] = [];
   orders: Order[] = [];
+  reviews: Review[] = [];
+  productsReviews: { [key: string]: Product } = {};
+  currentIndex: number = 0;
+  intervalId: any;
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService, private userService: UserService) {
     this.user = this.authService.getUser();
@@ -38,6 +47,25 @@ export class UserInfoComponent implements OnInit {
     }
     this.products = products;
     this.fetchOrders();
+    this.fetchReviews();
+  }
+
+  ngOnDestroy() {
+    this.stopAutoSlide(); // Zaustavi interval kada komponenta nije više u upotrebi
+  }
+
+  startAutoSlide() {
+    this.intervalId = setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.reviews.length;
+    }, 3000); // Promeni tab svake 3 sekunde
+  }
+
+  stopAutoSlide() {
+    clearInterval(this.intervalId);
+  }
+
+  onTabChange(event: MatTabChangeEvent) {
+    this.currentIndex = event.index;
   }
 
   showSection(section: string): void {
@@ -57,9 +85,28 @@ export class UserInfoComponent implements OnInit {
   fetchOrders(): void {
     this.userService.getOrders(this.authService.getUser()._id).subscribe((orders) => {
       this.orders = orders;
-
-      console.log(this.orders);
     });
+  }
+
+  fetchReviews(): void {
+    this.userService.getReviews(this.authService.getUser()._id).subscribe((reviews) => {
+      this.reviews = reviews;
+      try {
+        const productIds = [...new Set(this.reviews.map((review) => review.productId))];
+
+        for (const id of productIds) {
+          this.productService.getProductById(id).subscribe((product) => {
+            this.productsReviews[id] = product;
+          });
+        }
+      } catch (error) {
+        console.error('Greška prilikom dobijanja proizvoda:', error);
+      }
+    });
+  }
+
+  getProductName(productId: string): string {
+    return this.productsReviews[productId]?.name || 'Nepoznat proizvod';
   }
 
   formatDate(dateV: Date) {
