@@ -1,6 +1,6 @@
 export class Order {
   _id?: string = '';
-  userId: string;
+  userId: string = '';
   orderItems: {
     productId: string;
     name: string;

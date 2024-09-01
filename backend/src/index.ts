@@ -6,6 +6,7 @@ import { createReadStream, unlink } from "fs";
 import multer, { FileFilterCallback } from "multer"; // Import multer tipove
 import userRouter from "./routers/user.router";
 import productRouter from "./routers/product.router";
+import newsRouter from "./routers/news.router";
 import path from "path";
 const CORS: CorsOptions = {
   origin: "*",
@@ -68,6 +69,8 @@ const router = express.Router();
 
 router.use("/users", userRouter);
 router.use("/products", productRouter);
+router.use("/news", newsRouter);
+
 app.use("/", router);
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));

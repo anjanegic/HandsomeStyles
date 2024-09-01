@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatRadioModule } from '@angular/material/radio';
+import mongoose from 'mongoose';
 
 @Component({
   selector: 'app-checkout',
@@ -60,7 +61,15 @@ export class CheckoutComponent implements OnInit {
       const subtotalPrice = parseFloat(localStorage.getItem('subtotalPrice'));
       const shippingPrice = parseFloat(localStorage.getItem('shippingPrice'));
       const totalPrice = parseFloat(localStorage.getItem('totalPrice'));
-      const userId = this.authService.getUser()._id;
+      let userId: string | undefined;
+      if (this.authService.getUser()) {
+        userId = this.authService.getUser()._id;
+        // Ensure userId is a valid ObjectId if it's provided
+        if (!mongoose.isValidObjectId(userId)) {
+          userId = undefined; // or handle the invalid userId case as needed
+        }
+      }
+
       const dateAndTime = new Date();
 
       const orderJson = {

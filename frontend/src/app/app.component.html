@@ -11,7 +11,7 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item *ngFor="let collection of collections" (click)="selectedCollection = collection; navigateToCollection()">{{ collection }}</button>
       </mat-menu>
-      <button class="allButtons" mat-button routerLink="/collections">NEWS</button>
+      <button routerLink="news" class="allButtons" mat-button>NEWS</button>
       <button class="allButtons" mat-button routerLink="/games">QOTD</button>
     </nav>
     <div class="header-actions">

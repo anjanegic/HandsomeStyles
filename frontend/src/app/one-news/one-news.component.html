@@ -1,0 +1,38 @@
+<div class="news-container">
+  <h1>{{ news?.title }}</h1>
+  <div class="news-card">
+    <div class="news-image">
+      <img *ngIf="news?.image" [src]="'/news/' + news?.image" alt="product image" class="main-image" />
+    </div>
+    <div class="news-content">
+      <p>{{ news?.description }}</p>
+      <a [href]="news?.videoLink" target="_blank">watch video</a>
+    </div>
+    <hr />
+  </div>
+</div>
+<div class="comments-container">
+  <div class="comments-card">
+    <div class="comment-form">
+      <form [formGroup]="commentForm" (ngSubmit)="submitComment()" class="comment-form">
+        <input id="comment" formControlName="comment" placeholder="leave your comment here..." />
+        <button type="submit">
+          <span class="material-symbols-outlined">send</span>
+        </button>
+      </form>
+    </div>
+    <div *ngIf="comments.length > 0" class="comments-content">
+      <h2>Comments</h2>
+      <div class="comment-card" *ngFor="let comment of comments">
+        <div class="comment-card-details">
+          <div class="comment">
+            <div class="comment-card-name">{{ comment.userId }}</div>
+            <div class="comment-card-date">{{ comment.date }}</div>
+          </div>
+          <div class="comment-card-text">{{ comment.comment }}</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center" *ngIf="comments.length === 0">No comments</div>
+  </div>
+</div>
