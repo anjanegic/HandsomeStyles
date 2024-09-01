@@ -13,13 +13,13 @@ import { Order } from '../models/order';
 import { Review } from '../models/review';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
-
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-info',
   standalone: true,
-  imports: [NgIf, MatDialogModule, ProductListComponent, RouterModule, MatExpansionModule, CommonModule, MatTabsModule, MatCardModule, MatTabsModule],
+  imports: [NgIf, MatDialogModule, ProductListComponent, RouterModule, MatExpansionModule, CommonModule, MatTabsModule, MatCardModule, MatIconModule],
   templateUrl: './user-info.component.html',
   styleUrl: './user-info.component.css',
 })
@@ -33,6 +33,8 @@ export class UserInfoComponent implements OnInit {
   productsReviews: { [key: string]: Product } = {};
   currentIndex: number = 0;
   intervalId: any;
+  visibleTabsCount = 3;
+  showArrow = false;
 
   constructor(private authService: AuthService, private router: Router, private productService: ProductService, private userService: UserService) {
     this.user = this.authService.getUser();
@@ -51,13 +53,13 @@ export class UserInfoComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.stopAutoSlide(); // Zaustavi interval kada komponenta nije više u upotrebi
+    this.stopAutoSlide();
   }
 
   startAutoSlide() {
     this.intervalId = setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.reviews.length;
-    }, 3000); // Promeni tab svake 3 sekunde
+    }, 3000);
   }
 
   stopAutoSlide() {
@@ -91,9 +93,9 @@ export class UserInfoComponent implements OnInit {
   fetchReviews(): void {
     this.userService.getReviews(this.authService.getUser()._id).subscribe((reviews) => {
       this.reviews = reviews;
+      this.reviews = this.reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       try {
         const productIds = [...new Set(this.reviews.map((review) => review.productId))];
-
         for (const id of productIds) {
           this.productService.getProductById(id).subscribe((product) => {
             this.productsReviews[id] = product;
@@ -103,6 +105,20 @@ export class UserInfoComponent implements OnInit {
         console.error('Greška prilikom dobijanja proizvoda:', error);
       }
     });
+  }
+
+  deleteReview(id: string) {
+    console.log(id);
+
+    this.userService.deleteReview(id).subscribe((data) => {
+      this.reviews = this.reviews.filter((review) => review._id !== id);
+      this.reviews = this.reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    });
+  }
+
+  showMoreTabs() {
+    this.visibleTabsCount = this.reviews.length;
+    this.showArrow = false;
   }
 
   getProductName(productId: string): string {

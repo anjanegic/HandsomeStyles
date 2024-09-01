@@ -47,4 +47,12 @@ userRouter
   .route("/getReviews/:userId")
   .get((req, res) => new UserController().getReviews(req, res));
 
+userRouter
+  .route("/getUserById/:id")
+  .get((req, res) => new UserController().getUserById(req, res));
+
+userRouter
+  .route("/deleteReview")
+  .post((req, res) => new UserController().deleteReview(req, res));
+
 export default userRouter;

@@ -73,19 +73,24 @@
   </div>
   <div class="account-data" *ngIf="selectedSection === 'reviews'">
     <h2>My Reviews</h2>
-    <mat-tab-group animationDuration="500ms" (selectedTabChange)="onTabChange($event)">
-      <mat-tab *ngFor="let review of reviews">
-        <ng-template mat-tab-label>
-          <span>{{ getProductName(review.productId) }}</span>
-        </ng-template>
-        <div class="review-card">
-          <div class="review-card-details">
+    <div class="reviews-cards">
+      <div class="review-card" *ngFor="let review of reviews">
+        <div class="review-card-details">
+          <div class="review-title">
+            <div class="review-card-name">{{ getProductName(review.productId) }}</div>
             <div class="review-card-date">{{ review.date | date }}</div>
+          </div>
+          <div class="review-comment-delete">
             <div class="review-card-text">{{ review.comment }}</div>
+            <div class="delete-review">
+              <button mat-icon-button aria-label="Delete" (click)="deleteReview(review._id)">
+                <mat-icon class="material-symbols-outlined">delete</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
-      </mat-tab>
-    </mat-tab-group>
+      </div>
+    </div>
   </div>
 
   <div class="account-data" *ngIf="selectedSection === 'wishlist'">

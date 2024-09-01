@@ -30,6 +30,10 @@ export class UserService {
     return this.http.post<User>(`${this.uri}/register`, data);
   }
 
+  getUserName(userId: string) {
+    return this.http.get<User>(`${this.uri}/getUserByUsername/${userId}`);
+  }
+
   changeData(_id: string, email: string, firstname: string, lastname: string, address: string, city: string, country: string, postalCode: string, phone: string) {
     const data = {
       _id: _id,
@@ -71,5 +75,13 @@ export class UserService {
 
   getReviews(userId: string) {
     return this.http.get<Review[]>(`${this.uri}/getReviews/${userId}`);
+  }
+
+  getUserById(userId: string) {
+    return this.http.get<User>(`${this.uri}/getUserById/${userId}`);
+  }
+
+  deleteReview(reviewId: string) {
+    return this.http.post<any>(`${this.uri}/deleteReview`, { reviewId });
   }
 }

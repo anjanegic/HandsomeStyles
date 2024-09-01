@@ -198,13 +198,59 @@ mat-tab-group {
   border-radius: 5px;
 }
 
-.carousel-controls button:hover {
-  background-color: #b56044;
-}
-
 .review-card {
-  padding: 16px;
+  padding: 12px;
   border: 1px solid #f4b9ae;
   border-radius: 8px;
   background-color: #fff;
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #474747;
+  }
+}
+
+.review-comment-delete {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.review-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #4e4e4e;
+}
+
+.review-card-name {
+  font-size: 15px;
+}
+
+.show-more-tabs {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.reviews-cards {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 350px;
+  padding: 8px 4px;
+  gap: 4px;
 }

@@ -24,4 +24,12 @@ export class ProductService {
   search(query: string) {
     return this.http.get<any[]>(`${this.uri}/search?q=${query}`);
   }
+
+  getReviews(productId: string) {
+    return this.http.get<any[]>(`${this.uri}/getReviews/${productId}`);
+  }
+
+  submitReview(review: any) {
+    return this.http.post<any>(`${this.uri}/submitReview`, review);
+  }
 }

@@ -14,6 +14,9 @@ import { AuthService } from '../auth.service';
 import { CartService } from '../cart.service';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../user.service';
+import { Review } from '../models/review';
+import { User } from '../models/user';
+import { Order } from '../models/order';
 
 @Component({
   selector: 'app-product',
@@ -25,8 +28,14 @@ import { UserService } from '../user.service';
 export class ProductComponent {
   product: Product;
   selectedVariant: any = null;
-  labelText: string = 'Choose Variant'; // Default label text
-  quantity: number = 1; // Default quantity
+  labelText: string = 'Choose Variant';
+  quantity: number = 1;
+  reviews: Review[] = [];
+  userReviews: { [key: string]: User } = {};
+  orders: Order[] = [];
+  hasOrderedProduct: boolean = false;
+  userId: string = '';
+  reviewComment: string = '';
 
   getUser() {
     return this.authService.getUser();
@@ -49,9 +58,51 @@ export class ProductComponent {
           this.product = product;
           this.selectedVariant = this.product.variants[0];
           this.setLabelText();
+
+          this.fetchReviews();
+          this.loadOrders();
         });
       }
     });
+  }
+
+  fetchReviews(): void {
+    this.productService.getReviews(this.product._id).subscribe((reviews) => {
+      this.reviews = reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      try {
+        const userIds = [...new Set(this.reviews.map((review) => review.userId))];
+        for (const id of userIds) {
+          this.userService.getUserById(id).subscribe((user) => {
+            this.userReviews[id] = user;
+          });
+        }
+        this.userId = this.authService.getUser()._id;
+      } catch (error) {
+        console.error('Greška prilikom dobijanja proizvoda:', error);
+      }
+    });
+  }
+
+  loadOrders() {
+    this.userService.getOrders(this.authService.getUser()._id).subscribe((orders) => {
+      this.orders = orders;
+      this.checkIfOrderedProduct();
+    });
+  }
+
+  checkIfOrderedProduct(): void {
+    this.hasOrderedProduct = this.orders.some((order) => order.orderItems.some((item) => item.productId === this.product._id));
+    console.log(this.hasOrderedProduct);
+  }
+
+  isReviewInputDisabled(): boolean {
+    // this.userId = this.authService.getUser()._id;
+    return !this.userId || !this.hasOrderedProduct;
+  }
+
+  getUserName(userId: string): string {
+    return this.userReviews[userId]?.firstname || 'Nepoznat user';
   }
 
   onVariantChange(variant: any) {
@@ -128,5 +179,19 @@ export class ProductComponent {
 
     this.cartService.openCart();
     this.cartService.updateCartBadge();
+  }
+
+  submitReview() {
+    const review = {
+      productId: this.product._id,
+      userId: this.getUser()._id,
+      comment: this.reviewComment,
+      date: new Date(),
+    };
+    this.productService.submitReview(review).subscribe((data) => {
+      this.reviews.push(data);
+      this.reviews = this.reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.reviewComment = '';
+    });
   }
 }

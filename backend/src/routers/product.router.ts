@@ -20,4 +20,12 @@ productRouter
   .route("/search")
   .get((req, res) => new ProductController().searchProducts(req, res));
 
+productRouter
+  .route("/getReviews/:productId")
+  .get((req, res) => new ProductController().getReviews(req, res));
+
+productRouter
+  .route("/submitReview")
+  .post((req, res) => new ProductController().submitReview(req, res));
+
 export default productRouter;

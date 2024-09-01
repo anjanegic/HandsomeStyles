@@ -27,6 +27,9 @@ export class CollectionComponent {
       this.title = params.get('title') || '';
       const productsParam = params.get('products');
 
+      this.products = [];
+      this.sortedProducts = [];
+
       if (productsParam) {
         try {
           this.products = JSON.parse(productsParam) as Product[];

@@ -13,10 +13,6 @@ const Review = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
   },
-  rating: {
-    type: Number,
-    required: true,
-  },
   comment: {
     type: String,
   },

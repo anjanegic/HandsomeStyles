@@ -210,7 +210,6 @@ export class UserController {
     }
 
     const theId = new Types.ObjectId(userId);
-    console.log("Converted userId:", theId);
 
     Order.find({ userId: theId })
       .then((orders) => {
@@ -230,11 +229,48 @@ export class UserController {
     }
 
     const theId = new Types.ObjectId(userId);
-    console.log("Converted userId:", theId);
 
     Review.find({ userId: theId })
       .then((reviews) => {
         res.json(reviews);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  getUserById = (req: express.Request, res: express.Response) => {
+    let userId = req.params.id;
+
+    if (!Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    const theId = new Types.ObjectId(userId);
+
+    User.findById(theId)
+      .then((user) => {
+        res.json(user);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  deleteReview = (req: express.Request, res: express.Response) => {
+    let reviewId = req.body.reviewId;
+
+    if (!Types.ObjectId.isValid(reviewId)) {
+      return res.status(400).json({ message: "Invalid review ID format" });
+    }
+
+    const theId = new Types.ObjectId(reviewId);
+
+    Review.findByIdAndDelete(theId)
+      .then((review) => {
+        res.json(review);
       })
       .catch((err) => {
         console.error("Error fetching reviews:", err);

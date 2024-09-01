@@ -1,7 +1,9 @@
 import express from "express";
 import Product from "../models/product";
+import Review from "../models/review";
 import { Request, Response } from "express-serve-static-core";
 import { ParsedQs } from "qs";
+import { Types } from "mongoose";
 export class ProductController {
   getProductsFromCollection = (req: express.Request, res: express.Response) => {
     let collection = req.body.collection;
@@ -58,4 +60,37 @@ export class ProductController {
       res.status(500).json({ message: "Error during product search." });
     }
   }
+
+  getReviews = (req: express.Request, res: express.Response) => {
+    let productId = req.params.productId;
+
+    if (!Types.ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    const theId = new Types.ObjectId(productId);
+
+    Review.find({ productId: theId })
+      .then((reviews) => {
+        res.json(reviews);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+  submitReview = (req: express.Request, res: express.Response) => {
+    let review = req.body;
+    console.log(review);
+    const newReview = new Review(review);
+    newReview
+      .save()
+      .then((review) => {
+        res.json(review);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
 }
