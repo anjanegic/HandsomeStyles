@@ -5,6 +5,9 @@ const Review = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  firstname: {
+    type: String,
+  },
   orderId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Order",

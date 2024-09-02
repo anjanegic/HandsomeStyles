@@ -22,4 +22,8 @@ export class NewsService {
   getCommentsById(id: string) {
     return this.http.get<Comment[]>(`${this.uri}/getCommentsById/${id}`);
   }
+
+  submitComment(comment: Comment) {
+    return this.http.post<Comment>(`${this.uri}/submitComment`, comment);
+  }
 }

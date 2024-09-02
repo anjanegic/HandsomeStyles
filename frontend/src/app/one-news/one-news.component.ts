@@ -8,22 +8,23 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../auth.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-one-news',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './one-news.component.html',
-  styleUrl: './one-news.component.css',
+  styleUrls: ['./one-news.component.css'],
 })
 export class OneNewsComponent implements OnInit {
   news: News;
   comments: Comment[] = [];
-  commentForm = new FormGroup({
-    comment: new FormControl(''),
-  });
+  commentForm: FormGroup;
+  user: User;
 
-  constructor(private newsService: NewsService, private route: ActivatedRoute) {}
+  constructor(private newsService: NewsService, private route: ActivatedRoute, private authService: AuthService) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -31,12 +32,58 @@ export class OneNewsComponent implements OnInit {
       this.news = data;
       this.fetchComments();
     });
-  }
-  fetchComments() {
-    this.newsService.getCommentsById(this.news._id).subscribe((data) => {
-      this.comments = data;
+    this.user = this.authService.getUser();
+
+    this.commentForm = new FormGroup({
+      comment: new FormControl({ value: '', disabled: !this.user }),
     });
   }
 
-  submitComment() {}
+  fetchComments() {
+    this.newsService.getCommentsById(this.news._id).subscribe((data) => {
+      this.comments = data;
+      this.comments = this.comments.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    });
+  }
+
+  isInputDisabled(): boolean {
+    return !this.user;
+  }
+
+  submitComment() {
+    const comment = {
+      userId: this.user._id,
+      firstname: this.user.firstname,
+      comment: this.commentForm.value.comment,
+      date: new Date(),
+      newsId: this.news._id,
+    };
+    this.newsService.submitComment(comment).subscribe((data) => {
+      this.comments.push(data);
+      this.comments = this.comments.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      this.commentForm.reset();
+    });
+  }
+
+  formatTimeAgo(date: Date): string {
+    const now = new Date();
+    const seconds = Math.floor((now.getTime() - new Date(date).getTime()) / 1000);
+
+    let interval = Math.floor(seconds / 31536000); // years
+    if (interval >= 1) return `${interval} year${interval > 1 ? 's' : ''} ago`;
+
+    interval = Math.floor(seconds / 2592000); // months
+    if (interval >= 1) return `${interval} month${interval > 1 ? 's' : ''} ago`;
+
+    interval = Math.floor(seconds / 86400); // days
+    if (interval >= 1) return `${interval} day${interval > 1 ? 's' : ''} ago`;
+
+    interval = Math.floor(seconds / 3600); // hours
+    if (interval >= 1) return `${interval} hour${interval > 1 ? 's' : ''} ago`;
+
+    interval = Math.floor(seconds / 60); // minutes
+    if (interval >= 1) return `${interval} minute${interval > 1 ? 's' : ''} ago`;
+
+    return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+  }
 }

@@ -24,7 +24,7 @@ export const routes: Routes = [
   { path: 'search', component: SearchComponent, title: 'Search' },
   { path: 'order-confirmation', component: OrderConformationComponent, title: 'Order confirmation' },
   { path: 'news', component: NewsComponent, title: 'News' },
-  { path: 'one-news/:id', component: OneNewsComponent, title: 'One News' },
+  { path: 'one-news/:id', component: OneNewsComponent, title: 'News' },
 ];
 
 @NgModule({

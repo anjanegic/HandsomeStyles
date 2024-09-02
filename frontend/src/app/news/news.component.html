@@ -1,5 +1,5 @@
 <div class="news-container">
-  <div class="news-card" *ngFor="let news of news" (click)="navigateToNews(news._id)">
+  <div class="news-card" *ngFor="let news of paginatedNews.connect() | async" (click)="navigateToNews(news._id)">
     <h1>{{ news.title }}</h1>
     <div class="news-image">
       <img *ngIf="news?.image" [src]="'/news/' + news?.image" alt="product image" class="main-image" />
@@ -11,4 +11,5 @@
     </div>
     <hr />
   </div>
+  <mat-paginator (page)="scrollToTop()" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

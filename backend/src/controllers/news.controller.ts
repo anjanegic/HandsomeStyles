@@ -35,4 +35,18 @@ export class NewsController {
         console.log(err);
       });
   };
+
+  submitComment = (req: express.Request, res: express.Response) => {
+    let comment = req.body;
+    const newComment = new Comment(comment);
+    newComment
+      .save()
+      .then((comment) => {
+        res.json(comment);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
 }

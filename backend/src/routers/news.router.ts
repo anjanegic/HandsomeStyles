@@ -14,4 +14,9 @@ newsRouter
 newsRouter
   .route("/getCommentsById/:id")
   .get((req, res) => new NewsController().getCommentsById(req, res));
+
+newsRouter
+  .route("/submitComment")
+  .post((req, res) => new NewsController().submitComment(req, res));
+
 export default newsRouter;

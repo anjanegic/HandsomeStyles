@@ -86,7 +86,7 @@ export class UserInfoComponent implements OnInit {
 
   fetchOrders(): void {
     this.userService.getOrders(this.authService.getUser()._id).subscribe((orders) => {
-      this.orders = orders;
+      this.orders = orders.sort((a, b) => new Date(b.dateAndTime).getTime() - new Date(a.dateAndTime).getTime());
     });
   }
 
@@ -108,8 +108,6 @@ export class UserInfoComponent implements OnInit {
   }
 
   deleteReview(id: string) {
-    console.log(id);
-
     this.userService.deleteReview(id).subscribe((data) => {
       this.reviews = this.reviews.filter((review) => review._id !== id);
       this.reviews = this.reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

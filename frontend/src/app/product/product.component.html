@@ -68,7 +68,7 @@
         <div class="review-card" *ngFor="let review of reviews">
           <div class="review-card-details">
             <div class="review">
-              <div class="review-card-name">{{ getUserName(review.userId) }}</div>
+              <div class="review-card-name">{{ review.firstname }}</div>
               <div class="review-card-date">{{ review.date | date }}</div>
             </div>
             <div class="review-card-text">{{ review.comment }}</div>

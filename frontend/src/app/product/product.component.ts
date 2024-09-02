@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Product } from '../models/product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon'; // Import MatIconModule
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
@@ -35,6 +35,7 @@ export class ProductComponent {
   orders: Order[] = [];
   hasOrderedProduct: boolean = false;
   userId: string = '';
+  firstName: string = '';
   reviewComment: string = '';
 
   getUser() {
@@ -47,7 +48,8 @@ export class ProductComponent {
     private productService: ProductService,
     private authService: AuthService,
     private cartService: CartService,
-    private userService: UserService
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +65,8 @@ export class ProductComponent {
           this.loadOrders();
         });
       }
+      this.userId = this.authService.getUser()._id;
+      this.firstName = this.authService.getUser().firstname;
     });
   }
 
@@ -97,7 +101,6 @@ export class ProductComponent {
   }
 
   isReviewInputDisabled(): boolean {
-    // this.userId = this.authService.getUser()._id;
     return !this.userId || !this.hasOrderedProduct;
   }
 
@@ -184,11 +187,16 @@ export class ProductComponent {
   submitReview() {
     const review = {
       productId: this.product._id,
-      userId: this.getUser()._id,
+      userId: this.userId,
+      firstname: this.firstName,
       comment: this.reviewComment,
       date: new Date(),
     };
+    console.log(review);
+
     this.productService.submitReview(review).subscribe((data) => {
+      console.log(data);
+
       this.reviews.push(data);
       this.reviews = this.reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
       this.reviewComment = '';
