@@ -131,9 +131,9 @@ button[mat-icon-button] mat-icon {
 .hs-footer {
   margin-top: auto;
   display: block;
-  padding: 12px;
+  padding: 10px;
   font-size: 12px;
-  background-color: #c2aac2;
+  background-color: #b69e9e;
   color: white;
 }
 

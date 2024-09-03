@@ -1,6 +1,6 @@
-:host {
+/* :host {
   height: 100%;
-}
+} */
 
 .checkout-left p {
   font-weight: bold;
@@ -14,7 +14,6 @@
 .name-fields {
   display: flex;
   width: 100%;
-  gap: 10px;
   flex-direction: column;
 }
 
@@ -72,8 +71,7 @@ mat-error {
 
 mat-form-field {
   width: 100%;
-  margin-bottom: 10px;
-  height: 30px !important;
+  margin-bottom: 0 !important;
   padding-bottom: 20px;
 }
 
@@ -199,4 +197,46 @@ button {
 .total-price {
   font-size: 18px;
   color: rgb(77, 77, 77);
+}
+
+.discount-code-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.check-discount-code {
+  height: 40px;
+  width: 40px;
+  margin: 0;
+  display: flex;
+  border-radius: 50%;
+  background-color: green !important;
+  z-index: 10;
+  color: white !important;
+  border: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.discount-good {
+  color: green !important;
+  font-size: 16px !important;
+  text-align: center;
+  padding: 0 !important;
+  font-weight: normal !important;
+}
+
+.discount-wrong {
+  color: red !important;
+  font-size: 16px !important;
+  text-align: center;
+  padding: 0 !important;
+  font-weight: normal !important;
+}
+
+.discount-code-container {
+  display: flex;
+  justify-content: center;
 }

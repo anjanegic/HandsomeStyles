@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { OrderConformationComponent } from './order-conformation/order-conformation.component';
 import { NewsComponent } from './news/news.component';
 import { OneNewsComponent } from './one-news/one-news.component';
+import { QuestionComponent } from './question/question.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'HandsomeStyles' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'order-confirmation', component: OrderConformationComponent, title: 'Order confirmation' },
   { path: 'news', component: NewsComponent, title: 'News' },
   { path: 'one-news/:id', component: OneNewsComponent, title: 'News' },
+  { path: 'questions', component: QuestionComponent, title: 'QOTD' },
 ];
 
 @NgModule({

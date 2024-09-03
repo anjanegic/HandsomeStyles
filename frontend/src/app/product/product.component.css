@@ -24,7 +24,7 @@
 
 .product-title-heart {
   display: flex;
-  justify-content: space-between;
+  gap: 4px;
   align-items: center;
   margin: 0 0 10px 0;
 }
@@ -100,6 +100,7 @@ input[matinput]::-webkit-inner-spin-button {
 
 .addtocartbutton {
   margin: 8px 8px 8px 0;
+  transition: all 0.3s ease-in-out;
   background-color: #373737;
   color: white;
   width: 400px;

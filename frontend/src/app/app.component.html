@@ -12,7 +12,7 @@
         <button mat-menu-item *ngFor="let collection of collections" (click)="selectedCollection = collection; navigateToCollection()">{{ collection }}</button>
       </mat-menu>
       <button routerLink="news" class="allButtons" mat-button>NEWS</button>
-      <button class="allButtons" mat-button routerLink="/games">QOTD</button>
+      <button class="allButtons" mat-button routerLink="/questions">QOTD</button>
     </nav>
     <div class="header-actions">
       <ng-container *ngIf="getUser(); else loginButton">

@@ -13,8 +13,6 @@
     "concurrently": "^8.2.2"
   },
   "dependencies": {
-    "@angular/animations": "^18.2.1",
-    "ngx-slick-carousel": "^17.0.0",
-    "slick-carousel": "^1.8.1"
+    "@angular/animations": "^18.2.1"
   }
 }

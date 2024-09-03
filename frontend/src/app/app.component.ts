@@ -63,6 +63,11 @@ export class AppComponent {
       }
     });
 
+    const generateSessionId = () => 'SESSION-' + Math.random().toString(36).substring(2, 12).toUpperCase();
+
+    const sessionId = localStorage.getItem('sessionId') || generateSessionId();
+    localStorage.setItem('sessionId', sessionId);
+
     this.cartService.getCartUpdatedEvent().subscribe(() => {
       this.refreshCart();
     });

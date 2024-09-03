@@ -29,7 +29,7 @@ export class LoginComponent {
       password: ['', [Validators.required]],
     });
   }
-  // , Validators.pattern(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$/)]
+
   onSubmit(): void {
     if (this.loginForm.valid) {
       const formValues = this.loginForm.value;

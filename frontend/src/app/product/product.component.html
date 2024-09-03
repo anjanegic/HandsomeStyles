@@ -6,7 +6,6 @@
   <div class="product-details" *ngIf="product">
     <div class="product-title-heart">
       <h1>{{ product.name }}</h1>
-
       <button mat-icon-button aria-label="Toggle Wishlist" (click)="toggleWishlist()">
         <mat-icon
           [ngClass]="{
@@ -43,7 +42,7 @@
       </mat-select>
     </mat-form-field>
     <div>
-      <button mat-flat-button class="addtocartbutton" (click)="addToCart()">add to cart</button>
+      <button mat-flat-button class="addtocartbutton" (click)="addToCart()"><mat-icon>shopping_cart</mat-icon>Add to cart</button>
     </div>
 
     <br />

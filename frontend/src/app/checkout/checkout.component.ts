@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatRadioModule } from '@angular/material/radio';
+import { QuestionService } from '../question.service';
 
 @Component({
   selector: 'app-checkout',
@@ -23,8 +24,11 @@ export class CheckoutComponent implements OnInit {
   cartItems: any[] = [];
   shippingForm: FormGroup;
   paymentForm: FormGroup;
+  beforeDiscountAmount = 0;
+  discountErrorMessage: string = '';
+  discountAmount = 0;
 
-  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService, private questionService: QuestionService) {
     this.shippingForm = this.formBuilder.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
@@ -34,6 +38,7 @@ export class CheckoutComponent implements OnInit {
       zip: ['', [Validators.required]],
       country: ['', [Validators.required]],
       phone: ['', [Validators.required, this.phoneValidator]],
+      discountCode: [''],
     });
     this.paymentForm = this.formBuilder.group({
       paymentMethod: [''],
@@ -42,8 +47,26 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartItems = this.getCartItems();
-    console.log(this.cartItems);
-    console.log(this.shippingForm);
+  }
+
+  applyDiscountCode(): void {
+    const discountCode = this.shippingForm.get('discountCode')?.value;
+    this.questionService.checkDiscountCode(discountCode).subscribe(
+      (response) => {
+        if (response.valid) {
+          const subtotalPrice = this.getTotalPrice();
+          const shippingPrice = 5;
+          this.beforeDiscountAmount = subtotalPrice + shippingPrice;
+          this.discountAmount = this.beforeDiscountAmount * response.amount;
+        } else {
+          this.discountAmount = 0;
+        }
+      },
+      (error) => {
+        console.error('Error validating discount code', error);
+        this.discountErrorMessage = 'An error occurred while validating the discount code.';
+      }
+    );
   }
 
   onSubmit(): void {
@@ -57,9 +80,12 @@ export class CheckoutComponent implements OnInit {
       const orderItems = this.transformToOrderItems(cartItems);
       const shipping = this.shippingForm.value;
       const paymentMethod = this.paymentForm.get('paymentMethod')?.value;
-      const subtotalPrice = parseFloat(localStorage.getItem('subtotalPrice'));
-      const shippingPrice = parseFloat(localStorage.getItem('shippingPrice'));
-      const totalPrice = parseFloat(localStorage.getItem('totalPrice'));
+      const subtotalPrice = this.getTotalPrice();
+      const shippingPrice = 5;
+      this.beforeDiscountAmount = subtotalPrice + shippingPrice;
+
+      const totalPrice = this.beforeDiscountAmount - this.discountAmount;
+
       let userId: string | undefined;
       if (this.authService.getUser()) {
         userId = this.authService.getUser()._id;
@@ -83,7 +109,20 @@ export class CheckoutComponent implements OnInit {
 
       this.service.addOrder(orderJson).subscribe((order) => {
         localStorage.removeItem('cartItems');
-        this.router.navigate(['/order-confirmation']);
+        console.log(this.shippingForm.get('discountCode')?.value);
+        this.questionService.usedDiscountCode(this.shippingForm.get('discountCode')?.value).subscribe(
+          (response) => {
+            if (response.success) {
+              this.router.navigate(['/order-confirmation']);
+            } else {
+              alert('Error while using discount code.');
+            }
+          },
+          (error) => {
+            console.error('Error using discount code:', error);
+            alert('Error while using discount code.');
+          }
+        );
       });
     } else {
       console.log('Form Invalid!');

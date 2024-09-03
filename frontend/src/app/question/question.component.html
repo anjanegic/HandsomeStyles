@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="header">
+    <p>QUESTION OF THE DAY</p>
+  </div>
+  <div class="question-container">
+    <mat-card>
+      <mat-card-content *ngIf="currentQuestion">
+        <h2>{{ currentQuestion.question }}</h2>
+        <mat-radio-group aria-label="Select an option" (change)="onOptionChange($event)">
+          <mat-radio-button *ngFor="let option of currentQuestion.options" [value]="option.text">
+            {{ option.text }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <button mat-raised-button (click)="submitAnswer()">Answer</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
