@@ -11,6 +11,6 @@ export class User {
   postalCode: string;
   phone: string;
   approved: boolean;
-  deleted: boolean;
+  deleted: boolean = false;
   wishlist: string[] = [];
 }

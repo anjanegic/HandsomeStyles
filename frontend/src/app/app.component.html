@@ -7,6 +7,8 @@
   <a href=""><img src="LogoHs.PNG" alt="Logo" class="logo" /></a>
   <div class="allButLogo">
     <nav class="nav-menu">
+      <!-- <button *ngIf="getUser().type == 'admin'" class="allButtons" mat-button routerLink="/admin">ADMIN</button> -->
+
       <button class="allButtons" mat-button [matMenuTriggerFor]="menu">SHOP</button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item *ngFor="let collection of collections" (click)="selectedCollection = collection; navigateToCollection()">{{ collection }}</button>
@@ -16,9 +18,16 @@
     </nav>
     <div class="header-actions">
       <ng-container *ngIf="getUser(); else loginButton">
-        <button routerLink="/user-info" mat-icon-button aria-label="Account">
-          <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
-        </button>
+        <ng-container *ngIf="getUser().type == 'admin'; else userButtons">
+          <button routerLink="/admin" mat-icon-button aria-label="Account">
+            <mat-icon class="material-symbols-outlined"> shield_person </mat-icon>
+          </button>
+        </ng-container>
+        <ng-template #userButtons>
+          <button routerLink="/user-info" mat-icon-button aria-label="Account">
+            <mat-icon class="material-symbols-outlined">person_outlined</mat-icon>
+          </button>
+        </ng-template>
       </ng-container>
       <ng-template #loginButton>
         <button routerLink="login" mat-icon-button aria-label="Account">

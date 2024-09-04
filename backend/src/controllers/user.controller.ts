@@ -25,6 +25,12 @@ export class UserController {
        */
     User.findOne({ email: email, password: password })
       .then((user) => {
+        if (!user) {
+          return res.json({ message: "User not found" });
+        }
+        if (!user.approved) {
+          return res.json({ message: "Not approved" });
+        }
         res.json(user);
       })
       .catch((err) => {
@@ -271,6 +277,66 @@ export class UserController {
     Review.findByIdAndDelete(theId)
       .then((review) => {
         res.json(review);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  getNotApprovedUsers = (req: express.Request, res: express.Response) => {
+    User.find({ approved: false })
+      .then((users) => {
+        res.json(users);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  approveUser = (req: express.Request, res: express.Response) => {
+    let userId = req.body.userId;
+
+    if (!Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    const theId = new Types.ObjectId(userId);
+
+    User.findByIdAndUpdate(theId, { approved: true })
+      .then((user) => {
+        res.json(user);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  getAllUsers = (req: express.Request, res: express.Response) => {
+    User.find({ type: { $ne: "admin" } })
+      .then((users) => {
+        res.json(users);
+      })
+      .catch((err) => {
+        console.error("Error fetching users:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  deleteUser = (req: express.Request, res: express.Response) => {
+    let userId = req.body.userId;
+
+    if (!Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID format" });
+    }
+
+    const theId = new Types.ObjectId(userId);
+
+    User.findByIdAndDelete(theId)
+      .then((user) => {
+        res.json(user);
       })
       .catch((err) => {
         console.error("Error fetching reviews:", err);

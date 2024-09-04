@@ -12,6 +12,7 @@ import { OrderConformationComponent } from './order-conformation/order-conformat
 import { NewsComponent } from './news/news.component';
 import { OneNewsComponent } from './one-news/one-news.component';
 import { QuestionComponent } from './question/question.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
   { path: '', component: HomepageComponent, title: 'HandsomeStyles' },
@@ -27,6 +28,7 @@ export const routes: Routes = [
   { path: 'news', component: NewsComponent, title: 'News' },
   { path: 'one-news/:id', component: OneNewsComponent, title: 'News' },
   { path: 'questions', component: QuestionComponent, title: 'QOTD' },
+  { path: 'admin', component: AdminComponent, title: 'Admin' },
 ];
 
 @NgModule({

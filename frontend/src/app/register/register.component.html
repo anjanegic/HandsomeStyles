@@ -1,5 +1,6 @@
 <div class="register-container">
   <div class="register-div">
+    <div *ngIf="message" class="message">{{ message }}</div>
     <h1>CREATE AN ACCOUNT</h1>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
       <div class="name-fields">
@@ -23,7 +24,7 @@
       <mat-form-field>
         <mat-label>password</mat-label>
         <input matInput formControlName="password" type="password" />
-        <mat-error *ngIf="registerForm.get('password')?.hasError('pattern')">password must be at least 8 characters long and include at least one number</mat-error>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('pattern')">at least 8 characters and must contain numbers</mat-error>
         <mat-error *ngIf="registerForm.get('password')?.hasError('required')">password is <strong>required</strong></mat-error>
       </mat-form-field>
       <mat-form-field>

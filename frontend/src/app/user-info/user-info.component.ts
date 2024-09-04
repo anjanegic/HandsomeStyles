@@ -42,7 +42,6 @@ export class UserInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.authService.getUser());
     const products = [];
     for (const id of this.authService.getUser().wishlist) {
       this.productService.getProductById(id).subscribe((product) => products.push(product));
@@ -50,20 +49,6 @@ export class UserInfoComponent implements OnInit {
     this.products = products;
     this.fetchOrders();
     this.fetchReviews();
-  }
-
-  ngOnDestroy() {
-    this.stopAutoSlide();
-  }
-
-  startAutoSlide() {
-    this.intervalId = setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.reviews.length;
-    }, 3000);
-  }
-
-  stopAutoSlide() {
-    clearInterval(this.intervalId);
   }
 
   onTabChange(event: MatTabChangeEvent) {

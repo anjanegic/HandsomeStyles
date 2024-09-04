@@ -25,6 +25,7 @@ export class RegisterComponent {
   passwordRepeatFormControl = new FormControl('', [Validators.required]);
   registerForm: FormGroup;
   errorMessage = '';
+  message = '';
 
   constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService) {
     this.registerForm = this.formBuilder.group(
@@ -52,12 +53,11 @@ export class RegisterComponent {
       const firstname = formValues.firstname;
       const lastname = formValues.lastname;
       const password = formValues.password;
-      console.log('Form Submitted!', formValues);
+
       this.service.register(email, firstname, lastname, password).subscribe((data) => {
         if (data == null) alert('Error');
         else {
-          this.authService.login(data);
-          this.router.navigate(['']);
+          this.message = 'Registration successful!';
         }
       });
       //   this.service.login(email, password).subscribe((data) => {

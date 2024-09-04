@@ -37,7 +37,8 @@ export class LoginComponent {
       const password = formValues.password;
       console.log('Form Submitted!', formValues);
       this.service.login(email, password).subscribe((data) => {
-        if (data == null) alert('Nema korisnika');
+        if (data == null) this.errorMessage = 'Invalid Credentials';
+        if (data.message === 'Not approved') this.errorMessage = 'Still not approved!';
         else {
           this.authService.login(data);
           // @ts-ignore

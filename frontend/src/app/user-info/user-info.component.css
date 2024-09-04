@@ -153,7 +153,7 @@ mat-panel-description {
   grid-template-columns: repeat(3, auto);
   display: grid;
   width: 100%;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   border-top: 1px solid #f6bdb2 !important;
   padding: 10px 0 10px;

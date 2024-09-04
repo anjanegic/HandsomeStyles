@@ -1,0 +1,52 @@
+<div class="account-dashboard">
+  <div class="account-greeting">
+    <h1 class="account-greeting-name">HI {{ user.firstname.toUpperCase() }}</h1>
+    <a (click)="logout()" class="account-greeting-logout">Log out</a>
+  </div>
+</div>
+<div class="account-info">
+  <div class="account-navigation">
+    <ul>
+      <li (click)="showSection('users')">users</li>
+      <li (click)="showSection('products')">products</li>
+      <li (click)="showSection('news')">news</li>
+      <li (click)="showSection('questions')">questions</li>
+    </ul>
+  </div>
+  <div class="account-data" *ngIf="selectedSection === 'users'">
+    <p class="approve">Approve users</p>
+    <div *ngIf="users.length > 0" class="users-cards">
+      <mat-card class="user-card" appearance="outlined" *ngFor="let user of users">
+        <mat-card-header class="user-card-header">
+          <mat-card-title>{{ user.firstname }} {{ user.lastname }}</mat-card-title>
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="profile-icon" src="http://localhost:4000/uploads/profile-icon.png" alt="Photo" />
+        <mat-card-content> </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button (click)="approveUser(user)"><mat-icon class="material-symbols-outlined approve-icon">check_circle</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div *ngIf="users.length === 0">
+      <p>No users to approve!</p>
+    </div>
+    <p class="approve">All users</p>
+    <div class="users-cards">
+      <mat-card class="user-card" appearance="outlined" *ngFor="let user of allUsers">
+        <mat-card-header class="user-card-header">
+          <mat-card-title>{{ user.firstname }} {{ user.lastname }}</mat-card-title>
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image class="profile-icon" src="http://localhost:4000/uploads/profile-icon.png" alt="Photo" />
+        <mat-card-content> </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button (click)="deleteUser(user)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="account-data" *ngIf="selectedSection === 'products'" style="padding: 0 !important">products</div>
+  <div class="account-data" *ngIf="selectedSection === 'news'">news</div>
+  <div class="account-data" *ngIf="selectedSection === 'questions'">questions</div>
+</div>

@@ -23,7 +23,40 @@ conn.once("open", () => {
   console.log("DB Connected");
 });
 
-const upload = multer({ dest: "uploads/" }); // Privremena lokacija za čuvanje fajlova pre nego što se pošalju na GridFS
+// !!!
+// MULTER
+// !!!
+
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../uploads"));
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+
+app.post("/upload", upload.single("file"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).send({ error: "No file uploaded." });
+  }
+
+  res.send({ filepath: `/uploads/${req.file.filename}` });
+});
+
+// !!!
+// MULTER
+// !!!
 
 const router = express.Router();
 

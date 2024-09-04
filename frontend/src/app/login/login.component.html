@@ -2,6 +2,7 @@
   <div class="login-div">
     <h1>LOGIN</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
       <mat-form-field>
         <mat-label>email</mat-label>
         <input matInput formControlName="email" placeholder="name@example.com" />
@@ -13,9 +14,9 @@
         <input matInput formControlName="password" type="password" />
         <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is <strong>required</strong></mat-error>
       </mat-form-field>
-      <button mat-stroked-button color="basic" type="submit">log in</button>
+      <button mat-stroked-button color="basic" type="submit">Log In</button>
     </form>
-    <p>don't have an account?</p>
+    <p>Don't have an account?</p>
     <p class="login-register-link" (click)="navigateToRegister()">create account</p>
   </div>
 </div>

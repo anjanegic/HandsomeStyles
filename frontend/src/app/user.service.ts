@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from './models/user';
 import { Order } from './models/order';
 import { Review } from './models/review';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Observable<any> {
     const data = {
       email: email,
       password: password,
@@ -83,5 +84,20 @@ export class UserService {
 
   deleteReview(reviewId: string) {
     return this.http.post<any>(`${this.uri}/deleteReview`, { reviewId });
+  }
+
+  getNotApprovedUsers() {
+    return this.http.get<User[]>(`${this.uri}/getNotApprovedUsers`);
+  }
+
+  approveUser(userId: string) {
+    return this.http.post<User>(`${this.uri}/approveUser`, { userId });
+  }
+  getAllUsers() {
+    return this.http.get<User[]>(`${this.uri}/getAllUsers`);
+  }
+
+  deleteUser(userId: string) {
+    return this.http.post<any>(`${this.uri}/deleteUser`, { userId });
   }
 }
