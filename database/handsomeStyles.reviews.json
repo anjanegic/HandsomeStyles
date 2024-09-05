@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "66d596f3aedf1f2beab83836"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "productId": {
+    "$oid": "66bcb06c5096ca24c716eda6"
+  },
+  "comment": "Very beautiful! Amazing quality!!",
+  "date": {
+    "$date": "2024-09-02T10:44:03.043Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d59708aedf1f2beab838bd"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "productId": {
+    "$oid": "66be24985096ca24c716edab"
+  },
+  "comment": "Amazing",
+  "date": {
+    "$date": "2024-09-02T10:44:24.760Z"
+  },
+  "__v": 0
+}]

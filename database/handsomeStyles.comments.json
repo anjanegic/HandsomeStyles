@@ -1,0 +1,306 @@
+[{
+  "_id": {
+    "$oid": "66d60ff4a1474bbe482086db"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "Wow",
+  "date": {
+    "$date": "2024-09-02T19:20:20.221Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61c0fa1474bbe48208711"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "I love how he goes ther ewith Sam Smith",
+  "date": {
+    "$date": "2024-09-02T20:11:59.080Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61c64a1474bbe48208763"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "Anja je car",
+  "date": {
+    "$date": "2024-09-02T20:13:24.407Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978e"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61c68a1474bbe48208765"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "Wow",
+  "date": {
+    "$date": "2024-09-02T20:13:28.729Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978e"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61c6ba1474bbe48208767"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "I love how he goes ther ewith Sam Smith",
+  "date": {
+    "$date": "2024-09-02T20:13:31.639Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978e"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61c71a1474bbe48208769"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "Wow",
+  "date": {
+    "$date": "2024-09-02T20:13:37.706Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978e"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61d0da1474bbe48208770"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "lucky fans!!",
+  "date": {
+    "$date": "2024-09-02T20:16:13.684Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e649790"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61d17a1474bbe48208772"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "lucky him with the fans",
+  "date": {
+    "$date": "2024-09-02T20:16:23.429Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e649790"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61d1fa1474bbe48208774"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "ssss",
+  "date": {
+    "$date": "2024-09-02T20:16:31.554Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e649790"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61d22a1474bbe48208776"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "aaaaa",
+  "date": {
+    "$date": "2024-09-02T20:16:34.442Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e649790"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d61d32a1474bbe48208778"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "ssss",
+  "date": {
+    "$date": "2024-09-02T20:16:50.834Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e649790"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d62e90a1474bbe4820887f"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "sadsad",
+  "date": {
+    "$date": "2024-09-02T21:30:56.746Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d62e92a1474bbe48208881"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "asdsad",
+  "date": {
+    "$date": "2024-09-02T21:30:58.873Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d62e97a1474bbe48208883"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "Evo enter",
+  "date": {
+    "$date": "2024-09-02T21:31:03.389Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d6e088db233daf10d79065"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "cao",
+  "date": {
+    "$date": "2024-09-03T10:10:16.017Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d6e08ddb233daf10d79067"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "gggg",
+  "date": {
+    "$date": "2024-09-03T10:10:21.860Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d6e092db233daf10d7906a"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "f",
+  "date": {
+    "$date": "2024-09-03T10:10:26.426Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d6e098db233daf10d7906e"
+  },
+  "userId": {
+    "$oid": "668d9e0f7fbd551a28ff371f"
+  },
+  "firstname": "Petar",
+  "comment": "g",
+  "date": {
+    "$date": "2024-09-03T10:10:32.411Z"
+  },
+  "newsId": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "__v": 0
+}]

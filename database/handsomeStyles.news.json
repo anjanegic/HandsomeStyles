@@ -1,0 +1,66 @@
+[{
+  "_id": {
+    "$oid": "66d464eede34599f2e64978d"
+  },
+  "title": "Harry Styles In Madrid at Kalorama Festival",
+  "description": "Harry Styles and Sam Smith were among the standout stars at this year's Kalorama Festival in Madrid, held from August 29th to 31st. Their presence electrified the crowd, adding a unique blend of energy and charisma to the event. Both artists enjoyed performances by other talented musicians, including Olivia Dean and the funky band JUNGLE. The atmosphere was filled with excitement as Harry and Sam mingled with fans and soaked in the vibrant sounds of the festival. Their appearance added an extra layer of star power, making Kalorama one of the most talked-about events of the summer.",
+  "image": "news1.jpg",
+  "date": "2024-08-31",
+  "comments": [],
+  "videoLink": "https://www.youtube.com/watch?v=7n9tqjXqnFs"
+},
+{
+  "_id": {
+    "$oid": "66d464eede34599f2e64978e"
+  },
+  "title": "Harry Styles at Niall Horan’s show in Manchester",
+  "description": "Harry Styles made a surprise appearance at Niall Horan's show at the Co-op Live in Manchester on August 27th, sending fans into a frenzy. The former One Direction bandmates shared a heartwarming moment, rekindling memories of their time together. Harry was spotted in the audience, enjoying Niall's performance and singing along to the hits, showcasing the enduring bond between the two artists. His presence added an unexpected touch of nostalgia and excitement, making the night even more special for fans who witnessed this mini-reunion of their favorite bandmates. The show quickly became the talk of the town, highlighting the unbreakable friendship between Harry and Niall.",
+  "image": "news2.jpg",
+  "date": "2024-08-27",
+  "comments": [],
+  "videoLink": "https://www.youtube.com/watch?v=xtGzCGSbYhM"
+},
+{
+  "_id": {
+    "$oid": "66d464eede34599f2e64978f"
+  },
+  "title": "Harry Styles, Florence Welch & Timothée Chalamet at the Fontaines D.C. show",
+  "description": "Harry Styles, Florence Welch, and Timothée Chalamet were spotted together at the Fontaines D.C. show in London, creating a buzz among fans and concertgoers. The trio enjoyed the band's raw and energetic performance, blending seamlessly into the crowd while still drawing attention with their star-studded presence. Harry and Florence, both known for their distinctive styles and musical talents, were seen chatting and enjoying the night, while Timothée, a fan of indie music, appeared relaxed and engaged with the show. Their appearance added an extra layer of glamour to the event, making it a memorable night not just for Fontaines D.C. fans, but for anyone lucky enough to witness this gathering of icons.",
+  "image": "news3.jpg",
+  "date": "2024-08-23",
+  "comments": [],
+  "videoLink": "https://www.youtube.com/watch?v=wpbKV8VBxUg"
+},
+{
+  "_id": {
+    "$oid": "66d464eede34599f2e649790"
+  },
+  "title": "Harry Styles Meeting Fans In London Streets",
+  "description": "Harry Styles was spotted in London enjoying a lively evening with his band members, the HAIM sisters, and a group of enthusiastic fans. The gathering showcased a blend of music and camaraderie, with Harry and the HAIM sisters, known for their dynamic performances and close-knit bond, mingling and sharing laughs. The vibrant atmosphere was enhanced by the presence of dedicated fans who were thrilled to see their favorite artists in such a relaxed and social setting. The night was a celebration of friendship and music, highlighting the strong connections between the artists and their supporters.",
+  "image": "news4.jpg",
+  "date": "2024-08-20",
+  "comments": [],
+  "videoLink": "https://www.youtube.com/watch?v=gkB4nDtEpaQ"
+},
+{
+  "_id": {
+    "$oid": "66d464eede34599f2e649791"
+  },
+  "title": "Harry Styles Spotted with Olivia Dean at Five Guys, Then Enjoys Day Out with Fred Again in London",
+  "description": "In August 2024, Harry Styles was first spotted with Olivia Dean at a Five Guys in London, where they enjoyed a casual meal together. Later that day, Harry was seen with Fred Again at a picturesque lawn in London, where the two musicians relaxed and enjoyed each other’s company. This informal yet high-profile outing showcased the strong connections and easygoing nature of these artists. Their public appearances in such relaxed settings highlighted their down-to-earth personalities and created a buzz among fans, making it a memorable day for music enthusiasts.",
+  "image": "news5.jpg",
+  "date": "2024-08-16",
+  "comments": [],
+  "videoLink": "https://www.youtube.com/watch?v=5c0VcTaofas"
+},
+{
+  "_id": {
+    "$oid": "66d464eede34599f2e649792"
+  },
+  "title": "Harry Styles Takes a Spin on a Like Bike in London",
+  "description": "On July 26, Harry Styles was seen riding a Like bike around London, enjoying a leisurely day out. The pop star embraced the city's vibrant atmosphere as he pedaled through the streets, making for a relaxed and candid moment that fans loved. His casual outing on the bike, combined with his laid-back demeanor, offered a glimpse into his everyday life and down-to-earth personality. The sight of Harry taking a bike ride added a charming and relatable touch to his public image.",
+  "image": "news6.jpg",
+  "date": "2024-07-29",
+  "comments": [],
+  "videoLink": "https://www.youtube.com/watch?v=hQjB9lv_YLE"
+}]

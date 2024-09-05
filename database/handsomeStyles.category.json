@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "66d97d08edddbfdfe0f157cd"
+  },
+  "name": "Phone Case"
+},
+{
+  "_id": {
+    "$oid": "66d97d08edddbfdfe0f157ce"
+  },
+  "name": "Jewelry"
+},
+{
+  "_id": {
+    "$oid": "66d97d08edddbfdfe0f157cf"
+  },
+  "name": "Clothing"
+}]

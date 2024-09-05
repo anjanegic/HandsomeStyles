@@ -13,7 +13,12 @@
   "postalCode": "10070",
   "phone": "612288927",
   "approved": true,
-  "deleted": false
+  "deleted": false,
+  "wishlist": [
+    {
+      "$oid": "66bcb06c5096ca24c716eda7"
+    }
+  ]
 },
 {
   "_id": {
@@ -30,24 +35,8 @@
   "postalCode": "",
   "phone": "",
   "approved": true,
-  "deleted": false
-},
-{
-  "_id": {
-    "$oid": "668d9e0f7fbd551a28ff3721"
-  },
-  "email": "manager@gmail.com",
-  "password": "manager12345",
-  "firstname": "manager",
-  "lastname": "manager",
-  "type": "user",
-  "address": "",
-  "city": "",
-  "country": "",
-  "postalCode": "",
-  "phone": "",
-  "approved": true,
-  "deleted": false
+  "deleted": false,
+  "wishlist": []
 },
 {
   "_id": {
@@ -58,13 +47,14 @@
   "password": "Anja1234",
   "type": "user",
   "email": "anjanegic@gmail.com",
-  "approved": false,
+  "approved": true,
   "deleted": false,
   "address": "Belgrade",
   "city": "Bulevar Mihajla Pupina 143",
   "country": "Serbia",
   "phone": null,
-  "postalCode": "11070"
+  "postalCode": "11070",
+  "wishlist": []
 },
 {
   "_id": {
@@ -75,11 +65,25 @@
   "password": "Mica1234",
   "type": "user",
   "email": "mica@gmail.com",
-  "approved": false,
+  "approved": true,
   "deleted": false,
   "address": "Bulevar",
   "city": null,
   "country": null,
   "phone": null,
-  "postalCode": null
+  "postalCode": null,
+  "wishlist": []
+},
+{
+  "_id": {
+    "$oid": "66d8cf3cf5383514257cf766"
+  },
+  "firstname": "Aleksa",
+  "lastname": "Kis",
+  "password": "Aleksa123",
+  "type": "user",
+  "email": "aleksa@gmail.com",
+  "approved": true,
+  "deleted": false,
+  "wishlist": []
 }]

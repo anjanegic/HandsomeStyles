@@ -38,7 +38,7 @@
       "isCorrect": false
     }
   ],
-  "isActive": true
+  "isActive": false
 },
 {
   "_id": {
@@ -206,5 +206,206 @@
       "isCorrect": false
     }
   ],
+  "isActive": true
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a44"
+  },
+  "question": "What was the original title of Harry Styles' song 'Golden' before it was finalized?",
+  "options": [
+    {
+      "text": "Daylight",
+      "isCorrect": false
+    },
+    {
+      "text": "Golden Light",
+      "isCorrect": false
+    },
+    {
+      "text": "Golden Hours",
+      "isCorrect": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a45"
+  },
+  "question": "Which of Harry Styles' songs was inspired by a conversation with his therapist?",
+  "options": [
+    {
+      "text": "Falling",
+      "isCorrect": false
+    },
+    {
+      "text": "Cherry",
+      "isCorrect": false
+    },
+    {
+      "text": "To Be So Lonely",
+      "isCorrect": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a46"
+  },
+  "question": "In which song did Harry Styles make a lyrical reference to a former bandmate?",
+  "options": [
+    {
+      "text": "Ever Since New York",
+      "isCorrect": false
+    },
+    {
+      "text": "Two Ghosts",
+      "isCorrect": true
+    },
+    {
+      "text": "Only Angel",
+      "isCorrect": false
+    }
+  ],
   "isActive": false
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a47"
+  },
+  "question": "What was the first venue Harry Styles performed at as a solo artist?",
+  "options": [
+    {
+      "text": "The Greek Theatre",
+      "isCorrect": false
+    },
+    {
+      "text": "The Troubadour",
+      "isCorrect": true
+    },
+    {
+      "text": "The Roxy",
+      "isCorrect": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a48"
+  },
+  "question": "Which song did Harry Styles write for the movie 'Love, Simon'?",
+  "options": [
+    {
+      "text": "Medicine",
+      "isCorrect": false
+    },
+    {
+      "text": "Alfie's Song (Not So Typical Love Song)",
+      "isCorrect": false
+    },
+    {
+      "text": "Anna",
+      "isCorrect": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a49"
+  },
+  "question": "Which iconic fashion designer did Harry Styles collaborate with for his 'Love On Tour' wardrobe?",
+  "options": [
+    {
+      "text": "Donatella Versace",
+      "isCorrect": false
+    },
+    {
+      "text": "Alessandro Michele",
+      "isCorrect": true
+    },
+    {
+      "text": "Tom Ford",
+      "isCorrect": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a4a"
+  },
+  "question": "What is the hidden track at the end of Harry Styles' album 'Fine Line' called?",
+  "options": [
+    {
+      "text": "Treat People With Kindness",
+      "isCorrect": false
+    },
+    {
+      "text": "Sunflower, Vol. 6",
+      "isCorrect": false
+    },
+    {
+      "text": "Boyfriends",
+      "isCorrect": true
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a4b"
+  },
+  "question": "Harry Styles was the first male to appear solo on the cover of which magazine?",
+  "options": [
+    {
+      "text": "Vogue",
+      "isCorrect": true
+    },
+    {
+      "text": "GQ",
+      "isCorrect": false
+    },
+    {
+      "text": "Rolling Stone",
+      "isCorrect": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a4c"
+  },
+  "question": "In which city did Harry Styles write most of his second album, 'Fine Line'?",
+  "options": [
+    {
+      "text": "New York",
+      "isCorrect": false
+    },
+    {
+      "text": "Los Angeles",
+      "isCorrect": true
+    },
+    {
+      "text": "London",
+      "isCorrect": false
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d70e5fecd0ad7b14028a4d"
+  },
+  "question": "Which former One Direction member co-wrote the song 'Just a Little Bit of Your Heart' with Harry Styles?",
+  "options": [
+    {
+      "text": "Liam Payne",
+      "isCorrect": false
+    },
+    {
+      "text": "Louis Tomlinson",
+      "isCorrect": false
+    },
+    {
+      "text": "None",
+      "isCorrect": true
+    }
+  ]
 }]

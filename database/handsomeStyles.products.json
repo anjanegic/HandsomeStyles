@@ -393,4 +393,28 @@
       "model": "iPhone SE (2nd generation)"
     }
   ]
+},
+{
+  "_id": {
+    "$oid": "66d9da3854029048bf6eecf0"
+  },
+  "name": "W",
+  "description": "W",
+  "price": 12,
+  "currency": "EUR",
+  "category": "Phone Case",
+  "stock": 111,
+  "sold": 0,
+  "imageFilename": "D6407E72-7B51-4E84-A100-B7AE75DF5A5F-removebg-preview.png",
+  "tags": [
+    "Best",
+    "Phone Cases"
+  ],
+  "rating": 0,
+  "reviews": [],
+  "variants": [
+    "iPhone 11",
+    "iPhone 12",
+    "iPhone 13"
+  ]
 }]

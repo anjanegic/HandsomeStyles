@@ -1,0 +1,112 @@
+[{
+  "_id": {
+    "$oid": "66d78fc3cdc35ee0e8ed8b6c"
+  },
+  "questionId": {
+    "$oid": "66d70e5fecd0ad7b14028a3b"
+  },
+  "selectedOption": "One Direction",
+  "isCorrect": true,
+  "discountCode": "DISCOUNT-Y9NMOV",
+  "used": true,
+  "answeredAt": {
+    "$date": "2024-09-03T22:37:55.593Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d79658288f03762eb17f10"
+  },
+  "questionId": {
+    "$oid": "66d70e5fecd0ad7b14028a42"
+  },
+  "selectedOption": "Saturday Night Live",
+  "isCorrect": true,
+  "discountCode": "DISCOUNT-TX0YNH",
+  "used": false,
+  "answeredAt": {
+    "$date": "2024-09-03T23:06:00.797Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d7998ab0873d1a60fb77a4"
+  },
+  "questionId": {
+    "$oid": "66d70e5fecd0ad7b14028a40"
+  },
+  "selectedOption": "Lights Up",
+  "isCorrect": true,
+  "discountCode": "DISCOUNT-H2TX7A",
+  "used": false,
+  "answeredAt": {
+    "$date": "2024-09-03T23:19:38.120Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d8852d59f5a348e011b48f"
+  },
+  "questionId": {
+    "$oid": "66d70e5fecd0ad7b14028a40"
+  },
+  "selectedOption": "Lights Up",
+  "isCorrect": true,
+  "discountCode": "DISCOUNT-YXTB62",
+  "used": false,
+  "answeredAt": {
+    "$date": "2024-09-04T16:05:01.390Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d8d93a0ba2c6d40563e3b6"
+  },
+  "questionId": {
+    "$oid": "66d70e5fecd0ad7b14028a46"
+  },
+  "selectedOption": "Ever Since New York",
+  "isCorrect": false,
+  "discountCode": null,
+  "used": false,
+  "answeredAt": {
+    "$date": "2024-09-04T22:03:38.871Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d8d96a9c6f9a4e3d9302b9"
+  },
+  "questionId": {
+    "$oid": "66d70e5fecd0ad7b14028a43"
+  },
+  "selectedOption": "Just a Little Bit of Your Heart",
+  "isCorrect": true,
+  "discountCode": "DISCOUNT-PPH3V8",
+  "used": false,
+  "answeredAt": {
+    "$date": "2024-09-04T22:04:26.743Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9db5954029048bf6eed15"
+  },
+  "questionId": {
+    "$oid": "66d70e5fecd0ad7b14028a43"
+  },
+  "selectedOption": "Just a Little Bit of Your Heart",
+  "isCorrect": true,
+  "discountCode": "DISCOUNT-BBXXXC",
+  "used": true,
+  "answeredAt": {
+    "$date": "2024-09-05T16:24:57.725Z"
+  },
+  "__v": 0
+}]
