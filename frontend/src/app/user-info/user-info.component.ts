@@ -1,5 +1,5 @@
 import { AuthService } from '../auth.service';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-user-info',
@@ -36,9 +37,9 @@ export class UserInfoComponent implements OnInit {
   visibleTabsCount = 3;
   showArrow = false;
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService, private userService: UserService) {
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute, private productService: ProductService, private userService: UserService) {
     this.user = this.authService.getUser();
-    this.maskedpassword = '*'.repeat(this.user.password.length);
+    this.maskedpassword = '*'.repeat(this.user.password?.length);
   }
 
   ngOnInit() {
@@ -49,6 +50,9 @@ export class UserInfoComponent implements OnInit {
     this.products = products;
     this.fetchOrders();
     this.fetchReviews();
+    this.route.fragment.pipe(take(1)).subscribe((fragment) => {
+      this.selectedSection = fragment || 'account';
+    });
   }
 
   onTabChange(event: MatTabChangeEvent) {
@@ -57,6 +61,7 @@ export class UserInfoComponent implements OnInit {
 
   showSection(section: string): void {
     this.selectedSection = section;
+    this.router.navigate(['/user-info'], { fragment: section });
   }
 
   readonly dialog = inject(MatDialog);

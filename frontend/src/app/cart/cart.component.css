@@ -95,6 +95,11 @@ mat-sidenav-container {
   color: white !important;
 }
 
+.checkout-button:disabled {
+  background-color: #d5d2d5 !important;
+  color: #ffffff !important;
+}
+
 .checkout-button:hover {
   background-color: #ffffff !important;
   color: #373737 !important;

@@ -56,7 +56,7 @@
               <mat-label>discount code</mat-label>
               <div class="discount-code-container">
                 <input matInput formControlName="discountCode" placeholder="Enter discount code" />
-                <button class="check-discount-code" (click)="applyDiscountCode()"><mat-icon>check</mat-icon></button>
+                <button mat-fab class="check-discount-code" (click)="applyDiscountCode()"><mat-icon>check</mat-icon></button>
               </div>
             </mat-form-field>
             <p class="discount-good" *ngIf="discountAmount > 0">Discount applied!</p>
@@ -111,7 +111,7 @@
             <p>total:</p>
             <div *ngIf="discountAmount > 0" class="total-price-discount">
               <p style="text-decoration: line-through" class="discount-good">{{ getTotalPrice() + 5 | currency }}</p>
-              <p class="discount-good">{{ getTotalPrice() + 5 - discountAmount | currency }}</p>
+              <p class="discount-good">{{ getTotalPrice() + 5 | currency }}</p>
             </div>
             <p *ngIf="discountAmount === 0" class="total-price">
               {{ getTotalPrice() + 5 | currency }}

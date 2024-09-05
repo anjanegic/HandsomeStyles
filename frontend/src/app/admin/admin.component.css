@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .account-dashboard {
   border-bottom: 1px solid #f6dad5;
   display: flex;
@@ -32,17 +38,15 @@
 
 .account-info {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 95%;
+  flex: 1;
+  gap: 16px;
   margin: 50px;
 }
 
 .account-navigation {
   cursor: pointer;
   color: #6a6e71;
-  height: 85vh;
+  border-right: 1px solid #f6dad5;
 }
 
 a {
@@ -51,34 +55,36 @@ a {
 }
 
 ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   list-style-type: none;
 }
 
 li {
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   border: #f4b9ae solid 1px;
-
   border-radius: 10px;
   margin: 0 10px;
   padding: 8px;
-  margin: 10px;
   text-decoration: none;
 }
 li:hover {
   border: #8f4c42 solid 1px;
   border-radius: 10px;
-  margin: 0 10px;
   padding: 8px;
-  margin: 10px;
   text-decoration: none;
 }
 
 .account-data {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  background-color: #ffffff;
   display: flex;
-  align-items: center;
   justify-content: space-between;
   flex-direction: column;
   flex-basis: 70%;
-  margin: auto;
+  flex: 1;
   border: #f4b9ae solid 1px;
   border-radius: 8px;
   padding: 16px 32px;

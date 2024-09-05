@@ -44,7 +44,7 @@
       </div>
 
       <div class="checkout-button-container">
-        <button mat-flat-button class="checkout-button" (click)="checkout()">checkout</button>
+        <button [disabled]="!cartItems.length" mat-flat-button class="checkout-button" (click)="checkout()">checkout</button>
       </div>
     </div>
 

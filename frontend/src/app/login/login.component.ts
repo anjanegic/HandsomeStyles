@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserService } from '../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
 
-  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private formBuilder: FormBuilder, private snackbar: MatSnackBar, private service: UserService, private router: Router, private route: ActivatedRoute, private authService: AuthService) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -36,27 +37,34 @@ export class LoginComponent {
       const email = formValues.email;
       const password = formValues.password;
       console.log('Form Submitted!', formValues);
-      this.service.login(email, password).subscribe((data) => {
-        if (data == null) this.errorMessage = 'Invalid Credentials';
-        if (data.message === 'Not approved') this.errorMessage = 'Still not approved!';
-        else {
-          this.authService.login(data);
-          // @ts-ignore
-          if (this.route.snapshot.queryParams?.returnUrl) {
+      this.service.login(email, password).subscribe({
+        error: (error) => {
+          this.snackbar.open('Invalid Credentials', 'Close', {
+            duration: 3000,
+          });
+        },
+        next: (data) => {
+          if (data == null) this.errorMessage = 'Invalid Credentials';
+          if (data.message === 'Not approved') this.errorMessage = 'Still not approved!';
+          else {
+            this.authService.login(data);
             // @ts-ignore
-            const decodedUrl = decodeURIComponent(this.route.snapshot.queryParams?.returnUrl);
-            const [path, queryString] = decodedUrl.split('?');
-            const queryParams = queryString.split('&').reduce((params, param) => {
-              const [key, value] = param.split('=');
-              params[key] = value;
-              return params;
-            }, {} as any);
+            if (this.route.snapshot.queryParams?.returnUrl) {
+              // @ts-ignore
+              const decodedUrl = decodeURIComponent(this.route.snapshot.queryParams?.returnUrl);
+              const [path, queryString] = decodedUrl.split('?');
+              const queryParams = queryString.split('&').reduce((params, param) => {
+                const [key, value] = param.split('=');
+                params[key] = value;
+                return params;
+              }, {} as any);
 
-            this.router.navigate([path], { queryParams });
-          } else {
-            this.router.navigate(['/']);
+              this.router.navigate([path], { queryParams });
+            } else {
+              this.router.navigate(['/']);
+            }
           }
-        }
+        },
       });
     } else {
       console.log('Form is not valid');

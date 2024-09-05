@@ -26,7 +26,7 @@ export class UserController {
     User.findOne({ email: email, password: password })
       .then((user) => {
         if (!user) {
-          return res.json({ message: "User not found" });
+          return res.status(404).json({ message: "User not found" });
         }
         if (!user.approved) {
           return res.json({ message: "Not approved" });

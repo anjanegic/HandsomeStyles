@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
@@ -15,6 +15,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Category } from '../models/category';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
@@ -24,6 +26,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
+  @ViewChild('variantInput') variantInput: ElementRef<HTMLInputElement>;
+  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+
   user: any;
   selectedSection: string = 'users';
   users: User[] = [];
@@ -43,9 +48,11 @@ export class AdminComponent implements OnInit {
   stock = '';
 
   constructor(
+    private snack: MatSnackBar,
     private http: HttpClient,
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute,
     private productService: ProductService,
     private userService: UserService,
     private formBuilder: FormBuilder
@@ -62,6 +69,9 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.fragment.pipe(take(1)).subscribe((fragment) => {
+      this.selectedSection = fragment || 'users';
+    });
     this.fetchUsers();
     this.fetchCategories();
   }
@@ -95,6 +105,9 @@ export class AdminComponent implements OnInit {
 
   showSection(section: string): void {
     this.selectedSection = section;
+    this.router.navigate(['/admin'], {
+      fragment: section,
+    });
   }
 
   logout(): void {
@@ -103,26 +116,17 @@ export class AdminComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  onSubmit() {
-    const productData = {
-      ...this.productForm.value,
-      variants: this.variantsBefore,
-      tags: this.tagsBefore,
-    };
-    console.log(productData);
-  }
-
   addTags(tag: string) {
     if (tag) {
       this.tagsBefore.push(tag);
-      this.productForm.get('tags')?.reset(); // Resetujte kontrolu za unos varijante
+      this.tagInput.nativeElement.value = '';
     }
   }
 
   addVariant(variant: string) {
     if (variant) {
       this.variantsBefore.push(variant);
-      this.productForm.get('variants')?.reset(); // Resetujte kontrolu za unos varijante
+      this.variantInput.nativeElement.value = '';
     }
   }
 
@@ -147,20 +151,40 @@ export class AdminComponent implements OnInit {
   }
 
   addProduct() {
+    if (this.productForm.invalid) {
+      this.snack.open('Please fill all the required fields', '', {
+        duration: 3000,
+      });
+      return;
+    }
+
     const productData = {
       ...this.productForm.value,
       variants: this.variantsBefore,
       tags: this.tagsBefore,
     };
-    console.log(productData);
+
     this.productService.addProduct(productData).subscribe((data) => {
       const imageBlob = this.fileInput.nativeElement.files[0];
       const file = new FormData();
       file.set('file', imageBlob);
 
-      this.http.post('http://localhost:4000/upload', file).subscribe((response) => {});
-
-      console.log(data);
+      this.http.post('http://localhost:4000/upload', file).subscribe({
+        next: (response) => {
+          this.snack.open('Great! Product added successfully :)', 'Close', {
+            duration: 2000,
+          });
+          this.productForm.reset();
+          this.variantsBefore = [];
+          this.tagsBefore = [];
+          this.imageSrc = null;
+        },
+        error: () => {
+          this.snack.open('Opps, failed to save product', 'Close', {
+            duration: 3000,
+          });
+        },
+      });
     });
   }
 }

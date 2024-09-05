@@ -48,7 +48,7 @@
   </div>
   <div class="account-data" *ngIf="selectedSection === 'products'">
     <p class="approve">Add products</p>
-    <form [formGroup]="productForm" class="add-product-form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="productForm" class="add-product-form">
       <div class="file-upload-container" (click)="fileInput.click()">
         <span *ngIf="!imageSrc" class="material-symbols-outlined upload-icon"> upload_file </span>
         <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*" />
@@ -83,7 +83,7 @@
         <mat-form-field appearance="outline" class="input-field">
           <mat-label>Variant</mat-label>
           <input matInput placeholder="Add variant" #variantInput />
-          <button mat-icon-button matSuffix (click)="addVariant(variantInput.value)">
+          <button type="button" mat-icon-button matSuffix (click)="addVariant(variantInput.value)">
             <mat-icon>add</mat-icon>
           </button>
         </mat-form-field>
@@ -97,7 +97,7 @@
         <mat-form-field appearance="outline" class="input-field">
           <mat-label>Tags</mat-label>
           <input matInput placeholder="Add tags" #tagInput />
-          <button mat-icon-button matSuffix (click)="addTags(tagInput.value)">
+          <button type="button" mat-icon-button matSuffix (click)="addTags(tagInput.value)">
             <mat-icon>add</mat-icon>
           </button>
         </mat-form-field>

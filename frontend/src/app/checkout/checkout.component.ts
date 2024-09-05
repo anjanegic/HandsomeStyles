@@ -26,7 +26,10 @@ export class CheckoutComponent implements OnInit {
   paymentForm: FormGroup;
   beforeDiscountAmount = 0;
   discountErrorMessage: string = '';
-  discountAmount = 0;
+  // discountAmount is the amount that will be subtracted from the total price
+  // null means that no discount code has been applied
+  // 0 means that the discount code is invalid
+  discountAmount: number | null;
 
   constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService, private questionService: QuestionService) {
     this.shippingForm = this.formBuilder.group({
@@ -149,7 +152,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    const total = this.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+
+    if (this.discountAmount) {
+      return total - this.discountAmount;
+    }
+    return total;
   }
 
   phoneValidator(control: AbstractControl): ValidationErrors | null {
