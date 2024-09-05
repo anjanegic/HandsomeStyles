@@ -2,7 +2,7 @@
   <div class="news-card" *ngFor="let news of paginatedNews.connect() | async" (click)="navigateToNews(news._id)">
     <h1>{{ news.title }}</h1>
     <div class="news-image">
-      <img *ngIf="news?.image" [src]="'/news/' + news?.image" alt="product image" class="main-image" />
+      <img *ngIf="news?.image" src="http://localhost:4000/uploads/{{ news.image }}" alt="product image" class="main-image" />
     </div>
     <div class="news-content">
       <p>{{ getShortDescription(news.description) }} (<a (click)="navigateToNews(news._id)">see more</a>)</p>

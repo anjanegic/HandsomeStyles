@@ -2,7 +2,7 @@
   <h1>{{ news?.title }}</h1>
   <div class="news-card">
     <div class="news-image">
-      <img *ngIf="news?.image" [src]="'/news/' + news?.image" alt="product image" class="main-image" />
+      <img *ngIf="news?.image" src="http://localhost:4000/uploads/{{ news.image }}" alt="product image" class="main-image" />
     </div>
     <div class="news-content">
       <p>{{ news?.description }}</p>

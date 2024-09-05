@@ -113,16 +113,16 @@ export class ProductComponent {
   }
 
   setLabelText() {
-    if (this.product.variants.length > 0) {
-      const firstVariant = this.product.variants[0];
-      if (firstVariant.color) {
-        this.labelText = 'color';
-      } else if (firstVariant.model) {
-        this.labelText = 'phone model';
-      } else {
-        this.labelText = 'choose variant';
-      }
-    }
+    // if (this.product.variants.length > 0) {
+    //   const firstVariant = this.product.variants[0];
+    //   if (firstVariant.color) {
+    //     this.labelText = 'color';
+    //   } else if (firstVariant.model) {
+    //     this.labelText = 'phone model';
+    //   } else {
+    //     this.labelText = 'choose variant';
+    //   }
+    // }
   }
 
   isInWishlist(): boolean {

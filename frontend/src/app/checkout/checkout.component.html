@@ -82,10 +82,11 @@
           <div class="checkout-product">
             <div class="checkout-product-title-image">
               <div class="badge" [matBadge]="item.quantity" matBadgeColor="accent" matBadgeSize="medium">
-                <img class="checkout-product-image" [src]="'/products/' + item.product?.imageFilename" alt="product image" />
+                <img class="checkout-product-image" src="http://localhost:4000/uploads/{{ item.product?.imageFilename }}" alt="product image" />
               </div>
               <div class="checkout-product-name">
-                {{ item.product.name }}
+                {{ item.product.name }}<br />
+                {{ item.variant }}
               </div>
             </div>
             <div class="checkout-product-price">

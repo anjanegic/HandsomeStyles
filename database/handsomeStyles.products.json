@@ -1,123 +1,6 @@
 [{
   "_id": {
-    "$oid": "66bcb06c5096ca24c716eda6"
-  },
-  "name": "Harry Styles Phone Case",
-  "description": "A beautiful glass case! A better rubber grip to hold your phone. Incredible print quality.",
-  "price": 16.9,
-  "currency": "EUR",
-  "category": "Phone Case",
-  "stock": 100,
-  "sold": 5,
-  "imageFilename": "phoneCase1.jpg",
-  "tags": [
-    "Harry's House",
-    "Best Sellers",
-    "All products",
-    "Phone Cases"
-  ],
-  "rating": 4.5,
-  "reviews": [
-    {
-      "userId": "668d9e0f7fbd551a28ff371f",
-      "rating": 5,
-      "comment": "Great product!",
-      "date": "2024-07-17"
-    },
-    {
-      "userId": "668d9e0f7fbd551a28ff371f",
-      "rating": 4,
-      "comment": "Very good, but could be improved.",
-      "date": "2024-07-16"
-    }
-  ],
-  "variants": [
-    {
-      "model": "iPhone 15 Pro"
-    },
-    {
-      "model": "iPhone 15 Pro Max"
-    },
-    {
-      "model": "iPhone 15"
-    },
-    {
-      "model": "iPhone 14 Pro"
-    },
-    {
-      "model": "iPhone 14 Pro Max"
-    },
-    {
-      "model": "iPhone 14"
-    },
-    {
-      "model": "iPhone 13 Pro"
-    },
-    {
-      "model": "iPhone 13 Pro Max"
-    },
-    {
-      "model": "iPhone 13"
-    },
-    {
-      "model": "iPhone 13 Mini"
-    },
-    {
-      "model": "iPhone 12 Pro"
-    },
-    {
-      "model": "iPhone 12 Pro Max"
-    },
-    {
-      "model": "iPhone 12"
-    },
-    {
-      "model": "iPhone 12 Mini"
-    },
-    {
-      "model": "iPhone 11 Pro"
-    },
-    {
-      "model": "iPhone 11 Pro Max"
-    },
-    {
-      "model": "iPhone 11"
-    },
-    {
-      "model": "iPhone XS"
-    },
-    {
-      "model": "iPhone XS Max"
-    },
-    {
-      "model": "iPhone XR"
-    },
-    {
-      "model": "iPhone X"
-    },
-    {
-      "model": "iPhone 8"
-    },
-    {
-      "model": "iPhone 8 Plus"
-    },
-    {
-      "model": "iPhone 7"
-    },
-    {
-      "model": "iPhone 7 Plus"
-    },
-    {
-      "model": "iPhone SE (3rd generation)"
-    },
-    {
-      "model": "iPhone SE (2nd generation)"
-    }
-  ]
-},
-{
-  "_id": {
-    "$oid": "66bcb06c5096ca24c716eda7"
+    "$oid": "66d9f410dbbc29e610473f2e"
   },
   "name": "Pearl Necklace",
   "description": "A timeless pearl necklace that adds a touch of elegance to any outfit. Inspired by the classic pearl necklace that Harry wears.",
@@ -153,17 +36,138 @@
     }
   ],
   "variants": [
-    {
-      "color": "Gold"
-    },
-    {
-      "color": "Silver"
-    }
+    "Gold",
+    "Silver"
   ]
 },
 {
   "_id": {
-    "$oid": "66be15d95096ca24c716eda9"
+    "$oid": "66d9f576dbbc29e610473f2f"
+  },
+  "name": "Harry Styles Collage Phone Case",
+  "description": "A Harry inspired phone case with a classic design. Made from durable material with a comfortable grip.",
+  "price": 16.9,
+  "currency": "EUR",
+  "category": "Phone Case",
+  "stock": 2,
+  "imageFilename": "phoneCase3.png",
+  "tags": [
+    "Harry's House",
+    "Best Sellers",
+    "All products",
+    "Phone Cases"
+  ],
+  "rating": 4.5,
+  "reviews": [
+    {
+      "userId": "668d9e0f7fbd551a28ff371f",
+      "rating": 5,
+      "comment": "Love the vintage look and feel. Quality is top-notch!",
+      "date": "2024-08-01"
+    },
+    {
+      "userId": "668d9e0f7fbd551a28ff371f",
+      "rating": 4,
+      "comment": "Great case but the design could be slightly improved.",
+      "date": "2024-08-02"
+    }
+  ],
+  "variants": [
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
+    "iPhone 15",
+    "iPhone 14 Pro",
+    "iPhone 14 Pro Max",
+    "iPhone 14",
+    "iPhone 13 Pro",
+    "iPhone 13 Pro Max",
+    "iPhone 13",
+    "iPhone 13 Mini",
+    "iPhone 12 Pro",
+    "iPhone 12 Pro Max",
+    "iPhone 12",
+    "iPhone 12 Mini",
+    "iPhone 11 Pro",
+    "iPhone 11 Pro Max",
+    "iPhone 11",
+    "iPhone XS",
+    "iPhone XS Max",
+    "iPhone XR",
+    "iPhone X",
+    "iPhone 8",
+    "iPhone 8 Plus",
+    "iPhone 7",
+    "iPhone 7 Plus",
+    "iPhone SE (3rd generation)",
+    "iPhone SE (2nd generation)"
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d9f59ddbbc29e610473f30"
+  },
+  "name": "Harry Styles Phone Case",
+  "description": "A beautiful glass case! A better rubber grip to hold your phone. Incredible print quality.",
+  "price": 16.9,
+  "currency": "EUR",
+  "category": "Phone Case",
+  "stock": 100,
+  "sold": 5,
+  "imageFilename": "phoneCase1.jpg",
+  "tags": [
+    "Harry's House",
+    "Best Sellers",
+    "All products",
+    "Phone Cases"
+  ],
+  "rating": 4.5,
+  "reviews": [
+    {
+      "userId": "668d9e0f7fbd551a28ff371f",
+      "rating": 5,
+      "comment": "Great product!",
+      "date": "2024-07-17"
+    },
+    {
+      "userId": "668d9e0f7fbd551a28ff371f",
+      "rating": 4,
+      "comment": "Very good, but could be improved.",
+      "date": "2024-07-16"
+    }
+  ],
+  "variants": [
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
+    "iPhone 15",
+    "iPhone 14 Pro",
+    "iPhone 14 Pro Max",
+    "iPhone 14",
+    "iPhone 13 Pro",
+    "iPhone 13 Pro Max",
+    "iPhone 13",
+    "iPhone 13 Mini",
+    "iPhone 12 Pro",
+    "iPhone 12 Pro Max",
+    "iPhone 12",
+    "iPhone 12 Mini",
+    "iPhone 11 Pro",
+    "iPhone 11 Pro Max",
+    "iPhone 11",
+    "iPhone XS",
+    "iPhone XS Max",
+    "iPhone XR",
+    "iPhone X",
+    "iPhone 8",
+    "iPhone 8 Plus",
+    "iPhone 7",
+    "iPhone 7 Plus",
+    "iPhone SE (3rd generation)",
+    "iPhone SE (2nd generation)"
+  ]
+},
+{
+  "_id": {
+    "$oid": "66d9f5b8dbbc29e610473f31"
   },
   "name": "As It Was Phone Case",
   "description": "A retro-inspired phone case with a classic design. Made from durable material with a comfortable grip.",
@@ -195,226 +199,32 @@
     }
   ],
   "variants": [
-    {
-      "model": "iPhone 15 Pro"
-    },
-    {
-      "model": "iPhone 15 Pro Max"
-    },
-    {
-      "model": "iPhone 15"
-    },
-    {
-      "model": "iPhone 14 Pro"
-    },
-    {
-      "model": "iPhone 14 Pro Max"
-    },
-    {
-      "model": "iPhone 14"
-    },
-    {
-      "model": "iPhone 13 Pro"
-    },
-    {
-      "model": "iPhone 13 Pro Max"
-    },
-    {
-      "model": "iPhone 13"
-    },
-    {
-      "model": "iPhone 13 Mini"
-    },
-    {
-      "model": "iPhone 12 Pro"
-    },
-    {
-      "model": "iPhone 12 Pro Max"
-    },
-    {
-      "model": "iPhone 12"
-    },
-    {
-      "model": "iPhone 12 Mini"
-    },
-    {
-      "model": "iPhone 11 Pro"
-    },
-    {
-      "model": "iPhone 11 Pro Max"
-    },
-    {
-      "model": "iPhone 11"
-    },
-    {
-      "model": "iPhone XS"
-    },
-    {
-      "model": "iPhone XS Max"
-    },
-    {
-      "model": "iPhone XR"
-    },
-    {
-      "model": "iPhone X"
-    },
-    {
-      "model": "iPhone 8"
-    },
-    {
-      "model": "iPhone 8 Plus"
-    },
-    {
-      "model": "iPhone 7"
-    },
-    {
-      "model": "iPhone 7 Plus"
-    },
-    {
-      "model": "iPhone SE (3rd generation)"
-    },
-    {
-      "model": "iPhone SE (2nd generation)"
-    }
-  ]
-},
-{
-  "_id": {
-    "$oid": "66be24985096ca24c716edab"
-  },
-  "name": "Harry Styles Collage Phone Case",
-  "description": "A Harry inspired phone case with a classic design. Made from durable material with a comfortable grip.",
-  "price": 16.9,
-  "currency": "EUR",
-  "category": "Phone Case",
-  "stock": 2,
-  "imageFilename": "phoneCase3.png",
-  "tags": [
-    "Harry's House",
-    "Best Sellers",
-    "All products",
-    "Phone Cases"
-  ],
-  "rating": 4.5,
-  "reviews": [
-    {
-      "userId": "668d9e0f7fbd551a28ff371f",
-      "rating": 5,
-      "comment": "Love the vintage look and feel. Quality is top-notch!",
-      "date": "2024-08-01"
-    },
-    {
-      "userId": "668d9e0f7fbd551a28ff371f",
-      "rating": 4,
-      "comment": "Great case but the design could be slightly improved.",
-      "date": "2024-08-02"
-    }
-  ],
-  "variants": [
-    {
-      "model": "iPhone 15 Pro"
-    },
-    {
-      "model": "iPhone 15 Pro Max"
-    },
-    {
-      "model": "iPhone 15"
-    },
-    {
-      "model": "iPhone 14 Pro"
-    },
-    {
-      "model": "iPhone 14 Pro Max"
-    },
-    {
-      "model": "iPhone 14"
-    },
-    {
-      "model": "iPhone 13 Pro"
-    },
-    {
-      "model": "iPhone 13 Pro Max"
-    },
-    {
-      "model": "iPhone 13"
-    },
-    {
-      "model": "iPhone 13 Mini"
-    },
-    {
-      "model": "iPhone 12 Pro"
-    },
-    {
-      "model": "iPhone 12 Pro Max"
-    },
-    {
-      "model": "iPhone 12"
-    },
-    {
-      "model": "iPhone 12 Mini"
-    },
-    {
-      "model": "iPhone 11 Pro"
-    },
-    {
-      "model": "iPhone 11 Pro Max"
-    },
-    {
-      "model": "iPhone 11"
-    },
-    {
-      "model": "iPhone XS"
-    },
-    {
-      "model": "iPhone XS Max"
-    },
-    {
-      "model": "iPhone XR"
-    },
-    {
-      "model": "iPhone X"
-    },
-    {
-      "model": "iPhone 8"
-    },
-    {
-      "model": "iPhone 8 Plus"
-    },
-    {
-      "model": "iPhone 7"
-    },
-    {
-      "model": "iPhone 7 Plus"
-    },
-    {
-      "model": "iPhone SE (3rd generation)"
-    },
-    {
-      "model": "iPhone SE (2nd generation)"
-    }
-  ]
-},
-{
-  "_id": {
-    "$oid": "66d9da3854029048bf6eecf0"
-  },
-  "name": "W",
-  "description": "W",
-  "price": 12,
-  "currency": "EUR",
-  "category": "Phone Case",
-  "stock": 111,
-  "sold": 0,
-  "imageFilename": "D6407E72-7B51-4E84-A100-B7AE75DF5A5F-removebg-preview.png",
-  "tags": [
-    "Best",
-    "Phone Cases"
-  ],
-  "rating": 0,
-  "reviews": [],
-  "variants": [
-    "iPhone 11",
+    "iPhone 15 Pro",
+    "iPhone 15 Pro Max",
+    "iPhone 15",
+    "iPhone 14 Pro",
+    "iPhone 14 Pro Max",
+    "iPhone 14",
+    "iPhone 13 Pro",
+    "iPhone 13 Pro Max",
+    "iPhone 13",
+    "iPhone 13 Mini",
+    "iPhone 12 Pro",
+    "iPhone 12 Pro Max",
     "iPhone 12",
-    "iPhone 13"
+    "iPhone 12 Mini",
+    "iPhone 11 Pro",
+    "iPhone 11 Pro Max",
+    "iPhone 11",
+    "iPhone XS",
+    "iPhone XS Max",
+    "iPhone XR",
+    "iPhone X",
+    "iPhone 8",
+    "iPhone 8 Plus",
+    "iPhone 7",
+    "iPhone 7 Plus",
+    "iPhone SE (3rd generation)",
+    "iPhone SE (2nd generation)"
   ]
 }]

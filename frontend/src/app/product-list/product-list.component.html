@@ -5,7 +5,7 @@
     </div>
 
     <div *ngFor="let product of products" class="product-card" (click)="navigateToProduct(product._id)">
-      <img [src]="'/products/' + product.imageFilename" alt="{{ product.name }}" class="product-image" />
+      <img src="http://localhost:4000/uploads/{{ product.imageFilename }}" alt="{{ product.name }}" class="product-image" />
       <div class="product-info">
         <h3 class="product-title">{{ product.name }}</h3>
         <p class="product-price">{{ product.price | currency }}</p>

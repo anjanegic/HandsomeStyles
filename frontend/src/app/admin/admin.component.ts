@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ProductService } from '../product.service';
@@ -14,6 +14,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Category } from '../models/category';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -28,6 +29,7 @@ export class AdminComponent implements OnInit {
   users: User[] = [];
   allUsers: User[] = [];
   categories: Category[] = [];
+  @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
 
   productForm: FormGroup;
   name = '';
@@ -40,7 +42,14 @@ export class AdminComponent implements OnInit {
   tagsBefore: string[] = [];
   stock = '';
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService, private userService: UserService, private formBuilder: FormBuilder) {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router,
+    private productService: ProductService,
+    private userService: UserService,
+    private formBuilder: FormBuilder
+  ) {
     this.user = this.authService.getUser();
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required]],
@@ -145,6 +154,12 @@ export class AdminComponent implements OnInit {
     };
     console.log(productData);
     this.productService.addProduct(productData).subscribe((data) => {
+      const imageBlob = this.fileInput.nativeElement.files[0];
+      const file = new FormData();
+      file.set('file', imageBlob);
+
+      this.http.post('http://localhost:4000/upload', file).subscribe((response) => {});
+
       console.log(data);
     });
   }
