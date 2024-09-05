@@ -1,10 +1,12 @@
+import { Category } from './category';
+
 export class Product {
   _id?: string = '';
   name: string = '';
   description: string = '';
   price: number = 0;
   currency: string = 'EUR';
-  category: string = '';
+  category: string;
   stock: number = 100;
   sold: number = 0;
   imageFilename: string = '';

@@ -159,5 +159,90 @@ mat-icon:hover {
   background-color: #72c05a;
 }
 
-.no-users {
+.add-product-form {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.all-inputs {
+  width: 60%;
+}
+
+.input-field {
+  width: 100%;
+}
+
+.input-field input {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.file-upload-container {
+  width: 40%;
+  width: 300px;
+  height: 300px;
+  border: 2px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.upload-icon {
+  font-size: 48px;
+  color: #777;
+}
+
+.image-preview img {
+  object-fit: cover;
+}
+
+.upload-button {
+  width: 50px;
+  height: 50px;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.image-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.variants-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-bottom: 20px;
+}
+
+.add-product-button {
+  color: white;
+  background-color: #b69ea0;
+}
+
+.add-product-button:hover {
+  background-color: white;
+  color: #b69ea0;
+  border: 2px solid #b69ea0;
 }

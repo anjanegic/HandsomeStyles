@@ -46,7 +46,73 @@
       </mat-card>
     </div>
   </div>
-  <div class="account-data" *ngIf="selectedSection === 'products'" style="padding: 0 !important">products</div>
+  <div class="account-data" *ngIf="selectedSection === 'products'">
+    <p class="approve">Add products</p>
+    <form [formGroup]="productForm" class="add-product-form" (ngSubmit)="onSubmit()">
+      <div class="file-upload-container" (click)="fileInput.click()">
+        <span *ngIf="!imageSrc" class="material-symbols-outlined upload-icon"> upload_file </span>
+        <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*" />
+        <div class="image-preview" *ngIf="imageSrc">
+          <img [src]="imageSrc" alt="Preview" />
+        </div>
+      </div>
+
+      <div class="all-inputs">
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" formControlName="name" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Price</mat-label>
+          <input matInput placeholder="Price" type="number" formControlName="price" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="category" required>
+            <mat-option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Stock</mat-label>
+          <input matInput placeholder="Stock" type="number" formControlName="stock" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Variant</mat-label>
+          <input matInput placeholder="Add variant" #variantInput />
+          <button mat-icon-button matSuffix (click)="addVariant(variantInput.value)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <!-- Prikaz varijanti -->
+        <div class="variants-list">
+          <div *ngFor="let variant of variantsBefore">
+            {{ variant }}
+          </div>
+        </div>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Tags</mat-label>
+          <input matInput placeholder="Add tags" #tagInput />
+          <button mat-icon-button matSuffix (click)="addTags(tagInput.value)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <!-- Prikaz varijanti -->
+        <div class="variants-list">
+          <div *ngFor="let tag of tagsBefore">
+            {{ tag }}
+          </div>
+        </div>
+
+        <button mat-raised-button class="add-product-button" (click)="addProduct()" type="submit">Add product</button>
+      </div>
+    </form>
+  </div>
   <div class="account-data" *ngIf="selectedSection === 'news'">news</div>
   <div class="account-data" *ngIf="selectedSection === 'questions'">questions</div>
 </div>

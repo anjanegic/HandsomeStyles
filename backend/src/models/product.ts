@@ -1,12 +1,5 @@
 import mongoose from "mongoose";
 
-enum ProductCategory {
-  Jewelry = "Jewelry",
-  Clothing = "Clothing",
-  Accessories = "Accessories",
-  Home = "Home",
-}
-
 const Product = new mongoose.Schema(
   {
     name: {
@@ -28,7 +21,7 @@ const Product = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: Object.values(ProductCategory),
+
       required: true,
     },
     stock: {
@@ -50,38 +43,32 @@ const Product = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    reviews: [
-      {
-        userId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
+    reviews: {
+      type: [
+        {
+          userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+          },
+          rating: {
+            type: Number,
+            required: true,
+          },
+          comment: {
+            type: String,
+          },
+          date: {
+            type: Date,
+            default: Date.now,
+          },
         },
-        rating: {
-          type: Number,
-          required: true,
-        },
-        comment: {
-          type: String,
-        },
-        date: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-    ],
-    variants: [
-      {
-        name: {
-          type: String,
-        },
-        color: {
-          type: String,
-        },
-        model: {
-          type: String,
-        },
-      },
-    ],
+      ],
+      default: [],
+    },
+    variants: {
+      type: [String],
+      default: [],
+    },
   },
   {
     versionKey: false,

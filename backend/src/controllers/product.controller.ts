@@ -1,5 +1,6 @@
 import express from "express";
 import Product from "../models/product";
+import Category from "../models/category";
 import Review from "../models/review";
 import { Request, Response } from "express-serve-static-core";
 import { ParsedQs } from "qs";
@@ -92,5 +93,53 @@ export class ProductController {
         console.log(err);
         res.status(500).json({ message: "Internal server error" });
       });
+  };
+
+  getCategories = (req: express.Request, res: express.Response) => {
+    Category.find({})
+      .then((categories) => {
+        res.json(categories);
+      })
+      .catch((err) => {
+        console.error("Error fetching categories:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  addProduct = async (req: express.Request, res: express.Response) => {
+    console.log(req.body);
+    const {
+      name,
+      description,
+      price,
+      category,
+      stock,
+      imageFilename,
+      tags,
+      rating,
+      reviews,
+      variants,
+    } = req.body;
+
+    try {
+      const product = await Product.create({
+        name,
+        description,
+        price,
+        currency: "EUR",
+        category,
+        stock,
+        sold: 0,
+        imageFilename,
+        tags,
+        rating,
+        reviews,
+        variants,
+      });
+
+      res.json(product);
+    } catch (error) {
+      res.json({ message: error });
+    }
   };
 }

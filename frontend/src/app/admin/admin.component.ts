@@ -7,26 +7,54 @@ import { CommonModule } from '@angular/common';
 import { User } from '../models/user';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { FormBuilder, FormGroup, ReactiveFormsModule, FormArray, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { Category } from '../models/category';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatCardModule],
+  imports: [CommonModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatOptionModule, MatSelectModule, MatButtonModule],
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css',
+  styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
   user: any;
   selectedSection: string = 'users';
   users: User[] = [];
   allUsers: User[] = [];
+  categories: Category[] = [];
 
-  constructor(private authService: AuthService, private router: Router, private productService: ProductService, private userService: UserService) {
+  productForm: FormGroup;
+  name = '';
+  description = '';
+  price = '';
+  category = '';
+  imageFilename = '';
+  imageSrc: string | ArrayBuffer | null = null;
+  variantsBefore: any[] = [];
+  tagsBefore: string[] = [];
+  stock = '';
+
+  constructor(private authService: AuthService, private router: Router, private productService: ProductService, private userService: UserService, private formBuilder: FormBuilder) {
     this.user = this.authService.getUser();
+    this.productForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      category: ['', [Validators.required]],
+      imageFilename: ['', [Validators.required]],
+      stock: ['', [Validators.required]],
+    });
   }
 
   ngOnInit(): void {
     this.fetchUsers();
+    this.fetchCategories();
   }
 
   fetchUsers() {
@@ -38,14 +66,20 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  fetchCategories() {
+    this.productService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
+
   approveUser(user: User) {
-    this.userService.approveUser(user._id).subscribe((data) => {
+    this.userService.approveUser(user._id).subscribe(() => {
       this.fetchUsers();
     });
   }
 
   deleteUser(user: User) {
-    this.userService.deleteUser(user._id).subscribe((data) => {
+    this.userService.deleteUser(user._id).subscribe(() => {
       this.fetchUsers();
     });
   }
@@ -58,5 +92,60 @@ export class AdminComponent implements OnInit {
     this.authService.logout();
     this.user = null;
     this.router.navigate(['/login']);
+  }
+
+  onSubmit() {
+    const productData = {
+      ...this.productForm.value,
+      variants: this.variantsBefore,
+      tags: this.tagsBefore,
+    };
+    console.log(productData);
+  }
+
+  addTags(tag: string) {
+    if (tag) {
+      this.tagsBefore.push(tag);
+      this.productForm.get('tags')?.reset(); // Resetujte kontrolu za unos varijante
+    }
+  }
+
+  addVariant(variant: string) {
+    if (variant) {
+      this.variantsBefore.push(variant);
+      this.productForm.get('variants')?.reset(); // Resetujte kontrolu za unos varijante
+    }
+  }
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+
+      this.productForm.patchValue({
+        imageFilename: file.name,
+      });
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.imageSrc = reader.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  addProduct() {
+    const productData = {
+      ...this.productForm.value,
+      variants: this.variantsBefore,
+      tags: this.tagsBefore,
+    };
+    console.log(productData);
+    this.productService.addProduct(productData).subscribe((data) => {
+      console.log(data);
+    });
   }
 }

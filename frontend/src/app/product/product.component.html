@@ -36,8 +36,7 @@
       <mat-label>{{ labelText }}</mat-label>
       <mat-select [(ngModel)]="selectedVariant" (selectionChange)="onVariantChange($event.value)">
         <mat-option *ngFor="let variant of product.variants" [value]="variant">
-          <span *ngIf="variant.color">{{ variant.color }}</span>
-          <span *ngIf="variant.model">{{ variant.model }}</span>
+          <span *ngIf="variant">{{ variant }}</span>
         </mat-option>
       </mat-select>
     </mat-form-field>

@@ -28,4 +28,12 @@ productRouter
   .route("/submitReview")
   .post((req, res) => new ProductController().submitReview(req, res));
 
+productRouter
+  .route("/getCategories")
+  .get((req, res) => new ProductController().getCategories(req, res));
+
+productRouter
+  .route("/addProduct")
+  .post((req, res) => new ProductController().addProduct(req, res));
+
 export default productRouter;

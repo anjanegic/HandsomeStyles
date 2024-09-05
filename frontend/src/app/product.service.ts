@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from './models/product';
+import { Category } from './models/category';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,13 @@ export class ProductService {
 
   submitReview(review: any) {
     return this.http.post<any>(`${this.uri}/submitReview`, review);
+  }
+
+  getCategories() {
+    return this.http.get<Category[]>(`${this.uri}/getCategories`);
+  }
+
+  addProduct(product: any) {
+    return this.http.post<any>(`${this.uri}/addProduct`, product);
   }
 }
