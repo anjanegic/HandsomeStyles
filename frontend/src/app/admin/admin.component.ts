@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, model } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { User } from '../models/user';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { FormBuilder, FormGroup, ReactiveFormsModule, FormArray, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, FormArray, Validators, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatOptionModule } from '@angular/material/core';
@@ -17,24 +17,47 @@ import { Category } from '../models/category';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
+import { Product } from '../models/product';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductEditDialogComponent } from './components/product-edit-dialog/product-edit-dialog.component';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatCardModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatOptionModule, MatSelectModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    FormsModule,
+  ],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
   @ViewChild('variantInput') variantInput: ElementRef<HTMLInputElement>;
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
 
   user: any;
   selectedSection: string = 'users';
   users: User[] = [];
   allUsers: User[] = [];
   categories: Category[] = [];
-  @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
+  allProducts: Product[] = [];
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   productForm: FormGroup;
   name = '';
@@ -55,7 +78,8 @@ export class AdminComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private userService: UserService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.user = this.authService.getUser();
     this.productForm = this.formBuilder.group({
@@ -68,12 +92,28 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  updateProduct(product: Product): void {
+    const dialogRef = this.dialog.open(ProductEditDialogComponent, {
+      width: '250px',
+      data: product,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // this.productService.updateProduct(product._id, result).subscribe(() => {
+        //   this.fetchAllProducts(); // Refresh the product list
+        // });
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.route.fragment.pipe(take(1)).subscribe((fragment) => {
       this.selectedSection = fragment || 'users';
     });
     this.fetchUsers();
     this.fetchCategories();
+    this.fetchAllProducts();
   }
 
   fetchUsers() {
@@ -88,6 +128,12 @@ export class AdminComponent implements OnInit {
   fetchCategories() {
     this.productService.getCategories().subscribe((categories) => {
       this.categories = categories;
+    });
+  }
+
+  fetchAllProducts() {
+    this.productService.getProducts().subscribe((products) => {
+      this.allProducts = products;
     });
   }
 
@@ -187,4 +233,40 @@ export class AdminComponent implements OnInit {
       });
     });
   }
+
+  deleteProduct(product: Product) {
+    this.productService.deleteProduct(product._id).subscribe(() => {
+      this.fetchAllProducts();
+    });
+  }
+
+  add(event: MatChipInputEvent, product: Product): void {
+    const value = (event.value || '').trim();
+
+    if (value) {
+      product.variants.unshift(value);
+      this.productService.addVariant(product).subscribe(() => {});
+    }
+
+    event.chipInput.clear();
+  }
+
+  currentTag: string = '';
+
+  addTag(event: any, product: Product): void {
+    const value = (event.target as HTMLInputElement).value.trim();
+
+    if (value && !product.tags.includes(value)) {
+      product.tags.push(value);
+
+      this.productService.updateTags(product).subscribe(() => {
+        // Možete ažurirati view ili dodati dodatnu logiku ovde
+      });
+
+      // Resetovanje vrednosti inputa
+      (event.target as HTMLInputElement).value = '';
+    }
+  }
+
+  updateProduct(product) {}
 }

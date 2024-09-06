@@ -202,4 +202,6 @@ export class ProductComponent {
       this.reviewComment = '';
     });
   }
+
+
 }

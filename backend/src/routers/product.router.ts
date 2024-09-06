@@ -36,4 +36,16 @@ productRouter
   .route("/addProduct")
   .post((req, res) => new ProductController().addProduct(req, res));
 
+productRouter
+  .route("/deleteProduct/:id")
+  .delete((req, res) => new ProductController().deleteProduct(req, res));
+
+productRouter
+  .route("/addVariant/")
+  .post((req, res) => new ProductController().addVariant(req, res));
+
+productRouter
+  .route("/updateTags/")
+  .put((req, res) => new ProductController().updateTags(req, res));
+
 export default productRouter;

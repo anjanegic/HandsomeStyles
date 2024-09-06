@@ -142,4 +142,46 @@ export class ProductController {
       res.json({ message: error });
     }
   };
+
+  deleteProduct = (req: express.Request, res: express.Response) => {
+    const id = req.params.id;
+    Product.findByIdAndDelete(id)
+      .then((product) => {
+        res.json(product);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  addVariant = (req: express.Request, res: express.Response) => {
+    const product = req.body;
+    console.log(product);
+    Product.findByIdAndUpdate(product._id, {
+      $set: { variants: product.variants },
+    })
+      .then((product) => {
+        res.json(product);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  updateTags = (req: express.Request, res: express.Response) => {
+    const product = req.body;
+    console.log(product);
+    Product.findByIdAndUpdate(product._id, {
+      $set: { tags: product.tags },
+    })
+      .then((product) => {
+        res.json(product);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
 }

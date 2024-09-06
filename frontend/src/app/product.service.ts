@@ -41,4 +41,16 @@ export class ProductService {
   addProduct(product: any) {
     return this.http.post<any>(`${this.uri}/addProduct`, product);
   }
+
+  deleteProduct(productId: string) {
+    return this.http.delete(`${this.uri}/deleteProduct/${productId}`);
+  }
+
+  addVariant(product: Product) {
+    return this.http.post(`${this.uri}/addVariant`, product);
+  }
+
+  updateTags(product: Product) {
+    return this.http.put(`${this.uri}/updateTags`, product);
+  }
 }

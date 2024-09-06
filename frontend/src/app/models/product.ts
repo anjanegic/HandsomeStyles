@@ -18,11 +18,5 @@ export class Product {
     comment: string;
     date: Date;
   }[] = [];
-  variants: Variant[] = [];
-}
-
-export interface Variant {
-  name?: string;
-  color?: string;
-  model?: string;
+  variants: string[] = [];
 }

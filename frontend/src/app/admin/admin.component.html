@@ -112,6 +112,56 @@
         <button mat-raised-button class="add-product-button" (click)="addProduct()" type="submit">Add product</button>
       </div>
     </form>
+    <p class="approve">All products</p>
+    <div class="products-cards">
+      <mat-card class="product-card" appearance="outlined" *ngFor="let product of allProducts">
+        <div class="product-image-container">
+          <img mat-card-image class="product-image" src="http://localhost:4000/uploads/{{ product.imageFilename }}" alt="Photo" />
+        </div>
+        <div class="product-card-content">
+          <mat-card-header class="product-card-header">
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle>{{ product.description }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="product-price">${{ product.price }}</p>
+            <p class="product-category">{{ product.category }}</p>
+            <p class="product-stock">{{ product.stock }} in stock</p>
+            <div class="product-variants">
+              <mat-chip-grid class="chip-grid" #chipGrid aria-label="Variants selection">
+                @for (variant of product.variants; track $index) {
+                <mat-chip-row>
+                  {{ variant }}
+                </mat-chip-row>
+                }
+              </mat-chip-grid>
+
+              <input
+                class="input-chip"
+                name="currentVariant"
+                placeholder="New Variant..."
+                [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event, product)"
+              />
+            </div>
+            <p class="product-tags">
+              <span>Tags:&nbsp;</span>
+              <ng-container *ngFor="let tag of product.tags; let i = index; let last = last">
+                <span class="tag">{{ tag }}<ng-container *ngIf="!last">, &nbsp;</ng-container></span>
+              </ng-container>
+            </p>
+            <div class="product-tags-input">
+              <input class="input-tag" name="currentTag" placeholder="New Tag..." (keyup.enter)="addTag($event, product)" />
+            </div>
+          </mat-card-content>
+        </div>
+        <mat-card-actions>
+          <button mat-icon-button (click)="updateProduct(product)"><mat-icon class="material-symbols-outlined edit-icon">edit</mat-icon></button>
+          <button mat-icon-button (click)="deleteProduct(product)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
   <div class="account-data" *ngIf="selectedSection === 'news'">news</div>
   <div class="account-data" *ngIf="selectedSection === 'questions'">questions</div>

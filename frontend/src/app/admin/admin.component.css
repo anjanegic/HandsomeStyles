@@ -252,3 +252,50 @@ mat-icon:hover {
   color: #b69ea0;
   border: 2px solid #b69ea0;
 }
+
+.product-image-container {
+  display: flex;
+  width: 220px;
+  height: 220px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image {
+  height: 200px;
+  width: object-fit;
+}
+
+.product-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.chip-grid {
+  max-height: 200px;
+  overflow: overlay;
+}
+
+.input-chip {
+  border: 1.5px solid rgb(182 158 161);
+  border-radius: 16px;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+.input-tag {
+  border: 1.5px solid rgb(182 158 161);
+  border-radius: 16px;
+  margin: 10px 0;
+  padding: 0 10px;
+  width: 100%;
+  height: 28px;
+}
