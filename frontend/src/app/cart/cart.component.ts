@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../cart.service'; // Importujte servis
+import { CartService } from '../../services/cart.service'; // Importujte servis
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 

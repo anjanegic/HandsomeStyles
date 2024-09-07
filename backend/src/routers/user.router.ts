@@ -71,4 +71,9 @@ userRouter
 userRouter
   .route("/deleteUser")
   .post((req, res) => new UserController().deleteUser(req, res));
+
+userRouter
+  .route("/updateOrderStatus")
+  .post((req, res) => new UserController().updateOrderStatus(req, res));
+
 export default userRouter;

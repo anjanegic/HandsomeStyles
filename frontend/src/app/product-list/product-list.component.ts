@@ -5,8 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { Product } from '../models/product';
 import { NgIf } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { UserService } from '../user.service';
-import { AuthService } from '../auth.service';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({

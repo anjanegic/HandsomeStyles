@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from '@angular/router';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../models/product';
 import { MatRippleModule } from '@angular/material/core';
 import { CommonModule } from '@angular/common';

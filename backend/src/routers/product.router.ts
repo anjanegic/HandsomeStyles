@@ -48,4 +48,8 @@ productRouter
   .route("/updateTags/")
   .put((req, res) => new ProductController().updateTags(req, res));
 
+productRouter
+  .route("/updateProduct/:id")
+  .put((req, res) => new ProductController().updateProduct(req, res));
+
 export default productRouter;

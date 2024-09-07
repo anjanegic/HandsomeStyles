@@ -33,13 +33,13 @@
     </div>
     <p class="approve">All users</p>
     <div class="users-cards">
-      <mat-card class="user-card" appearance="outlined" *ngFor="let user of allUsers">
+      <mat-card class="user-card" appearance="outlined" (click)="updateOrdersReviews(user)" *ngFor="let user of allUsers">
         <mat-card-header class="user-card-header">
           <mat-card-title>{{ user.firstname }} {{ user.lastname }}</mat-card-title>
           <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image class="profile-icon" src="http://localhost:4000/uploads/profile.png" alt="Photo" />
-        <mat-card-content> </mat-card-content>
+
         <mat-card-actions>
           <button mat-icon-button (click)="deleteUser(user)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
         </mat-card-actions>
@@ -95,9 +95,9 @@
           </div>
         </div>
         <mat-form-field appearance="outline" class="input-field">
-          <mat-label>Tags</mat-label>
+          <mat-label class="tags-label">Tags</mat-label>
           <input matInput placeholder="Add tags" #tagInput />
-          <button type="button" mat-icon-button matSuffix (click)="addTags(tagInput.value)">
+          <button type="button" mat-icon-button matSuffix class="add-tag-button" (click)="addTags(tagInput.value)">
             <mat-icon>add</mat-icon>
           </button>
         </mat-form-field>
@@ -130,9 +130,13 @@
             <div class="product-variants">
               <mat-chip-grid class="chip-grid" #chipGrid aria-label="Variants selection">
                 @for (variant of product.variants; track $index) {
-                <mat-chip-row>
+                <mat-chip-row class="chip-row" (removed)="remove(variant, product)">
                   {{ variant }}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
                 </mat-chip-row>
+
                 }
               </mat-chip-grid>
 
@@ -148,7 +152,13 @@
             <p class="product-tags">
               <span>Tags:&nbsp;</span>
               <ng-container *ngFor="let tag of product.tags; let i = index; let last = last">
-                <span class="tag">{{ tag }}<ng-container *ngIf="!last">, &nbsp;</ng-container></span>
+                <span class="tag"
+                  >{{ tag }}
+                  <button class="tag-remove" (click)="removeTag(product, tag)">
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                  <ng-container *ngIf="!last">, &nbsp;</ng-container></span
+                >
               </ng-container>
             </p>
             <div class="product-tags-input">

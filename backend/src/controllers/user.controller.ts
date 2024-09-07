@@ -343,4 +343,24 @@ export class UserController {
         res.status(500).json({ message: "Internal server error" });
       });
   };
+
+  updateOrderStatus = (req: express.Request, res: express.Response) => {
+    let orderId = req.body.orderId;
+    let status = req.body.status;
+
+    if (!Types.ObjectId.isValid(orderId)) {
+      return res.status(400).json({ message: "Invalid order ID format" });
+    }
+
+    const theId = new Types.ObjectId(orderId);
+
+    Order.findByIdAndUpdate(theId, { status })
+      .then((order) => {
+        res.json(order);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
 }

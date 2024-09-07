@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from '../models/news';
 import { Comment } from '../models/comments';
-import { NewsService } from '../news.service';
+import { NewsService } from '../../services/news.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { User } from '../models/user';
 
 @Component({

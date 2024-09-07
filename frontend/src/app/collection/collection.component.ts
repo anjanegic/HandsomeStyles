@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../models/product';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { FormsModule } from '@angular/forms';

@@ -1,14 +1,14 @@
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ChangeDataDialogComponent } from '../change-data-dialog/change-data-dialog.component';
+import { ChangeDataDialogComponent } from './change-data-dialog/change-data-dialog.component';
 import { Product } from '../models/product';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../services/product.service';
 import { ProductListComponent } from '../product-list/product-list.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 import { Order } from '../models/order';
 import { Review } from '../models/review';
 import { MatTabsModule } from '@angular/material/tabs';

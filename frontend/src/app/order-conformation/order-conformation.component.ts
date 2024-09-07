@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart.service'; // Importujte CartService
+import { CartService } from '../../services/cart.service'; // Importujte CartService
 
 @Component({
   selector: 'app-order-conformation',

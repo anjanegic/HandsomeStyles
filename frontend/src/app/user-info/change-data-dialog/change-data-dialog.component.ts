@@ -7,9 +7,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { UserService } from '../user.service';
+import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Location } from '@angular/common';
 
 @Component({

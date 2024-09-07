@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from './models/user';
-import { Order } from './models/order';
-import { Review } from './models/review';
+import { User } from '../app/models/user';
+import { Order } from '../app/models/order';
+import { Review } from '../app/models/review';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -93,11 +93,16 @@ export class UserService {
   approveUser(userId: string) {
     return this.http.post<User>(`${this.uri}/approveUser`, { userId });
   }
+
   getAllUsers() {
     return this.http.get<User[]>(`${this.uri}/getAllUsers`);
   }
 
   deleteUser(userId: string) {
     return this.http.post<any>(`${this.uri}/deleteUser`, { userId });
+  }
+
+  updateOrderStatus(orderId: string, status: string) {
+    return this.http.post<any>(`${this.uri}/updateOrderStatus`, { orderId, status });
   }
 }

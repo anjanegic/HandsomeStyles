@@ -184,4 +184,20 @@ export class ProductController {
         res.status(500).json({ message: "Internal server error" });
       });
   };
+
+  updateProduct = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const product = req.body;
+
+    await Product.findByIdAndUpdate(id, product, {
+      new: true,
+    })
+      .then((product) => {
+        res.json(product);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
 }

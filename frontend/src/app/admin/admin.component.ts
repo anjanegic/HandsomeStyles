@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild, model } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../product.service';
-import { UserService } from '../user.service';
+import { ProductService } from '../../services/product.service';
+import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { User } from '../models/user';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,11 +18,12 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
 import { Product } from '../models/product';
-import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatChip, MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductEditDialogComponent } from './components/product-edit-dialog/product-edit-dialog.component';
+import { UserOrdersReviewsDialogComponent } from './components/user-orders-reviews-dialog/user-orders-reviews-dialog.component';
 
 @Component({
   selector: 'app-admin',
@@ -41,7 +42,9 @@ import { ProductEditDialogComponent } from './components/product-edit-dialog/pro
     MatIconModule,
     MatAutocompleteModule,
     FormsModule,
+    MatChip,
   ],
+
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
@@ -94,16 +97,36 @@ export class AdminComponent implements OnInit {
 
   updateProduct(product: Product): void {
     const dialogRef = this.dialog.open(ProductEditDialogComponent, {
-      width: '250px',
-      data: product,
+      width: '600px',
+      data: {
+        product: product,
+        categories: this.categories,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // this.productService.updateProduct(product._id, result).subscribe(() => {
-        //   this.fetchAllProducts(); // Refresh the product list
-        // });
+        this.productService.updateProduct(product._id, result).subscribe(() => {
+          this.fetchAllProducts(); // Refresh the product list
+        });
       }
+    });
+  }
+
+  updateOrdersReviews(user: User) {
+    const dialogRef = this.dialog.open(UserOrdersReviewsDialogComponent, {
+      width: '1000px',
+      data: {
+        user: user,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      // if (result) {
+      //   this.productService.updateProduct(product._id, result).subscribe(() => {
+      //     this.fetchAllProducts(); // Refresh the product list
+      //   });
+      // }
     });
   }
 
@@ -251,6 +274,11 @@ export class AdminComponent implements OnInit {
     event.chipInput.clear();
   }
 
+  remove(variant: string, product: Product) {
+    product.variants.splice(product.variants.indexOf(variant), 1);
+    this.productService.addVariant(product).subscribe(() => {});
+  }
+
   currentTag: string = '';
 
   addTag(event: any, product: Product): void {
@@ -263,10 +291,12 @@ export class AdminComponent implements OnInit {
         // Možete ažurirati view ili dodati dodatnu logiku ovde
       });
 
-      // Resetovanje vrednosti inputa
       (event.target as HTMLInputElement).value = '';
     }
   }
 
-  updateProduct(product) {}
+  removeTag(product: Product, tag: string) {
+    product.tags.splice(product.tags.indexOf(tag), 1);
+    this.productService.updateTags(product).subscribe(() => {});
+  }
 }

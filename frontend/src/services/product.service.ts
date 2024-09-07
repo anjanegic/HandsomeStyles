@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from './models/product';
-import { Category } from './models/category';
+import { Product } from '../app/models/product';
+import { Category } from '../app/models/category';
 
 @Injectable({
   providedIn: 'root',
@@ -52,5 +52,9 @@ export class ProductService {
 
   updateTags(product: Product) {
     return this.http.put(`${this.uri}/updateTags`, product);
+  }
+
+  updateProduct(productId: string, product: any) {
+    return this.http.put(`${this.uri}/updateProduct/${productId}`, product);
   }
 }

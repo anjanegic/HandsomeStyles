@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Product } from '../models/product';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../services/product.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
@@ -10,10 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-import { AuthService } from '../auth.service';
-import { CartService } from '../cart.service';
+import { AuthService } from '../../services/auth.service';
+import { CartService } from '../../services/cart.service';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from '../../services/user.service';
 import { Review } from '../models/review';
 import { User } from '../models/user';
 import { Order } from '../models/order';
@@ -202,6 +202,4 @@ export class ProductComponent {
       this.reviewComment = '';
     });
   }
-
-
 }
