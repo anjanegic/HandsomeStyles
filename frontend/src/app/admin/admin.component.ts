@@ -24,6 +24,11 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductEditDialogComponent } from './components/product-edit-dialog/product-edit-dialog.component';
 import { UserOrdersReviewsDialogComponent } from './components/user-orders-reviews-dialog/user-orders-reviews-dialog.component';
+import { News } from '../models/news';
+import { NewsService } from '../../services/news.service';
+import { NewsEditComponent } from './components/news-edit/news-edit.component';
+
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin',
@@ -43,6 +48,7 @@ import { UserOrdersReviewsDialogComponent } from './components/user-orders-revie
     MatAutocompleteModule,
     FormsModule,
     MatChip,
+    NewsEditComponent,
   ],
 
   templateUrl: './admin.component.html',
@@ -52,6 +58,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('variantInput') variantInput: ElementRef<HTMLInputElement>;
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
+  @ViewChild('newsInput', { static: false }) newsInput: ElementRef;
 
   user: any;
   selectedSection: string = 'users';
@@ -59,6 +66,7 @@ export class AdminComponent implements OnInit {
   allUsers: User[] = [];
   categories: Category[] = [];
   allProducts: Product[] = [];
+  news: News[] = [];
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -73,6 +81,9 @@ export class AdminComponent implements OnInit {
   tagsBefore: string[] = [];
   stock = '';
 
+  newsForm: FormGroup;
+  searchForm: FormGroup;
+
   constructor(
     private snack: MatSnackBar,
     private http: HttpClient,
@@ -82,7 +93,8 @@ export class AdminComponent implements OnInit {
     private productService: ProductService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private newsService: NewsService
   ) {
     this.user = this.authService.getUser();
     this.productForm = this.formBuilder.group({
@@ -92,6 +104,19 @@ export class AdminComponent implements OnInit {
       category: ['', [Validators.required]],
       imageFilename: ['', [Validators.required]],
       stock: ['', [Validators.required]],
+    });
+    this.newsForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      videoLink: ['', [Validators.required]],
+      image: ['', [Validators.required]],
+    });
+
+    this.searchForm = this.formBuilder.group({
+      searchUsers: ['', []],
+      searchApprovedUsers: ['', []],
+      searchProducts: ['', []],
+      searchNews: ['', []],
     });
   }
 
@@ -107,7 +132,7 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.productService.updateProduct(product._id, result).subscribe(() => {
-          this.fetchAllProducts(); // Refresh the product list
+          this.fetchAllProducts();
         });
       }
     });
@@ -121,22 +146,50 @@ export class AdminComponent implements OnInit {
       },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      // if (result) {
-      //   this.productService.updateProduct(product._id, result).subscribe(() => {
-      //     this.fetchAllProducts(); // Refresh the product list
-      //   });
-      // }
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   ngOnInit(): void {
-    this.route.fragment.pipe(take(1)).subscribe((fragment) => {
+    this.route.fragment.pipe(debounceTime(300), distinctUntilChanged()).subscribe((fragment) => {
       this.selectedSection = fragment || 'users';
     });
+
     this.fetchUsers();
     this.fetchCategories();
     this.fetchAllProducts();
+    this.fetchNews();
+
+    this.searchForm.get('searchApprovedUsers')?.valueChanges.subscribe((searchTerm) => {
+      if (searchTerm) {
+        this.users = this.users.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
+      } else {
+        this.fetchUsers();
+      }
+    });
+
+    this.searchForm.get('searchUsers')?.valueChanges.subscribe((searchTerm) => {
+      if (searchTerm) {
+        this.allUsers = this.allUsers.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
+      } else {
+        this.fetchUsers();
+      }
+    });
+
+    this.searchForm.get('searchProducts')?.valueChanges.subscribe((searchTerm) => {
+      if (searchTerm) {
+        this.allProducts = this.allProducts.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      } else {
+        this.fetchAllProducts();
+      }
+    });
+
+    this.searchForm.get('searchNews')?.valueChanges.subscribe((searchTerm) => {
+      if (searchTerm) {
+        this.news = this.news.filter((news) => news.title.toLowerCase().includes(searchTerm.toLowerCase()) || news.description.toLowerCase().includes(searchTerm.toLowerCase()));
+      } else {
+        this.fetchNews();
+      }
+    });
   }
 
   fetchUsers() {
@@ -157,6 +210,12 @@ export class AdminComponent implements OnInit {
   fetchAllProducts() {
     this.productService.getProducts().subscribe((products) => {
       this.allProducts = products;
+    });
+  }
+
+  fetchNews() {
+    this.newsService.getNews().subscribe((news) => {
+      this.news = news;
     });
   }
 
@@ -298,5 +357,90 @@ export class AdminComponent implements OnInit {
   removeTag(product: Product, tag: string) {
     product.tags.splice(product.tags.indexOf(tag), 1);
     this.productService.updateTags(product).subscribe(() => {});
+  }
+
+  addNews() {
+    if (this.newsForm.invalid) {
+      this.snack.open('Please fill all the required fields', '', {
+        duration: 3000,
+      });
+      return;
+    }
+
+    const newsData = {
+      ...this.newsForm.value,
+    };
+
+    this.newsService.addNews(newsData).subscribe((data) => {
+      const imageBlob = this.fileInput.nativeElement.files[0];
+      const file = new FormData();
+      file.set('file', imageBlob);
+
+      this.http.post('http://localhost:4000/upload', file).subscribe({
+        next: (response) => {
+          this.snack.open('Great! News added successfully :)', 'Close', {
+            duration: 2000,
+          });
+          this.newsForm.reset();
+          this.imageSrc = null;
+          this.fetchNews();
+        },
+        error: () => {
+          this.snack.open('Opps, failed to save news', 'Close', {
+            duration: 3000,
+          });
+        },
+      });
+    });
+  }
+
+  onFileSelectedNews(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+
+      this.newsForm.patchValue({
+        image: file.name,
+      });
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.imageSrc = reader.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // SEARCH
+
+  searchUsers() {
+    const searchTerm = this.searchForm.value.searchUsers;
+    if (searchTerm) {
+      this.allUsers = this.allUsers.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+  }
+
+  searchApprovedUsers() {
+    const searchTerm = this.searchForm.value.searchApprovedUsers;
+    if (searchTerm) {
+      this.users = this.users.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+  }
+
+  searchProducts() {
+    const searchTerm = this.searchForm.value.searchProducts;
+    if (searchTerm) {
+      this.allProducts = this.allProducts.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+  }
+
+  searchNews() {
+    const searchTerm = this.searchForm.value.searchNews;
+    if (searchTerm) {
+      this.news = this.news.filter((news) => news.title.toLowerCase().includes(searchTerm.toLowerCase()) || news.description.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
   }
 }

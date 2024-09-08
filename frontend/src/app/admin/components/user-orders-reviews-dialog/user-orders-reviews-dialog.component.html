@@ -1,5 +1,5 @@
 <div class="orders-cards">
-  <div class="user-orders" *ngIf="orders.length > 0">
+  <ng-container class="user-orders" *ngIf="orders.length > 0; else noOrders">
     <h1>{{ user.firstname }}'s orders</h1>
     <mat-expansion-panel hideToggle *ngFor="let order of orders">
       <mat-expansion-panel-header>
@@ -47,8 +47,8 @@
       <button mat-button mat-dialog-close id="close-button" (click)="onCancel()">Close</button>
       <button mat-stroked-button mat-dialog-close type="submit" (click)="onSave()" id="submit-button">Submit</button>
     </mat-dialog-actions>
-  </div>
-  <div style="text-align: center; padding: 26px 10px 10px" *ngIf="orders.length === 0">
+  </ng-container>
+  <ng-template #noOrders style="text-align: center; padding: 26px 10px 10px">
     <h1>{{ user.firstname }} haven't placed any orders yet!</h1>
-  </div>
+  </ng-template>
 </div>

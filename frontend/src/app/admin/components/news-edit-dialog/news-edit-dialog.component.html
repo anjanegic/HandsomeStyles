@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Edit News</h1>
+<div mat-dialog-content>
+  <form [formGroup]="newsForm" class="editNews-form">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Video link</mat-label>
+      <input matInput formControlName="videoLink" />
+    </mat-form-field>
+  </form>
+</div>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close id="close-button" (click)="onCancel()">Close</button>
+  <button mat-stroked-button mat-dialog-close type="submit" (click)="onSave()" id="submit-button">Submit</button>
+</mat-dialog-actions>

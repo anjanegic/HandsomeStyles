@@ -95,6 +95,7 @@ li:hover {
   font-weight: 700;
   color: #b69e9f;
   padding: 10px;
+  margin: 10px 0 !important;
 }
 
 .users-cards {
@@ -165,14 +166,14 @@ button[mat-icon-button] {
   color: #ffffff;
 }
 
-mat-icon:hover {
+/* mat-icon:hover {
   color: #ffffff;
   background-color: #72c05a;
-}
+} */
 
 .add-product-form {
   width: 100%;
-  padding: 10px;
+  padding: 20px 10px 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -232,6 +233,9 @@ mat-icon:hover {
   height: 300px;
   width: 300px;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image-preview img {
@@ -342,4 +346,16 @@ mat-icon:hover {
   mat-icon:hover {
     background-color: unset;
   }
+}
+
+.all-news {
+  max-height: 1000px;
+  overflow: overlay;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 70px;
 }

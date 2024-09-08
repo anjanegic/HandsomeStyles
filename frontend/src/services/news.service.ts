@@ -26,4 +26,20 @@ export class NewsService {
   submitComment(comment: Comment) {
     return this.http.post<Comment>(`${this.uri}/submitComment`, comment);
   }
+
+  deleteNews(id: string) {
+    return this.http.post<News>(`${this.uri}/deleteNews/${id}`, {});
+  }
+
+  updateNews(id: string, news: any) {
+    return this.http.put(`${this.uri}/updateNews/${id}`, news);
+  }
+
+  addNews(news: any) {
+    return this.http.post<News>(`${this.uri}/addNews`, news);
+  }
+
+  deleteComment(commentId: string) {
+    return this.http.post<Comment>(`${this.uri}/deleteComment`, { commentId });
+  }
 }

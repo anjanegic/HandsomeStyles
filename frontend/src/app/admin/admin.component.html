@@ -14,7 +14,18 @@
     </ul>
   </div>
   <div class="account-data" *ngIf="selectedSection === 'users'">
-    <p class="approve">Approve users</p>
+    <div class="search-container">
+      <p class="approve">Approve users</p>
+      <form [formGroup]="searchForm" class="search-form">
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search users" formControlName="searchApprovedUsers" />
+          <button mat-icon-button matSuffix (click)="searchApprovedUsers()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
     <div *ngIf="users.length > 0" class="users-cards">
       <mat-card class="user-card" appearance="outlined" *ngFor="let user of users">
         <mat-card-header class="user-card-header">
@@ -29,9 +40,21 @@
       </mat-card>
     </div>
     <div *ngIf="users.length === 0">
-      <p>No users to approve!</p>
+      <p style="margin: 0px 15px 12px">No users to approve!</p>
     </div>
-    <p class="approve">All users</p>
+
+    <div class="search-container">
+      <p class="approve">All users</p>
+      <form [formGroup]="searchForm" class="search-form">
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search users" formControlName="searchUsers" />
+          <button mat-icon-button matSuffix (click)="searchUsers()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
     <div class="users-cards">
       <mat-card class="user-card" appearance="outlined" (click)="updateOrdersReviews(user)" *ngFor="let user of allUsers">
         <mat-card-header class="user-card-header">
@@ -44,6 +67,9 @@
           <button mat-icon-button (click)="deleteUser(user)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
         </mat-card-actions>
       </mat-card>
+    </div>
+    <div *ngIf="allUsers.length === 0">
+      <p style="margin: 0px 15px 12px">No users!</p>
     </div>
   </div>
   <div class="account-data" *ngIf="selectedSection === 'products'">
@@ -88,7 +114,6 @@
           </button>
         </mat-form-field>
 
-        <!-- Prikaz varijanti -->
         <div class="variants-list">
           <div *ngFor="let variant of variantsBefore">
             {{ variant }}
@@ -102,7 +127,6 @@
           </button>
         </mat-form-field>
 
-        <!-- Prikaz varijanti -->
         <div class="variants-list">
           <div *ngFor="let tag of tagsBefore">
             {{ tag }}
@@ -112,7 +136,19 @@
         <button mat-raised-button class="add-product-button" (click)="addProduct()" type="submit">Add product</button>
       </div>
     </form>
-    <p class="approve">All products</p>
+    <div class="search-container">
+      <p class="approve">All products</p>
+      <form [formGroup]="searchForm" class="search-form">
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search products" formControlName="searchProducts" />
+          <button mat-icon-button matSuffix (click)="searchProducts()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+
     <div class="products-cards">
       <mat-card class="product-card" appearance="outlined" *ngFor="let product of allProducts">
         <div class="product-image-container">
@@ -172,7 +208,55 @@
         </mat-card-actions>
       </mat-card>
     </div>
+    <div *ngIf="allProducts.length === 0">
+      <p style="margin: 0px 15px 12px">No products!</p>
+    </div>
   </div>
-  <div class="account-data" *ngIf="selectedSection === 'news'">news</div>
+  <div class="account-data" *ngIf="selectedSection === 'news'">
+    <p class="approve">Add news</p>
+    <form [formGroup]="newsForm" class="add-product-form">
+      <div class="file-upload-container" (click)="fileInput.click()">
+        <span *ngIf="!imageSrc" class="material-symbols-outlined upload-icon"> upload_file </span>
+        <input type="file" #fileInput hidden (change)="onFileSelectedNews($event)" accept="image/*" />
+        <div class="image-preview" *ngIf="imageSrc">
+          <img [src]="imageSrc" alt="Preview" />
+        </div>
+      </div>
+
+      <div class="all-inputs">
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Title</mat-label>
+          <input matInput placeholder="Title" formControlName="title" required />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Description</mat-label>
+          <textarea matInput placeholder="Description" formControlName="description" required></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Video link</mat-label>
+          <input matInput placeholder="Video link" formControlName="videoLink" required />
+        </mat-form-field>
+        <button mat-raised-button class="add-product-button" (click)="addNews()" type="submit">Add news</button>
+      </div>
+    </form>
+    <div class="search-container">
+      <p class="approve">All news</p>
+      <form [formGroup]="searchForm" class="search-form">
+        <mat-form-field appearance="outline" class="input-field">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search news" formControlName="searchNews" />
+          <button mat-icon-button matSuffix (click)="searchNews()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="all-news">
+      <ng-container *ngFor="let singleNews of news">
+        <app-news-edit (close)="fetchNews()" (save)="fetchNews()" [news]="singleNews"></app-news-edit>
+      </ng-container>
+    </div>
+  </div>
+
   <div class="account-data" *ngIf="selectedSection === 'questions'">questions</div>
 </div>

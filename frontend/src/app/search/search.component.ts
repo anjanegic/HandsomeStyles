@@ -51,11 +51,11 @@ export class SearchComponent implements OnInit {
       if (query.trim()) {
         this.productService.search(query).subscribe((results) => {
           this.results = results;
-          this.resultsState = 'top'; // Pokreće animaciju
+          this.resultsState = 'top';
         });
       } else {
         this.results = [];
-        this.resultsState = 'center'; // Sakriva rezultate
+        this.resultsState = 'center';
       }
     });
   }

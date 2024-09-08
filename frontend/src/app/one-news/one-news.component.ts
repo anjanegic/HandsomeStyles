@@ -10,11 +10,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../models/user';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-one-news',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
   templateUrl: './one-news.component.html',
   styleUrls: ['./one-news.component.css'],
 })
@@ -85,5 +86,11 @@ export class OneNewsComponent implements OnInit {
     if (interval >= 1) return `${interval} minute${interval > 1 ? 's' : ''} ago`;
 
     return `${seconds} second${seconds > 1 ? 's' : ''} ago`;
+  }
+
+  deleteComment(commentId: string) {
+    this.newsService.deleteComment(commentId).subscribe(() => {
+      this.fetchComments();
+    });
   }
 }
