@@ -12,6 +12,10 @@ export class QuestionService {
 
   constructor(private http: HttpClient) {}
 
+  getAllQuestions() {
+    return this.http.get<Question[]>(`${this.baseUrl}/getAllQuestions`);
+  }
+
   getQuestions() {
     return this.http.get<Question[]>(`${this.baseUrl}/getQuestions`);
   }
@@ -30,5 +34,17 @@ export class QuestionService {
 
   usedDiscountCode(code: string): Observable<{ success: boolean }> {
     return this.http.get<{ success: boolean }>(`${this.baseUrl}/used-discount-code?code=${code}`);
+  }
+
+  changeAnswer(question: Question, selectedOption: string) {
+    return this.http.post(`${this.baseUrl}/change-answer`, { questionId: question._id, selectedOption });
+  }
+
+  deleteQuestion(id: string) {
+    return this.http.post(`${this.baseUrl}/delete-question`, { id });
+  }
+
+  updateQuestion(id: string, question: Question) {
+    return this.http.post(`${this.baseUrl}/update-question`, { id, question });
   }
 }

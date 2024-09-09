@@ -5,6 +5,16 @@ import { Request, Response } from "express-serve-static-core";
 import { generateDiscountCode } from "../utils/generateDiscountCode";
 
 export class QuestionController {
+  getAllQuestions = (req: express.Request, res: express.Response) => {
+    Question.find()
+      .then((questions) => {
+        res.json(questions);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   getQuestions = (req: express.Request, res: express.Response) => {
     Question.find({ isActive: true })
       .then((questions) => {
@@ -113,5 +123,55 @@ export class QuestionController {
     } catch (error) {
       res.json({ success: false });
     }
+  };
+
+  changeAnswer = (req: express.Request, res: express.Response) => {
+    const selectedOption = req.body.selectedOption;
+    const questionId = req.body.questionId;
+
+    Question.findById(questionId)
+      .then((question) => {
+        if (!question) {
+          return res.json({ message: "Question not found" });
+        }
+        question.options.forEach((option) => {
+          if (option.text === selectedOption) {
+            option.isCorrect = true;
+          } else {
+            option.isCorrect = false;
+          }
+        });
+
+        question.save();
+        res.json({ success: true });
+      })
+      .catch((err) => {
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  deleteQuestion = (req: express.Request, res: express.Response) => {
+    const id = req.body.id;
+
+    Question.findByIdAndDelete(id)
+      .then((question) => {
+        res.json({ success: true });
+      })
+      .catch((err) => {
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  updateQuestion = (req: express.Request, res: express.Response) => {
+    const id = req.body.id;
+    const question = req.body.question;
+
+    Question.findByIdAndUpdate(id, question)
+      .then((question) => {
+        res.json({ success: true });
+      })
+      .catch((err) => {
+        res.status(500).json({ message: "Internal server error" });
+      });
   };
 }

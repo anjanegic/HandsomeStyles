@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Edit Question</h1>
+<div mat-dialog-content>
+  <form [formGroup]="questionForm" class="editData-form">
+    <!-- Input za pitanje -->
+    <mat-form-field>
+      <mat-label>Question</mat-label>
+      <input matInput formControlName="question" />
+    </mat-form-field>
+
+    <!-- Inputs za opcije -->
+    <div formArrayName="options">
+      <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i">
+        <mat-form-field>
+          <mat-label>Option {{ i + 1 }}</mat-label>
+          <input matInput formControlName="text" />
+          <button mat-icon-button matSuffix (click)="options.removeAt(i)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="addOption()">Add Option</button>
+  </form>
+</div>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onCancel()">Close</button>
+  <button mat-stroked-button (click)="onSave()">Submit</button>
+</mat-dialog-actions>

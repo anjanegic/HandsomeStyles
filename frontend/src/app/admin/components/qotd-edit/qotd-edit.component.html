@@ -1,0 +1,13 @@
+<div class="qotd-card">
+  <div class="qotd-question">
+    <p [ngClass]="{ 'active-qotd': question.isActive }">{{ question.question }}</p>
+    <div class="qotd-buttons">
+      <button mat-icon-button (click)="deleteQuestion(question)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
+      <button mat-icon-button (click)="updateQuestion(question)"><mat-icon class="material-symbols-outlined edit-icon">edit</mat-icon></button>
+    </div>
+  </div>
+
+  <mat-radio-group [value]="selectedOption" class="qotd-options">
+    <mat-radio-button *ngFor="let option of question.options" [value]="option.text" (change)="changeOption($event, option)">{{ option.text }}</mat-radio-button>
+  </mat-radio-group>
+</div>

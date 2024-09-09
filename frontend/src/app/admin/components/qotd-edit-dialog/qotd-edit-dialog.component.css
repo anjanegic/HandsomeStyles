@@ -1,0 +1,33 @@
+mat-form-field {
+  width: 100%;
+}
+.editData-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+
+  & > mat-form-field {
+    min-width: 400px;
+  }
+}
+
+mat-dialog-actions {
+  align-self: flex-end;
+}
+
+h1 {
+  color: #dd735e !important;
+  font-weight: bolder !important;
+  align-self: center;
+}
+
+#submit-button {
+  color: #dd735e !important;
+  font-weight: bold !important;
+  border-color: #f6dad5 !important;
+}
+
+#close-button {
+  color: #757575 !important;
+}

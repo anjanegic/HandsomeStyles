@@ -27,8 +27,11 @@ import { UserOrdersReviewsDialogComponent } from './components/user-orders-revie
 import { News } from '../models/news';
 import { NewsService } from '../../services/news.service';
 import { NewsEditComponent } from './components/news-edit/news-edit.component';
+import { QotdEditComponent } from './components/qotd-edit/qotd-edit.component';
 
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { QuestionService } from '../../services/question.service';
+import { Question } from '../models/question';
 
 @Component({
   selector: 'app-admin',
@@ -49,6 +52,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
     FormsModule,
     MatChip,
     NewsEditComponent,
+    QotdEditComponent,
   ],
 
   templateUrl: './admin.component.html',
@@ -59,6 +63,7 @@ export class AdminComponent implements OnInit {
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
   @ViewChild('newsInput', { static: false }) newsInput: ElementRef;
+  @ViewChild('qotdInput', { static: false }) qotdInput: ElementRef;
 
   user: any;
   selectedSection: string = 'users';
@@ -67,6 +72,7 @@ export class AdminComponent implements OnInit {
   categories: Category[] = [];
   allProducts: Product[] = [];
   news: News[] = [];
+  questions: Question[] = [];
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -94,9 +100,11 @@ export class AdminComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private qotdService: QuestionService
   ) {
     this.user = this.authService.getUser();
+
     this.productForm = this.formBuilder.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -105,6 +113,7 @@ export class AdminComponent implements OnInit {
       imageFilename: ['', [Validators.required]],
       stock: ['', [Validators.required]],
     });
+
     this.newsForm = this.formBuilder.group({
       title: ['', [Validators.required]],
       description: ['', [Validators.required]],
@@ -117,6 +126,7 @@ export class AdminComponent implements OnInit {
       searchApprovedUsers: ['', []],
       searchProducts: ['', []],
       searchNews: ['', []],
+      searchQuestions: ['', []],
     });
   }
 
@@ -150,7 +160,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.fragment.pipe(debounceTime(300), distinctUntilChanged()).subscribe((fragment) => {
+    this.route.fragment.pipe(take(1)).subscribe((fragment) => {
       this.selectedSection = fragment || 'users';
     });
 
@@ -158,38 +168,62 @@ export class AdminComponent implements OnInit {
     this.fetchCategories();
     this.fetchAllProducts();
     this.fetchNews();
+    this.fetchQuestions();
 
-    this.searchForm.get('searchApprovedUsers')?.valueChanges.subscribe((searchTerm) => {
-      if (searchTerm) {
-        this.users = this.users.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
-      } else {
-        this.fetchUsers();
-      }
-    });
+    this.searchForm
+      .get('searchApprovedUsers')
+      ?.valueChanges.pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        if (searchTerm) {
+          this.users = this.users.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
+        } else {
+          this.fetchUsers();
+        }
+      });
 
-    this.searchForm.get('searchUsers')?.valueChanges.subscribe((searchTerm) => {
-      if (searchTerm) {
-        this.allUsers = this.allUsers.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
-      } else {
-        this.fetchUsers();
-      }
-    });
+    this.searchForm
+      .get('searchUsers')
+      ?.valueChanges.pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        if (searchTerm) {
+          this.allUsers = this.allUsers.filter((user) => user.firstname.toLowerCase().includes(searchTerm.toLowerCase()));
+        } else {
+          this.fetchUsers();
+        }
+      });
 
-    this.searchForm.get('searchProducts')?.valueChanges.subscribe((searchTerm) => {
-      if (searchTerm) {
-        this.allProducts = this.allProducts.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
-      } else {
-        this.fetchAllProducts();
-      }
-    });
+    this.searchForm
+      .get('searchProducts')
+      ?.valueChanges.pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        if (searchTerm) {
+          this.allProducts = this.allProducts.filter((product) => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        } else {
+          this.fetchAllProducts();
+        }
+      });
 
-    this.searchForm.get('searchNews')?.valueChanges.subscribe((searchTerm) => {
-      if (searchTerm) {
-        this.news = this.news.filter((news) => news.title.toLowerCase().includes(searchTerm.toLowerCase()) || news.description.toLowerCase().includes(searchTerm.toLowerCase()));
-      } else {
-        this.fetchNews();
-      }
-    });
+    this.searchForm
+      .get('searchNews')
+      ?.valueChanges.pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        if (searchTerm) {
+          this.news = this.news.filter((news) => news.title.toLowerCase().includes(searchTerm.toLowerCase()) || news.description.toLowerCase().includes(searchTerm.toLowerCase()));
+        } else {
+          this.fetchNews();
+        }
+      });
+
+    this.searchForm
+      .get('searchQuestions')
+      ?.valueChanges.pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((searchTerm) => {
+        if (searchTerm) {
+          this.questions = this.questions.filter((question) => question.question.toLowerCase().includes(searchTerm.toLowerCase()));
+        } else {
+          this.fetchQuestions();
+        }
+      });
   }
 
   fetchUsers() {
@@ -216,6 +250,12 @@ export class AdminComponent implements OnInit {
   fetchNews() {
     this.newsService.getNews().subscribe((news) => {
       this.news = news;
+    });
+  }
+
+  fetchQuestions() {
+    this.qotdService.getAllQuestions().subscribe((questions) => {
+      this.questions = questions;
     });
   }
 
@@ -441,6 +481,13 @@ export class AdminComponent implements OnInit {
     const searchTerm = this.searchForm.value.searchNews;
     if (searchTerm) {
       this.news = this.news.filter((news) => news.title.toLowerCase().includes(searchTerm.toLowerCase()) || news.description.toLowerCase().includes(searchTerm.toLowerCase()));
+    }
+  }
+
+  searchQuestions() {
+    const searchTerm = this.searchForm.value.searchQuestions;
+    if (searchTerm) {
+      this.questions = this.questions.filter((question) => question.question.toLowerCase().includes(searchTerm.toLowerCase()));
     }
   }
 }
