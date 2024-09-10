@@ -4,38 +4,32 @@ import Order from "../models/order";
 import Review from "../models/review";
 import { ObjectId } from "mongodb";
 import { Types } from "mongoose";
-import { Request, Response } from "express-serve-static-core";
-import { ParsedQs } from "qs";
+import { comparePassword, hashPassword } from "../utils/encryption";
 
 export class UserController {
-  login = (req: express.Request, res: express.Response) => {
+  login = async (req: express.Request, res: express.Response) => {
     let email = req.body.email;
     let password = req.body.password;
 
-    /*
-            let query = UserM.findOne({username: usernameP, password: passwordP});
+    try {
+      const user = await User.findOne({ email: email });
+      if (!user || !user.password) {
+        return res
+          .status(401)
+          .json({ message: "Cannot find user for provided email" });
+      }
 
-            Mongoose queries are not promises. Queries are thenables. Code above is executed synchronously.
+      const isMatch = await comparePassword(password, user.password);
+      if (!isMatch) {
+        return res
+          .status(401)
+          .json({ message: "Invalid password credentials" });
+      }
 
-            Unlike promises, calling a query's .then() executes the query and it gets called immediately, 
-            but execution is asynchronous and THEN CALLBACK is called after finish.
-
-            Then function returs Promise, but we are not returning promises to front, 
-            from then callback we are returning just data in response that is later inserted into Observable.
-       */
-    User.findOne({ email: email, password: password })
-      .then((user) => {
-        if (!user) {
-          return res.status(404).json({ message: "User not found" });
-        }
-        if (!user.approved) {
-          return res.json({ message: "Not approved" });
-        }
-        res.json(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      return res.status(200).json({ message: "Login successful", user: user });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error" });
+    }
   };
 
   changeData = (req: express.Request, res: express.Response) => {
@@ -89,9 +83,11 @@ export class UserController {
       return res.status(400).json({ message: "User already exists." });
     }
 
+    const hashedPassword = await hashPassword(password);
+
     const newUser = new User({
       email,
-      password,
+      password: hashedPassword,
       firstname,
       lastname,
       type: "user",
