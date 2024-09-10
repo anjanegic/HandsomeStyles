@@ -34,10 +34,12 @@
               <div class="comment-card-name">{{ comment.firstname }}</div>
               <div class="comment-card-date">{{ formatTimeAgo(comment.date) }}</div>
             </div>
-            <div *ngIf="user.type === 'admin'" class="comment-delete-button">
+            <div class="comment-delete-button">
               <div class="comment-card-text">{{ comment.comment }}</div>
-              <div *ngIf="user.type === 'admin'" class="comment-card-actions">
-                <button mat-icon-button (click)="deleteComment(comment._id)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
+              <div *ngIf="user" class="comment-card-actions">
+                <div *ngIf="user.type === 'admin'" class="comment-card-actions">
+                  <button mat-icon-button (click)="deleteComment(comment._id)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
+                </div>
               </div>
             </div>
           </div>

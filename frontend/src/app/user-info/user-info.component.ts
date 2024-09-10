@@ -142,8 +142,6 @@ export class UserInfoComponent implements OnInit {
     return numberOfItems;
   }
 
-  changeData(): void {}
-
   logout(): void {
     this.authService.logout();
     this.user = null;

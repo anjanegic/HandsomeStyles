@@ -87,12 +87,10 @@ export class CartComponent implements OnInit, AfterViewInit {
   }
 
   increaseQuantity(index: number) {
-    if (this.cartItems[index].quantity < 10) {
-      this.cartItems[index].quantity++;
-      this.saveCartToLocalStorage();
-      this.updateTotalPrice();
-      this.cartService.updateCartBadge();
-    }
+    this.cartItems[index].quantity++;
+    this.saveCartToLocalStorage();
+    this.updateTotalPrice();
+    this.cartService.updateCartBadge();
   }
 
   decreaseQuantity(index: number) {

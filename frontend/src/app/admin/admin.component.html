@@ -34,7 +34,7 @@
         </mat-card-header>
         <img mat-card-image class="profile-icon" src="http://localhost:4000/uploads/profile.png" alt="Photo" />
         <mat-card-content> </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions (click)="onContainerClick($event)">
           <button mat-icon-button (click)="approveUser(user)"><mat-icon class="material-symbols-outlined approve-icon">check_circle</mat-icon></button>
         </mat-card-actions>
       </mat-card>
@@ -63,7 +63,7 @@
         </mat-card-header>
         <img mat-card-image class="profile-icon" src="http://localhost:4000/uploads/profile.png" alt="Photo" />
 
-        <mat-card-actions>
+        <mat-card-actions (click)="onContainerClick($event)">
           <button mat-icon-button (click)="deleteUser(user)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
         </mat-card-actions>
       </mat-card>

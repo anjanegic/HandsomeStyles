@@ -5,7 +5,6 @@ import Review from "../models/review";
 import { ObjectId } from "mongodb";
 import { Types } from "mongoose";
 import { comparePassword, hashPassword } from "../utils/encryption";
-import e from "cors";
 
 export class UserController {
   login = async (req: express.Request, res: express.Response) => {
@@ -20,6 +19,10 @@ export class UserController {
           .json({ message: "Cannot find user for provided email" });
       }
 
+      if (!user.approved) {
+        return res.json({ message: "Not approved" });
+      }
+
       const isMatch = await comparePassword(password, user.password);
       if (!isMatch) {
         return res
@@ -27,7 +30,7 @@ export class UserController {
           .json({ message: "Invalid password credentials" });
       }
 
-      return res.status(200).json({ message: "Login successful", user: user });
+      return res.status(200).json(user);
     } catch (error) {
       return res.status(500).json({ message: "Server error" });
     }
@@ -336,14 +339,10 @@ export class UserController {
       });
   };
 
-  resetPassword = (req: Request, res: Response) => {
-    const { _id, password, passwordRepeat } = req.body;
+  resetPassword = (req: express.Request, res: express.Response) => {
+    const { _id, password } = req.body;
 
-    if (password !== passwordRepeat) {
-      return res.json({ message: "Passwords do not match" });
-    }
-
-    User.findOneAndUpdate({ _id: _id }, { password: password })
+    User.findOneAndUpdate({ _id: _id }, { password: hashPassword(password) })
       .then((user) => {
         res.json(user);
       })

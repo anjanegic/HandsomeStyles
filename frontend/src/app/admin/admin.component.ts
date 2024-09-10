@@ -182,6 +182,7 @@ export class AdminComponent implements OnInit {
   updateOrdersReviews(user: User) {
     const dialogRef = this.dialog.open(UserOrdersReviewsDialogComponent, {
       width: '1000px',
+      height: '80vh',
       data: {
         user: user,
       },
@@ -520,5 +521,9 @@ export class AdminComponent implements OnInit {
     if (searchTerm) {
       this.questions = this.questions.filter((question) => question.question.toLowerCase().includes(searchTerm.toLowerCase()));
     }
+  }
+
+  onContainerClick(event: MouseEvent) {
+    event.stopPropagation();
   }
 }

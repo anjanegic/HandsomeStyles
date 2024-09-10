@@ -44,6 +44,7 @@ export class OneNewsComponent implements OnInit {
     this.newsService.getCommentsById(this.news._id).subscribe((data) => {
       this.comments = data;
       this.comments = this.comments.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      console.log(this.comments);
     });
   }
 

@@ -299,11 +299,6 @@ button[mat-icon-button] {
   overflow: overlay;
 }
 
-/* .chip-row {
-  background-color: transparent !important;
-  border: 1px solid;
-} */
-
 .input-chip {
   border: 1.5px solid rgb(182 158 161);
   border-radius: 16px;

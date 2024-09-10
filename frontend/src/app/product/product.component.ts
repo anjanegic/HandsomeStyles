@@ -170,9 +170,9 @@ export class ProductComponent {
       quantity: this.quantity,
     };
 
-    const compareKey = item.product.category === 'Phone Case' ? 'model' : 'color';
+    const variantKey = JSON.stringify(item.variant);
 
-    const existingItemIndex = cartItems.findIndex((cartItem: any) => cartItem.product._id === item.product._id && cartItem.variant[compareKey] === item.variant[compareKey]);
+    const existingItemIndex = cartItems.findIndex((cartItem: any) => cartItem.product._id === item.product._id && JSON.stringify(cartItem.variant) === variantKey);
 
     if (existingItemIndex !== -1) {
       const newQuantity = cartItems[existingItemIndex].quantity + item.quantity;

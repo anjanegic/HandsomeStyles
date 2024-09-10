@@ -134,12 +134,12 @@ export class CheckoutComponent implements OnInit {
             }
           );
         });
-        localStorage.removeItem('cartItems');
 
         if (this.shippingForm.get('discountCode')?.value) {
           this.questionService.usedDiscountCode(this.shippingForm.get('discountCode')?.value).subscribe(
             (response) => {
               if (response.success) {
+                localStorage.removeItem('cartItems');
                 this.router.navigate(['/order-confirmation']);
               } else {
               }
@@ -149,6 +149,8 @@ export class CheckoutComponent implements OnInit {
             }
           );
         }
+
+        localStorage.removeItem('cartItems');
         this.router.navigate(['/order-confirmation']);
       });
     } else {
