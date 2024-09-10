@@ -251,6 +251,12 @@ button[mat-icon-button] {
   margin-bottom: 20px;
 }
 
+.add-option-button {
+  color: #b69ea0;
+  border: 2px solid #b69ea0;
+  background-color: transparent;
+  margin-top: 20px;
+}
 .add-product-button {
   color: white;
   background-color: #b69ea0;
@@ -358,4 +364,18 @@ button[mat-icon-button] {
   flex-direction: row;
   justify-content: space-between;
   height: 70px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.add-question-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 30px 30px;
 }

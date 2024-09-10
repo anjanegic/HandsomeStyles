@@ -102,9 +102,9 @@ export class QuestionController {
           res.json({ valid: false, amount: 0 });
         }
       })
-      .catch((err) => {
-        console.error("Error fetching answer:", err);
-        res.status(500).json({ message: "Internal server error" });
+      //if discount code is not valid, return false
+      .catch(() => {
+        res.json({ valid: false, amount: 0 });
       });
   };
 
@@ -169,6 +169,19 @@ export class QuestionController {
     Question.findByIdAndUpdate(id, question)
       .then((question) => {
         res.json({ success: true });
+      })
+      .catch((err) => {
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  addQuestion = (req: Request, res: Response) => {
+    const question = new Question(req.body);
+
+    question
+      .save()
+      .then((question) => {
+        res.json(question);
       })
       .catch((err) => {
         res.status(500).json({ message: "Internal server error" });

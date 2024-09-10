@@ -175,3 +175,23 @@ input[matinput]::-webkit-inner-spin-button {
   padding: 8px 4px;
   gap: 4px;
 }
+
+mat-chip {
+  background-color: #373737 !important;
+  color: #ffffff !important;
+
+  margin-left: 20px;
+}
+
+.message {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  p {
+    margin: 0;
+    color: #e65539;
+    margin-left: 10px;
+  }
+}

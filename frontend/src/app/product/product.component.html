@@ -17,16 +17,20 @@
       </button>
     </div>
 
-    <h2>{{ product.price | currency }}</h2>
+    <h2>{{ product.price | currency }} <mat-chip id="sold-out-chip" *ngIf="product.stock === 0">Sold out</mat-chip></h2>
     <p>{{ product.description }}</p>
+    <div *ngIf="message" class="message">
+      <mat-icon>error</mat-icon>
+      <p>{{ message }}</p>
+    </div>
 
     <mat-form-field class="quantityForm">
       <div class="quantity-selector">
-        <button mat-icon-button (click)="decreaseQuantity()">
+        <button mat-icon-button (click)="decreaseQuantity()" [disabled]="product.stock === 0">
           <mat-icon>remove</mat-icon>
         </button>
-        <input matInput type="number" [(ngModel)]="quantity" min="1" />
-        <button mat-icon-button (click)="increaseQuantity()">
+        <input matInput type="number" [(ngModel)]="quantity" min="1" [disabled]="product.stock === 0" />
+        <button mat-icon-button (click)="increaseQuantity()" [disabled]="product.stock === 0">
           <mat-icon>add</mat-icon>
         </button>
       </div>
@@ -34,14 +38,14 @@
 
     <mat-form-field class="form" appearance="fill">
       <mat-label>{{ labelText }}</mat-label>
-      <mat-select [(ngModel)]="selectedVariant" (selectionChange)="onVariantChange($event.value)">
+      <mat-select [(ngModel)]="selectedVariant" (selectionChange)="onVariantChange($event.value)" [disabled]="product.stock === 0">
         <mat-option *ngFor="let variant of product.variants" [value]="variant">
           <span *ngIf="variant">{{ variant }}</span>
         </mat-option>
       </mat-select>
     </mat-form-field>
     <div>
-      <button mat-flat-button class="addtocartbutton" (click)="addToCart()"><mat-icon>shopping_cart</mat-icon>Add to cart</button>
+      <button mat-flat-button class="addtocartbutton" (click)="addToCart()" [disabled]="product.stock === 0"><mat-icon>shopping_cart</mat-icon>Add to cart</button>
     </div>
 
     <br />

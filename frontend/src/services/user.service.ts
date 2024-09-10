@@ -105,4 +105,13 @@ export class UserService {
   updateOrderStatus(orderId: string, status: string) {
     return this.http.post<any>(`${this.uri}/updateOrderStatus`, { orderId, status });
   }
+
+  resetPassword(id: string, password: string, passwordRepeat: string) {
+    const data = {
+      _id: id,
+      password: password,
+      passwordRepeat: passwordRepeat,
+    };
+    return this.http.post<User>(`${this.uri}/resetPassword`, data);
+  }
 }

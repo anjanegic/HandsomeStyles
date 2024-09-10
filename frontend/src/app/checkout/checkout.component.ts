@@ -12,6 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatRadioModule } from '@angular/material/radio';
 import { QuestionService } from '../../services/question.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-checkout',
@@ -29,9 +30,16 @@ export class CheckoutComponent implements OnInit {
   // discountAmount is the amount that will be subtracted from the total price
   // null means that no discount code has been applied
   // 0 means that the discount code is invalid
-  discountAmount: number | null;
+  discountAmount: number = 0;
 
-  constructor(private formBuilder: FormBuilder, private service: UserService, private router: Router, private authService: AuthService, private questionService: QuestionService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: UserService,
+    private productService: ProductService,
+    private router: Router,
+    private authService: AuthService,
+    private questionService: QuestionService
+  ) {
     this.shippingForm = this.formBuilder.group({
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
@@ -54,22 +62,24 @@ export class CheckoutComponent implements OnInit {
 
   applyDiscountCode(): void {
     const discountCode = this.shippingForm.get('discountCode')?.value;
-    this.questionService.checkDiscountCode(discountCode).subscribe(
-      (response) => {
-        if (response.valid) {
-          const subtotalPrice = this.getTotalPrice();
-          const shippingPrice = 5;
-          this.beforeDiscountAmount = subtotalPrice + shippingPrice;
-          this.discountAmount = this.beforeDiscountAmount * response.amount;
-        } else {
-          this.discountAmount = 0;
+    if (discountCode != '') {
+      this.questionService.checkDiscountCode(discountCode).subscribe(
+        (response) => {
+          if (response.valid) {
+            const subtotalPrice = this.getTotalPrice();
+            const shippingPrice = 5;
+            this.beforeDiscountAmount = subtotalPrice + shippingPrice;
+            this.discountAmount = this.beforeDiscountAmount * response.amount;
+          } else {
+            this.discountAmount = 0;
+            this.discountErrorMessage = 'Invalid discount code';
+          }
+        },
+        (error) => {
+          this.discountErrorMessage = 'Invalid discount code';
         }
-      },
-      (error) => {
-        console.error('Error validating discount code', error);
-        this.discountErrorMessage = 'An error occurred while validating the discount code.';
-      }
-    );
+      );
+    }
   }
 
   onSubmit(): void {
@@ -80,6 +90,7 @@ export class CheckoutComponent implements OnInit {
       if (cartItemsString) {
         cartItems = JSON.parse(cartItemsString);
       }
+
       const orderItems = this.transformToOrderItems(cartItems);
       const shipping = this.shippingForm.value;
       const paymentMethod = this.paymentForm.get('paymentMethod')?.value;
@@ -111,21 +122,34 @@ export class CheckoutComponent implements OnInit {
       };
 
       this.service.addOrder(orderJson).subscribe((order) => {
-        localStorage.removeItem('cartItems');
-        console.log(this.shippingForm.get('discountCode')?.value);
-        this.questionService.usedDiscountCode(this.shippingForm.get('discountCode')?.value).subscribe(
-          (response) => {
-            if (response.success) {
-              this.router.navigate(['/order-confirmation']);
-            } else {
-              alert('Error while using discount code.');
+        cartItems.forEach((item) => {
+          console.log('Item', item.product._id);
+
+          this.productService.reduceStock(item.product._id, item.quantity).subscribe(
+            (response) => {
+              console.log('Stock reduced for', item.product.name);
+            },
+            (error) => {
+              console.error('Error reducing stock for', item.product.name, error);
             }
-          },
-          (error) => {
-            console.error('Error using discount code:', error);
-            alert('Error while using discount code.');
-          }
-        );
+          );
+        });
+        localStorage.removeItem('cartItems');
+
+        if (this.shippingForm.get('discountCode')?.value) {
+          this.questionService.usedDiscountCode(this.shippingForm.get('discountCode')?.value).subscribe(
+            (response) => {
+              if (response.success) {
+                this.router.navigate(['/order-confirmation']);
+              } else {
+              }
+            },
+            (error) => {
+              console.error('Error using discount code:', error);
+            }
+          );
+        }
+        this.router.navigate(['/order-confirmation']);
       });
     } else {
       console.log('Form Invalid!');

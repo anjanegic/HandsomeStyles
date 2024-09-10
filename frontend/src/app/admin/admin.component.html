@@ -259,48 +259,34 @@
   </div>
 
   <div class="account-data" *ngIf="selectedSection === 'questions'">
-    <p class="approve">Add questions</p>
-    <!-- <form [formGroup]="questionForm" class="add-product-form">
-      <div class="file-upload-container" (click)="fileInput.click()">
-        <span *ngIf="!imageSrc" class="material-symbols-outlined upload-icon"> upload_file </span>
-        <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*" />
-        <div class="image-preview" *ngIf="imageSrc">
-          <img [src]="imageSrc" alt="Preview" />
-        </div>
-      </div> -->
-
-    <!-- <div class="all-inputs">
+    <p class="approve">Add Question</p>
+    <form [formGroup]="questionForm" class="add-question-form" (ngSubmit)="onSave()">
+      <div class="all-inputs">
         <mat-form-field appearance="outline" class="input-field">
           <mat-label>Question</mat-label>
           <input matInput placeholder="Question" formControlName="question" required />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="input-field">
-          <mat-label>Answer</mat-label>
-          <input matInput placeholder="Answer" formControlName="answer" required />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="input-field">
-          <mat-label>Image</mat-label>
-          <input matInput placeholder="Image" formControlName="image" required />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="input-field">
-          <mat-label>Date</mat-label>
-          <input matInput placeholder="Date" formControlName="date" required />
-        </mat-form-field>
-        <button mat-raised-button class="add-product-button" (click)="addQuestion()" type="submit">Add question</button>
+
+        <div formArrayName="options">
+          <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i" class="option-group">
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Option {{ i + 1 }}</mat-label>
+              <input matInput placeholder="Option Text" formControlName="text" required />
+              <button mat-icon-button matSuffix (click)="options.removeAt(i)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <mat-checkbox formControlName="isCorrect"> Is Correct </mat-checkbox>
+          </div>
+        </div>
+
+        <button mat-raised-button class="add-option-button" type="button" (click)="addOption()">Add Option</button>
+      </div>
+      <div class="button-container">
+        <button mat-stroked-button class="add-product-button" type="submit" id="submit-button">Save Question</button>
       </div>
     </form>
-    <div class="search-container">
-      <p class="approve">All questions</p>
-      <form [formGroup]="searchForm" class="search-form">
-        <mat-form-field appearance="outline" class="input-field">
-          <mat-label>Search</mat-label>
-          <input matInput placeholder="Search questions" formControlName="searchQuestions" />
-          <button mat-icon-button matSuffix (click)="searchQuestions()">
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-form-field>
-      </form>
-    </div> -->
+
     <div class="search-container">
       <p class="approve">All questions</p>
       <form [formGroup]="searchForm" class="search-form">

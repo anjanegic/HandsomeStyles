@@ -60,16 +60,6 @@ export class RegisterComponent {
           this.message = 'Registration successful!';
         }
       });
-      //   this.service.login(email, password).subscribe((data) => {
-      //     if (data == null) alert('Nema korisnika');
-      //     else {
-      //       this.authService.login(data);
-      //       this.router.navigate(['']);
-      //     }
-      //   });
-      // } else {
-      //   console.log('Form is not valid');
-      // }
     }
   }
 

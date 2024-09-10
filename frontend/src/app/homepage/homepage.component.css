@@ -88,10 +88,11 @@
   display: flex;
   flex-direction: column;
   font-size: 32px;
+  margin-top: 80px;
 
   button {
     font-size: 16px;
-    background-color: #a06e50;
+    background-color: #b69e9f;
     color: rgb(255, 255, 255);
     border-radius: 14px;
     height: 50px;

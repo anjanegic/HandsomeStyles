@@ -38,5 +38,8 @@ questionRouter
 questionRouter
   .route("/update-question")
   .post((req, res) => new QuestionController().updateQuestion(req, res));
+questionRouter
+  .route("/add-question")
+  .post((req, res) => new QuestionController().addQuestion(req, res));
 
 export default questionRouter;

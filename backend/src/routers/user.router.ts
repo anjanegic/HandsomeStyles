@@ -25,10 +25,6 @@ userRouter
   .get((req, res) => new UserController().getUserByUsername(req, res));
 
 userRouter
-  .route("/changeFavourite")
-  .post((req, res) => new UserController().changeFavourite(req, res));
-
-userRouter
   .route("/removeFromWishlist")
   .post((req, res) => new UserController().removeFromWishlist(req, res));
 
@@ -75,5 +71,9 @@ userRouter
 userRouter
   .route("/updateOrderStatus")
   .post((req, res) => new UserController().updateOrderStatus(req, res));
+
+userRouter
+  .route("/resetPassword")
+  .post((req, res) => new UserController().resetPassword(req, res));
 
 export default userRouter;

@@ -67,7 +67,6 @@ export class ChangeDataDialogComponent {
       const country = formValues.country;
       const postalCode = formValues.postalCode;
       const phone = formValues.phone;
-      console.log('Form Submitted!', formValues);
       this.service.changeData(_id, email, firstname, lastname, address, city, country, postalCode, phone).subscribe((data) => {
         if (data == null) alert('Nema korisnika');
         else {

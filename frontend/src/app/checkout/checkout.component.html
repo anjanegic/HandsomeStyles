@@ -56,11 +56,11 @@
               <mat-label>discount code</mat-label>
               <div class="discount-code-container">
                 <input matInput formControlName="discountCode" placeholder="Enter discount code" />
-                <button mat-fab class="check-discount-code" (click)="applyDiscountCode()"><mat-icon>check</mat-icon></button>
+                <button type="button" mat-fab class="check-discount-code" (click)="applyDiscountCode()"><mat-icon>check</mat-icon></button>
               </div>
             </mat-form-field>
+            <p class="discount-bad" *ngIf="discountErrorMessage">{{ discountErrorMessage }}</p>
             <p class="discount-good" *ngIf="discountAmount > 0">Discount applied!</p>
-            <p class="discount-wrong" *ngIf="discountAmount === 0">Invalid discount code!</p>
           </div>
           <form [formGroup]="paymentForm">
             <div class="payment-methods">

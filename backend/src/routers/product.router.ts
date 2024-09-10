@@ -52,4 +52,8 @@ productRouter
   .route("/updateProduct/:id")
   .put((req, res) => new ProductController().updateProduct(req, res));
 
+productRouter
+  .route("/reduceStock/")
+  .put((req, res) => new ProductController().reduceStock(req, res));
+
 export default productRouter;

@@ -47,4 +47,8 @@ export class QuestionService {
   updateQuestion(id: string, question: Question) {
     return this.http.post(`${this.baseUrl}/update-question`, { id, question });
   }
+
+  addQuestion(question: Question) {
+    return this.http.post(`${this.baseUrl}/add-question`, question);
+  }
 }

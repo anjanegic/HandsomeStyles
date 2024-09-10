@@ -6,6 +6,7 @@ import { ObjectId } from "mongodb";
 import { Types } from "mongoose";
 import { Request, Response } from "express-serve-static-core";
 import { ParsedQs } from "qs";
+import e from "cors";
 
 export class UserController {
   login = (req: express.Request, res: express.Response) => {
@@ -23,6 +24,9 @@ export class UserController {
             Then function returs Promise, but we are not returning promises to front, 
             from then callback we are returning just data in response that is later inserted into Observable.
        */
+
+    console.log(email, password);
+
     User.findOne({ email: email, password: password })
       .then((user) => {
         if (!user) {
@@ -134,31 +138,6 @@ export class UserController {
       .then((user) => {
         res.json(user);
       })
-      .catch((err) => console.log(err));
-
-    /*UserM.findOne({_id: "658c42827618b2cf3e3edae6"}).then(
-                user=>{
-                    res.json(user)
-                }
-            ).catch(err=>console.log(err))*/
-  };
-
-  changeFavourite = (req: express.Request, res: express.Response) => {
-    let user = req.body.user;
-    let bookname = req.body.bookname;
-
-    /*UserM.updateOne({username: user},
-        {$pull: {favourites: {name: bookname}}}).then(
-                ok=>res.json({message: "Ok"})
-        ).catch(err=>console.log(err))*/
-
-    User.updateOne(
-      // @ts-ignore
-      { username: user },
-      { $set: { "favourites.$[f].name": "Changed name" } },
-      { arrayFilters: [{ "f.name": bookname }] }
-    )
-      .then((ok) => res.json({ message: "Ok" }))
       .catch((err) => console.log(err));
   };
 
@@ -357,6 +336,23 @@ export class UserController {
     Order.findByIdAndUpdate(theId, { status })
       .then((order) => {
         res.json(order);
+      })
+      .catch((err) => {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
+
+  resetPassword = (req: Request, res: Response) => {
+    const { _id, password, passwordRepeat } = req.body;
+
+    if (password !== passwordRepeat) {
+      return res.json({ message: "Passwords do not match" });
+    }
+
+    User.findOneAndUpdate({ _id: _id }, { password: password })
+      .then((user) => {
+        res.json(user);
       })
       .catch((err) => {
         console.error("Error fetching reviews:", err);

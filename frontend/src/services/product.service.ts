@@ -57,4 +57,8 @@ export class ProductService {
   updateProduct(productId: string, product: any) {
     return this.http.put(`${this.uri}/updateProduct/${productId}`, product);
   }
+
+  reduceStock(productId: string, quantity: number) {
+    return this.http.put(`${this.uri}/reduceStock`, { productId, quantity });
+  }
 }

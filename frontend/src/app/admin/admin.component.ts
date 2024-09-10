@@ -32,6 +32,8 @@ import { QotdEditComponent } from './components/qotd-edit/qotd-edit.component';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../models/question';
+import { Option } from '../models/question';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-admin',
@@ -41,6 +43,7 @@ import { Question } from '../models/question';
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatInputModule,
     ReactiveFormsModule,
     MatOptionModule,
@@ -89,6 +92,7 @@ export class AdminComponent implements OnInit {
 
   newsForm: FormGroup;
   searchForm: FormGroup;
+  questionForm: FormGroup;
 
   constructor(
     private snack: MatSnackBar,
@@ -128,6 +132,33 @@ export class AdminComponent implements OnInit {
       searchNews: ['', []],
       searchQuestions: ['', []],
     });
+
+    this.questionForm = this.formBuilder.group({
+      question: ['', []],
+      options: this.formBuilder.array([]),
+    });
+  }
+  get options(): FormArray {
+    return this.questionForm.get('options') as FormArray;
+  }
+
+  addOption(option: Option = { text: '', isCorrect: false }): void {
+    this.options.push(
+      this.formBuilder.group({
+        text: [option.text, Validators.required],
+        isCorrect: [option.isCorrect],
+      })
+    );
+  }
+
+  onSave(): void {
+    if (this.questionForm.valid) {
+      const newQuestion: Question = this.questionForm.value;
+      this.qotdService.addQuestion(newQuestion).subscribe((data) => {
+        this.fetchQuestions();
+        this.questionForm.reset();
+      });
+    }
   }
 
   updateProduct(product: Product): void {
@@ -255,7 +286,7 @@ export class AdminComponent implements OnInit {
 
   fetchQuestions() {
     this.qotdService.getAllQuestions().subscribe((questions) => {
-      this.questions = questions;
+      this.questions = questions.reverse();
     });
   }
 

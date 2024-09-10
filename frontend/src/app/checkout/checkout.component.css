@@ -229,6 +229,14 @@ button {
   font-weight: normal !important;
 }
 
+.discount-bad {
+  color: red !important;
+  font-size: 16px !important;
+  text-align: center;
+  padding: 0 !important;
+  font-weight: normal !important;
+}
+
 .discount-wrong {
   color: red !important;
   font-size: 16px !important;

@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { take } from 'rxjs';
+import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
 
 @Component({
   selector: 'app-user-info',
@@ -69,6 +70,16 @@ export class UserInfoComponent implements OnInit {
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(ChangeDataDialogComponent, {
       width: '45vw',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  readonly dialogReset = inject(MatDialog);
+
+  openDialogReset(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialogReset.open(ResetPasswordDialogComponent, {
+      width: '50vw',
       enterAnimationDuration,
       exitAnimationDuration,
     });

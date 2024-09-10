@@ -24,7 +24,7 @@
           <img src="http://localhost:4000/uploads/{{ randomProduct.imageFilename }}" alt="{{ randomProduct.name }}" class="random-product-image" />
           <div class="highlighted-product-details">
             <span>{{ randomProduct?.name }}</span>
-            <span class="custom-font">{{ randomProduct?.price }}$</span>
+            <span class="custom-font">{{ randomProduct?.price | currency }}</span>
           </div>
         </button>
       </div>

@@ -17,11 +17,12 @@ import { UserService } from '../../services/user.service';
 import { Review } from '../models/review';
 import { User } from '../models/user';
 import { Order } from '../models/order';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatIconModule, FormsModule, CommonModule, MatInputModule, RouterModule],
+  imports: [MatChipsModule, MatCardModule, MatButtonModule, MatSelectModule, MatFormFieldModule, MatIconModule, FormsModule, CommonModule, MatInputModule, RouterModule],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
 })
@@ -37,6 +38,7 @@ export class ProductComponent {
   userId: string = '';
   firstName: string = '';
   reviewComment: string = '';
+  message: string = '';
 
   getUser() {
     return this.authService.getUser();
@@ -173,8 +175,20 @@ export class ProductComponent {
     const existingItemIndex = cartItems.findIndex((cartItem: any) => cartItem.product._id === item.product._id && cartItem.variant[compareKey] === item.variant[compareKey]);
 
     if (existingItemIndex !== -1) {
-      cartItems[existingItemIndex].quantity += item.quantity;
+      const newQuantity = cartItems[existingItemIndex].quantity + item.quantity;
+
+      if (newQuantity > item.product.stock) {
+        this.message = 'Not enough in stock! Currently available: ' + item.product.stock;
+        return;
+      }
+
+      cartItems[existingItemIndex].quantity = newQuantity;
     } else {
+      if (item.quantity > item.product.stock) {
+        this.message = 'Not enough in stock! Currently available: ' + item.product.stock;
+        return;
+      }
+
       cartItems.push(item);
     }
 

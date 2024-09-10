@@ -200,4 +200,21 @@ export class ProductController {
         res.status(500).json({ message: "Internal server error" });
       });
   };
+
+  reduceStock = (req: express.Request, res: express.Response) => {
+    const { productId, quantity } = req.body;
+    console.log("productId:", productId);
+    console.log("quantity:", quantity);
+
+    Product.findByIdAndUpdate(productId, {
+      $inc: { stock: -quantity, sold: quantity },
+    })
+      .then((product) => {
+        res.json(product);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal server error" });
+      });
+  };
 }

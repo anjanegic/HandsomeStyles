@@ -31,3 +31,7 @@ input {
   font-family: brasika;
   src: url(/assets/fonts/BrasikaDisplay.ttf) format("truetype");
 }
+
+#sold-out-chip {
+  --mdc-chip-label-text-color: #fff;
+}
