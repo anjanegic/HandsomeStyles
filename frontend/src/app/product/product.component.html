@@ -24,7 +24,7 @@
       <p>{{ message }}</p>
     </div>
 
-    <mat-form-field class="quantityForm">
+    <mat-form-field appearance="outline" class="quantityForm">
       <div class="quantity-selector">
         <button mat-icon-button (click)="decreaseQuantity()" [disabled]="product.stock === 0">
           <mat-icon>remove</mat-icon>
@@ -36,7 +36,7 @@
       </div>
     </mat-form-field>
 
-    <mat-form-field class="form" appearance="fill">
+    <mat-form-field *ngIf="product.variants.length > 1" appearance="outline" class="variant-selector">
       <mat-label>{{ labelText }}</mat-label>
       <mat-select [(ngModel)]="selectedVariant" (selectionChange)="onVariantChange($event.value)" [disabled]="product.stock === 0">
         <mat-option *ngFor="let variant of product.variants" [value]="variant">

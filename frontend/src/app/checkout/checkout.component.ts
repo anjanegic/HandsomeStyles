@@ -31,6 +31,7 @@ export class CheckoutComponent implements OnInit {
   // null means that no discount code has been applied
   // 0 means that the discount code is invalid
   discountAmount: number = 0;
+  subtotal = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,7 +67,7 @@ export class CheckoutComponent implements OnInit {
       this.questionService.checkDiscountCode(discountCode).subscribe(
         (response) => {
           if (response.valid) {
-            const subtotalPrice = this.getTotalPrice();
+            const subtotalPrice = this.subtotal;
             const shippingPrice = 5;
             this.beforeDiscountAmount = subtotalPrice + shippingPrice;
             this.discountAmount = this.beforeDiscountAmount * response.amount;
@@ -94,11 +95,11 @@ export class CheckoutComponent implements OnInit {
       const orderItems = this.transformToOrderItems(cartItems);
       const shipping = this.shippingForm.value;
       const paymentMethod = this.paymentForm.get('paymentMethod')?.value;
-      const subtotalPrice = this.getTotalPrice();
+      const subtotalPrice = this.subtotal;
       const shippingPrice = 5;
       this.beforeDiscountAmount = subtotalPrice + shippingPrice;
 
-      const totalPrice = this.beforeDiscountAmount - this.discountAmount;
+      const totalPrice = this.getTotalPrice() + 5;
 
       let userId: string | undefined;
       if (this.authService.getUser()) {
@@ -160,12 +161,10 @@ export class CheckoutComponent implements OnInit {
 
   transformToOrderItems(cartItems: any[]): any[] {
     return cartItems.map((item) => {
-      const variantValue = item.variant.color || item.variant.model || item.variant.size || 'Unknown';
-
       return {
         productId: item.product._id,
         name: item.product.name,
-        variant: variantValue,
+        variant: item.variant,
         price: item.product.price,
         quantity: item.quantity,
         image: item.product.imageFilename,
@@ -179,7 +178,7 @@ export class CheckoutComponent implements OnInit {
 
   getTotalPrice(): number {
     const total = this.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
-
+    this.subtotal = total;
     if (this.discountAmount) {
       return total - this.discountAmount;
     }

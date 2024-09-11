@@ -98,7 +98,7 @@
           <div class="subtotal">
             <p>subtotal:</p>
             <p>
-              {{ getTotalPrice() | currency }}
+              {{ subtotal | currency }}
             </p>
           </div>
           <div class="subtotal">
@@ -110,7 +110,7 @@
           <div class="total-title">
             <p>total:</p>
             <div *ngIf="discountAmount > 0" class="total-price-discount">
-              <p style="text-decoration: line-through" class="discount-good">{{ getTotalPrice() + 5 | currency }}</p>
+              <p style="text-decoration: line-through" class="discount-good">{{ beforeDiscountAmount | currency }}</p>
               <p class="discount-good">{{ getTotalPrice() + 5 | currency }}</p>
             </div>
             <p *ngIf="discountAmount === 0" class="total-price">

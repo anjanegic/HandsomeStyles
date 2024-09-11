@@ -275,7 +275,7 @@ export class AdminComponent implements OnInit {
 
   fetchAllProducts() {
     this.productService.getProducts().subscribe((products) => {
-      this.allProducts = products;
+      this.allProducts = products.reverse();
     });
   }
 
@@ -385,6 +385,7 @@ export class AdminComponent implements OnInit {
           });
         },
       });
+      this.fetchAllProducts();
     });
   }
 

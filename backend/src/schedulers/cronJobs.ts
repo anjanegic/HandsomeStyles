@@ -2,7 +2,7 @@ import cron from "node-cron";
 import Question from "../models/question";
 
 cron.schedule(
-  "0 1 * * *",
+  "1 0 * * *",
   async () => {
     try {
       const allQuestions = await Question.find();
