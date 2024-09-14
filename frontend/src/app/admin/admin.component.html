@@ -64,7 +64,7 @@
         <img mat-card-image class="profile-icon" src="http://localhost:4000/uploads/profile.png" alt="Photo" />
 
         <mat-card-actions (click)="onContainerClick($event)">
-          <button mat-icon-button (click)="deleteUser(user)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
+          <button mat-mini-fab color="transparent" (click)="deleteUser(user)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -76,7 +76,7 @@
     <p class="approve">Add products</p>
     <form [formGroup]="productForm" class="add-product-form">
       <div class="file-upload-container" (click)="fileInput.click()">
-        <span *ngIf="!imageSrc" class="material-symbols-outlined upload-icon"> upload_file </span>
+        <span *ngIf="!imageSrc" class="material-symbols-outlined upload-icon">upload_file</span>
         <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*" />
         <div class="image-preview" *ngIf="imageSrc">
           <img [src]="imageSrc" alt="Preview" />
@@ -202,9 +202,9 @@
             </div>
           </mat-card-content>
         </div>
-        <mat-card-actions>
-          <button mat-icon-button (click)="updateProduct(product)"><mat-icon class="material-symbols-outlined edit-icon">edit</mat-icon></button>
-          <button mat-icon-button (click)="deleteProduct(product)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
+        <mat-card-actions class="product-edit-actions">
+          <button mat-mini-fab color="transparent" (click)="updateProduct(product)"><mat-icon class="material-symbols-outlined edit-icon">edit</mat-icon></button>
+          <button mat-mini-fab color="transparent" (click)="deleteProduct(product)"><mat-icon class="material-symbols-outlined delete-icon">delete</mat-icon></button>
         </mat-card-actions>
       </mat-card>
     </div>

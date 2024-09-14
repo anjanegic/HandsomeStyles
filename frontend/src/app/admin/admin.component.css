@@ -166,11 +166,6 @@ button[mat-icon-button] {
   color: #ffffff;
 }
 
-/* mat-icon:hover {
-  color: #ffffff;
-  background-color: #72c05a;
-} */
-
 .add-product-form {
   width: 100%;
   padding: 20px 10px 30px;
@@ -180,6 +175,14 @@ button[mat-icon-button] {
   align-items: center;
 }
 
+.product-edit-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+  gap: 4px;
+}
 .all-inputs {
   width: 60%;
 }
